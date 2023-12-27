@@ -1,4 +1,3 @@
-import * as React from "react";
 import PropTypes from "prop-types";
 import { List } from "@mui/material";
 import { RecordContextProvider, useListContext } from "react-admin";

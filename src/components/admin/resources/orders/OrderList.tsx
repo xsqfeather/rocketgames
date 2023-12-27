@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Fragment, useCallback } from "react";
 import {
   AutocompleteInput,
@@ -81,7 +80,7 @@ const TabbedDatagrid = () => {
   );
 
   const handleChange = useCallback(
-    (event: React.ChangeEvent<{}>, value: any) => {
+    (_event: React.ChangeEvent<{}>, value: any) => {
       setFilters &&
         setFilters(
           { ...filterValues, status: value },

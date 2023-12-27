@@ -2,13 +2,11 @@ import { useMemo, CSSProperties } from "react";
 import { useGetList } from "react-admin";
 import { useMediaQuery, Theme } from "@mui/material";
 import { subDays, startOfDay } from "date-fns";
-import { ClientOnly } from "remix-utils/client-only";
 
 import Welcome from "./Welcome";
 import MonthlyRevenue from "./MonthlyRevenue";
 import NbNewOrders from "./NbNewOrders";
 import PendingOrders from "./PendingOrders";
-import PendingReviews from "./PendingReviews";
 import NewCustomers from "./NewCustomers";
 import OrderChart from "./OrderChart";
 

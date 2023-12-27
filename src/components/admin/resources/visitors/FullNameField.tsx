@@ -1,4 +1,3 @@
-import * as React from "react";
 import { SxProps, Typography } from "@mui/material";
 import { memo } from "react";
 

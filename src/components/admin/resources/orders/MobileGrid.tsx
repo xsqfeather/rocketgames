@@ -1,5 +1,5 @@
 // in src/comments.js
-import * as React from "react";
+
 import { Box, Card, CardHeader, CardContent, Typography } from "@mui/material";
 import {
   DateField,

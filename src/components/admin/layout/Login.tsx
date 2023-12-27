@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
@@ -11,7 +10,7 @@ import {
   CircularProgress,
   Box,
 } from "@mui/material";
-import {Lock as LockIcon} from "@mui/icons-material";
+import { Lock as LockIcon } from "@mui/icons-material";
 import {
   Form,
   required,
@@ -20,7 +19,6 @@ import {
   useLogin,
   useNotify,
 } from "react-admin";
-
 
 const Login = () => {
   const [loading, setLoading] = useState(false);

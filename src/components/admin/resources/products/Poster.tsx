@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Card, CardMedia } from "@mui/material";
 import { useRecordContext } from "react-admin";
 import { Product } from "../../types";

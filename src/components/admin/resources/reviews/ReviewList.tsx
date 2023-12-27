@@ -30,7 +30,7 @@ const ReviewList = () => {
             theme.transitions.create(["all"], {
               duration: theme.transitions.duration.enteringScreen,
             }),
-          marginRight: !!match ? "400px" : 0,
+          marginRight: match ? "400px" : 0,
         }}
         filters={reviewFilters}
         perPage={25}
@@ -41,7 +41,7 @@ const ReviewList = () => {
         ) : (
           <ReviewListDesktop
             selectedRow={
-              !!match ? parseInt((match as any).params.id, 10) : undefined
+              match ? parseInt((match as any).params.id, 10) : undefined
             }
           />
         )}

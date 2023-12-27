@@ -39,8 +39,8 @@ export async function loginLoader() {
 }
 
 export async function loginAction({ request }: LoaderFunctionArgs) {
-  let formData = await request.formData();
-  let username = formData.get("username") as string | null;
+  const formData = await request.formData();
+  const username = formData.get("username") as string | null;
 
   // Validate our form inputs and return validation errors via useActionData()
   if (!username) {
@@ -57,14 +57,14 @@ export async function loginAction({ request }: LoaderFunctionArgs) {
     };
   }
 
-  let redirectTo = formData.get("redirectTo") as string | null;
+  const redirectTo = formData.get("redirectTo") as string | null;
   return redirect(redirectTo || "/");
 }
 
 export async function protectedLoader({ request }: LoaderFunctionArgs) {
   const token = localStorage.getItem("token");
   if (!token) {
-    let params = new URLSearchParams();
+    const params = new URLSearchParams();
     params.set("from", new URL(request.url).pathname);
     return redirect("/auth/login?" + params.toString());
   }

@@ -1,5 +1,5 @@
-import { stringify } from 'query-string';
-import { fetchUtils, DataProvider } from 'ra-core';
+import { stringify } from "query-string";
+import { fetchUtils, DataProvider } from "ra-core";
 
 /**
  * Maps react-admin queries to a simple REST API
@@ -19,7 +19,7 @@ import { fetchUtils, DataProvider } from 'ra-core';
  *
  * @example
  *
- * import * as React from "react";
+ *
  * import { Admin, Resource } from 'react-admin';
  * import simpleRestProvider from 'ra-data-simple-rest';
  *
@@ -34,108 +34,108 @@ import { fetchUtils, DataProvider } from 'ra-core';
  * export default App;
  */
 export default (
-    apiUrl: string,
-    httpClient = fetchUtils.fetchJson,
+  apiUrl: string,
+  httpClient = fetchUtils.fetchJson
 ): DataProvider => ({
-    getList: (resource, params) => {
-        const { page, perPage } = params.pagination;
-        const { field, order } = params.sort;
+  getList: (resource, params) => {
+    const { page, perPage } = params.pagination;
+    const { field, order } = params.sort;
 
-        const rangeStart = (page - 1) * perPage;
-        const rangeEnd = page * perPage - 1;
+    const rangeStart = (page - 1) * perPage;
+    const rangeEnd = page * perPage - 1;
 
-        const query = {
-            sort: JSON.stringify([field, order]),
-            range: JSON.stringify([rangeStart, rangeEnd]),
-            filter: JSON.stringify(params.filter),
-        };
-        const url = `${apiUrl}/${resource}?${stringify(query)}`;
-        return httpClient(url).then(({ json }) => {
-            return {
-                data: json.list,
-                total: json.total,
-            };
-        });
-    },
+    const query = {
+      sort: JSON.stringify([field, order]),
+      range: JSON.stringify([rangeStart, rangeEnd]),
+      filter: JSON.stringify(params.filter),
+    };
+    const url = `${apiUrl}/${resource}?${stringify(query)}`;
+    return httpClient(url).then(({ json }) => {
+      return {
+        data: json.list,
+        total: json.total,
+      };
+    });
+  },
 
-    getOne: (resource, params) =>
-        httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => ({
-            data: json,
-        })),
+  getOne: (resource, params) =>
+    httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => ({
+      data: json,
+    })),
 
-    getMany: (resource, params) => {
-        const query = {
-            filter: JSON.stringify({ id: params.ids }),
-        };
-        const url = `${apiUrl}/${resource}?${stringify(query)}`;
-        return httpClient(url).then(({ json }) => ({ data: json }));
-    },
+  getMany: (resource, params) => {
+    const query = {
+      filter: JSON.stringify({ id: params.ids }),
+    };
+    const url = `${apiUrl}/${resource}?${stringify(query)}`;
+    return httpClient(url).then(({ json }) => ({ data: json }));
+  },
 
-    getManyReference: (resource, params) => {
-        const { page, perPage } = params.pagination;
-        const { field, order } = params.sort;
+  getManyReference: (resource, params) => {
+    const { page, perPage } = params.pagination;
+    const { field, order } = params.sort;
 
-        const query = {
-            sort: JSON.stringify([field, order]),
-            range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
-            filter: JSON.stringify({
-                ...params.filter,
-                [params.target]: params.id,
-            }),
-        };
-        const url = `${apiUrl}/${resource}?${stringify(query)}`;
+    const query = {
+      sort: JSON.stringify([field, order]),
+      range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
+      filter: JSON.stringify({
+        ...params.filter,
+        [params.target]: params.id,
+      }),
+    };
+    const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
-        return httpClient(url).then(({  json }) => {
-            return {
-                data: json.list,
-                total: json.total,
-            };
-        });
-    },
+    return httpClient(url).then(({ json }) => {
+      return {
+        data: json.list,
+        total: json.total,
+      };
+    });
+  },
 
-    update: (resource, params) =>
-        httpClient(`${apiUrl}/${resource}/${params.id}`, {
-            method: 'PUT',
-            body: JSON.stringify(params.data),
-        }).then(({ json }) => ({ data: json })),
+  update: (resource, params) =>
+    httpClient(`${apiUrl}/${resource}/${params.id}`, {
+      method: "PUT",
+      body: JSON.stringify(params.data),
+    }).then(({ json }) => ({ data: json })),
 
-    // simple-rest doesn't handle provide an updateMany route, so we fallback to calling update n times instead
-    updateMany: (resource, params) =>
-        Promise.all(
-            params.ids.map(id =>
-                httpClient(`${apiUrl}/${resource}/${id}`, {
-                    method: 'PUT',
-                    body: JSON.stringify(params.data),
-                })
-            )
-        ).then(responses => ({ data: responses.map(({ json }) => json.id) })),
+  // simple-rest doesn't handle provide an updateMany route, so we fallback to calling update n times instead
+  updateMany: (resource, params) =>
+    Promise.all(
+      params.ids.map((id) =>
+        httpClient(`${apiUrl}/${resource}/${id}`, {
+          method: "PUT",
+          body: JSON.stringify(params.data),
+        })
+      )
+    ).then((responses) => ({ data: responses.map(({ json }) => json.id) })),
 
-    create: (resource, params) =>
-        httpClient(`${apiUrl}/${resource}`, {
-            method: 'POST',
-            body: JSON.stringify(params.data),
-        }).then(({ json }) => ({ data: json })),
+  create: (resource, params) =>
+    httpClient(`${apiUrl}/${resource}`, {
+      method: "POST",
+      body: JSON.stringify(params.data),
+    }).then(({ json }) => ({ data: json })),
 
-    delete: (resource, params) =>
-        httpClient(`${apiUrl}/${resource}/${params.id}`, {
-            method: 'DELETE',
-            headers: new Headers({
-                'Content-Type': 'text/plain',
-            }),
-        }).then(({ json }) => ({ data: json })),
+  delete: (resource, params) =>
+    httpClient(`${apiUrl}/${resource}/${params.id}`, {
+      method: "DELETE",
+      headers: new Headers({
+        "Content-Type": "text/plain",
+      }),
+    }).then(({ json }) => ({ data: json })),
 
-    // simple-rest doesn't handle filters on DELETE route, so we fallback to calling DELETE n times instead
-    deleteMany: (resource, params) =>
-        Promise.all(
-            params.ids.map(id =>
-                httpClient(`${apiUrl}/${resource}/${id}`, {
-                    method: 'DELETE',
-                    headers: new Headers({
-                        'Content-Type': 'text/plain',
-                    }),
-                })
-            )
-        ).then(responses => ({
-            data: responses.map(({ json }) => json.id),
-        })),
+  // simple-rest doesn't handle filters on DELETE route, so we fallback to calling DELETE n times instead
+  deleteMany: (resource, params) =>
+    Promise.all(
+      params.ids.map((id) =>
+        httpClient(`${apiUrl}/${resource}/${id}`, {
+          method: "DELETE",
+          headers: new Headers({
+            "Content-Type": "text/plain",
+          }),
+        })
+      )
+    ).then((responses) => ({
+      data: responses.map(({ json }) => json.id),
+    })),
 });

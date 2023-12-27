@@ -1,4 +1,3 @@
-import * as React from "react";
 import {
   Datagrid,
   DateField,
@@ -20,9 +19,9 @@ import StarRatingField from "../reviews/StarRatingField";
 import Poster from "./Poster";
 import { Product } from "../../types";
 import CreateRelatedReviewButton from "./CreateRelatedReviewButton";
+import React from "react";
 
 const RichTextInput = React.lazy(() =>
-  // @ts-expect-error
   import("ra-input-rich-text").then((module) => ({
     default: module.RichTextInput,
   }))
