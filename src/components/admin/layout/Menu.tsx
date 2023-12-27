@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Box from "@mui/material/Box";
-import { Label as LabelIcon} from "@mui/icons-material";
+import { Label as LabelIcon } from "@mui/icons-material";
 
 import {
   useTranslate,
@@ -56,6 +56,7 @@ const Menu = ({ dense = false }: MenuProps) => {
       >
         <MenuItemLink
           to="/admin/commands"
+          placeholder="Reviews"
           state={{ _scrollToTop: true }}
           primaryText={translate(`resources.commands.name`, {
             smart_count: 2,
@@ -65,6 +66,7 @@ const Menu = ({ dense = false }: MenuProps) => {
         />
         <MenuItemLink
           to="/admin/invoices"
+          placeholder="Reviews"
           state={{ _scrollToTop: true }}
           primaryText={translate(`resources.invoices.name`, {
             smart_count: 2,
@@ -82,6 +84,7 @@ const Menu = ({ dense = false }: MenuProps) => {
       >
         <MenuItemLink
           to="/admin/products"
+          placeholder="Reviews"
           state={{ _scrollToTop: true }}
           primaryText={translate(`resources.products.name`, {
             smart_count: 2,
@@ -91,6 +94,7 @@ const Menu = ({ dense = false }: MenuProps) => {
         />
         <MenuItemLink
           to="/admin/categories"
+          placeholder="Reviews"
           state={{ _scrollToTop: true }}
           primaryText={translate(`resources.categories.name`, {
             smart_count: 2,
@@ -108,6 +112,7 @@ const Menu = ({ dense = false }: MenuProps) => {
       >
         <MenuItemLink
           to="/admin/customers"
+          placeholder="Reviews"
           state={{ _scrollToTop: true }}
           primaryText={translate(`resources.customers.name`, {
             smart_count: 2,
@@ -117,6 +122,7 @@ const Menu = ({ dense = false }: MenuProps) => {
         />
         <MenuItemLink
           to="/admin/segments"
+          placeholder="Reviews"
           state={{ _scrollToTop: true }}
           primaryText={translate(`resources.segments.name`, {
             smart_count: 2,
@@ -127,6 +133,7 @@ const Menu = ({ dense = false }: MenuProps) => {
       </SubMenu>
       <MenuItemLink
         to="/admin/reviews"
+        placeholder="Reviews"
         state={{ _scrollToTop: true }}
         primaryText={translate(`resources.reviews.name`, {
           smart_count: 2,
