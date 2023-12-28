@@ -105,7 +105,7 @@ export default function RocketPage() {
   }, [socket]);
 
   useEffect(() => {
-    if (tableStatus === "FINISH" && betRecord.betMoney > 0) {
+    if (tableStatus === "FINISH" && betRecord?.betMoney > 0) {
       setRecords(() => [betRecord, ...records]);
       setBetRecord({
         betMoney: 0,
@@ -114,7 +114,7 @@ export default function RocketPage() {
         winMoney: 0,
       });
     }
-  }, [tableStatus, betRecord.betMoney]);
+  }, [tableStatus, betRecord?.betMoney]);
 
   const handleBetBtn = () => {
     setIsBet(true);
@@ -125,9 +125,9 @@ export default function RocketPage() {
       amount: 10,
     });
     setBetRecord({
-      betMoney: betRecord.betMoney + 10,
+      betMoney: betRecord?.betMoney + 10,
       point: 0,
-      profit: betRecord.profit - 10,
+      profit: betRecord?.profit - 10,
       winMoney: 0,
     });
   };
@@ -189,10 +189,10 @@ export default function RocketPage() {
       </Group>
       <Group>
         <Text>当前</Text>
-        <Text>下注：{betRecord.betMoney || 0}</Text>
-        <Text>回款: {betRecord.winMoney || 0} </Text>
-        <Text>倍数: {betRecord.point || 0} </Text>
-        <Text>盈利: {betRecord.profit || 0} </Text>
+        <Text>下注：{betRecord?.betMoney || 0}</Text>
+        <Text>回款: {betRecord?.winMoney || 0} </Text>
+        <Text>倍数: {betRecord?.point || 0} </Text>
+        <Text>盈利: {betRecord?.profit || 0} </Text>
       </Group>
       <Title>下注记录</Title>
       <Table>
@@ -207,10 +207,10 @@ export default function RocketPage() {
         <Table.Tbody>
           {records.map((record, index) => (
             <Table.Tr key={index}>
-              <Table.Td>{record.betMoney}</Table.Td>
-              <Table.Td>{record.winMoney}</Table.Td>
-              <Table.Td>{record.profit}</Table.Td>
-              <Table.Td>{record.point}</Table.Td>
+              <Table.Td>{record?.betMoney}</Table.Td>
+              <Table.Td>{record?.winMoney}</Table.Td>
+              <Table.Td>{record?.profit}</Table.Td>
+              <Table.Td>{record?.point}</Table.Td>
             </Table.Tr>
           ))}
         </Table.Tbody>

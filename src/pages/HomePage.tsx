@@ -27,8 +27,6 @@ const UnstyledButtonLink = ({
 };
 
 export default function HomePage() {
-  // const socket = useContext(SocketContext);
-
   return (
     <Stack>
       <Flex justify={"space-around"}>
