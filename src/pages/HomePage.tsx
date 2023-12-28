@@ -1,8 +1,6 @@
 import { Card, Flex, Stack, UnstyledButton } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { IconCards, IconRocket, IconStorm } from "@tabler/icons-react";
-import { useContext, useEffect } from "react";
-import { SocketContext } from "../contexts/SocketContext";
 
 const UnstyledButtonLink = ({
   children,
@@ -29,15 +27,7 @@ const UnstyledButtonLink = ({
 };
 
 export default function HomePage() {
-  const socket = useContext(SocketContext);
-  useEffect(() => {
-    socket?.on("/user/lobby/lobbyHandler/login", (msg) => {
-      console.log("/lobby/login", msg);
-    });
-    return () => {
-      socket?.off("/user/lobby/lobbyHandler/login");
-    };
-  }, [socket]);
+  // const socket = useContext(SocketContext);
 
   return (
     <Stack>

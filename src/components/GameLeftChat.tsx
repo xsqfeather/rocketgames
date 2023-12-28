@@ -48,7 +48,7 @@ const mockdata = [
   },
 ];
 
-export function HallLeftNavBar() {
+export function GameLeftChat() {
   const links = mockdata.map((item) => (
     <LinksGroup {...item} key={item.label} />
   ));

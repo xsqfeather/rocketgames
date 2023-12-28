@@ -16,14 +16,18 @@ export async function loginAction({ request }: LoaderFunctionArgs) {
       email,
     });
     console.log({ loginRlt });
-    if (loginRlt.data.code === 502) {
+    if (loginRlt.data.code === 504) {
       //user already exists
-      return redirect(`/auth/login?error=${loginRlt.data.message}`);
+      return redirect(
+        `/auth/login?error=${loginRlt.data.message}&time=${Date.now()}`
+      );
     }
     localStorage.setItem("token", loginRlt.data.session);
     localStorage.setItem("accountID", loginRlt.data.accountID);
-    const redirectTo = formData.get("redirectTo") as string | null;
-    return redirect(redirectTo || "/");
+    let redirectTo = formData.get("redirectTo") as string | null;
+    redirectTo = redirectTo || "/";
+    redirectTo = redirectTo + "?loginSuccess=true";
+    return redirect(redirectTo);
   } catch (error) {
     console.error({ error });
     return null;

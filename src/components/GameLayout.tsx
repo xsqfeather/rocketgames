@@ -1,32 +1,17 @@
 import "@mantine/core/styles.css";
-import "@mantine/notifications/styles.css";
-
 import { MantineProvider, Text, UnstyledButton } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { AppShell, Burger, Group } from "@mantine/core";
-import { Link, Outlet, useSearchParams } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { HallLeftNavBar } from "./HallLeftNavbar";
 import { SocketProvider } from "../contexts/SocketContext";
-import { Notifications, notifications } from "@mantine/notifications";
-import { useEffect } from "react";
 
 export function HallLayout() {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
-  const [searchParams] = useSearchParams();
-  const loginSuccess = searchParams.get("loginSuccess");
-  useEffect(() => {
-    if (loginSuccess) {
-      notifications.show({
-        title: "登录成功",
-        message: "Welcome",
-        color: "green",
-      });
-    }
-  }, [loginSuccess]);
+
   return (
     <MantineProvider>
-      <Notifications position="top-right" />
       <SocketProvider>
         <AppShell
           header={{ height: 60 }}

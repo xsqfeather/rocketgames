@@ -1,11 +1,14 @@
 import "@mantine/core/styles.css";
+import "@mantine/notifications/styles.css";
 
 import { Paper, Box, Grid, MantineProvider } from "@mantine/core";
 import { Outlet } from "react-router-dom";
+import { Notifications } from "@mantine/notifications";
 
 export default function AuthLayout() {
   return (
     <MantineProvider>
+      <Notifications position="top-right" />
       <Grid justify="space-around" align="center">
         <Grid.Col span={6} p={3}>
           <Paper radius={0} p={30}>
