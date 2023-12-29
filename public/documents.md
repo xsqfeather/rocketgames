@@ -19,22 +19,32 @@
     - [Socket.IO](#socketio)
       - [/user/lobby/lobbyHandler/login](#userlobbylobbyhandlerlogin)
         - [input params](#input-params-2)
-        - [output params](#output-params)
         - [output response](#output-response-2)
+          - [code:200](#code200)
     - [Socket.IO](#socketio-1)
       - [/user/lobby/lobbyHandler/login](#userlobbylobbyhandlerlogin-1)
-        - [input params](#input-params-3)
-        - [output params](#output-params-1)
+      - [input params](#input-params-3)
+      - [output response](#output-response-3)
+        - [code:200](#code200-1)
+        - [code:620](#code620)
   - [Rocket API](#rocket-api)
     - [Socket.io](#socketio-2)
       - [/user/rocket/rocketHandler/bet](#userrocketrockethandlerbet)
         - [input params](#input-params-4)
-        - [output params](#output-params-2)
+        - [output params](#output-params)
+        - [code:200](#code200-2)
+        - [code:620](#code620-1)
+        - [code:1500](#code1500)
+        - [code:1400](#code1400)
       - [/user/rocket/rocketHandler/escape](#userrocketrockethandlerescape)
         - [input params](#input-params-5)
-        - [output params](#output-params-3)
+        - [output response](#output-response-4)
+        - [code:620](#code620-2)
+        - [code:620](#code620-3)
+        - [code:1500](#code1500-1)
+        - [code:1400](#code1400-1)
       - [/ind/rocket/table/status](#indrockettablestatus)
-        - [output params](#output-params-4)
+        - [output params](#output-params-1)
 
 <!-- /code_chunk_output -->
 
@@ -100,19 +110,9 @@ Login to the lobby and get the session, which can be used as token for clients
 }
 ```
 
-##### output params
-
-```typescript
-{
-    "seq": "1",
-    "accountID": "20010001000",
-    "session": "xKLxeQLJG0Ri280q2GRTGjB9yqaTi9Tmb8EjSgCaRjJGc7MngDgjc31Zlql3n351",
-    "gameNode": "lobby:172.20.10.3",
-    "code": 200,
-}
-```
-
 ##### output response
+
+###### code:200
 
 ```typescript
 {
@@ -126,7 +126,7 @@ Login to the lobby and get the session, which can be used as token for clients
 
 #### /user/lobby/lobbyHandler/login
 
-##### input params
+#### input params
 
 ```typescript
 {
@@ -136,7 +136,9 @@ Login to the lobby and get the session, which can be used as token for clients
 }
 ```
 
-##### output params
+#### output response
+
+##### code:200
 
 ```typescript
 {
@@ -148,6 +150,15 @@ Login to the lobby and get the session, which can be used as token for clients
     "tableId": "4LZbC7tL7sPSq2eVV0DnZ",
     "state": "GAMING",
     "message": "join game success"
+}
+```
+
+##### code:620
+
+```typescript
+{
+    "code": 620, //table not found
+    "message": `Table ${tableId} not found`
 }
 ```
 
@@ -172,6 +183,8 @@ When rocket is ready, the player can put money into table to bet
 
 ##### output params
 
+##### code:200
+
 ```typescript
 {
     "code": 200,
@@ -181,6 +194,41 @@ When rocket is ready, the player can put money into table to bet
     "cashOutPoint": 2.5578779922522403,
     "tableId": "4LZbC7tL7sPSq2eVV0DnZ",
     "state": "READY"
+}
+```
+
+##### code:620
+
+GameClassError
+
+```typescript
+{
+    "code": 620, //table not found
+    "message": `Table ${tableId} not found`//`User ${accountID} not found`
+}
+```
+
+##### code:1500
+
+The game action is not at the right time
+
+```typescript
+{
+    "code": 1500,
+    "message": "table not ready",
+    "gameCode": "table:errors:not-ready",
+}
+```
+
+##### code:1400
+
+The game action is not at the right time
+
+```typescript
+{
+    "code": 1400,
+    "message": "player not found on the table",
+    "gameCode": "table:errors:player-not-found",
 }
 ```
 
@@ -198,7 +246,9 @@ When rocket is flying, the player can get back his bet money with point
 }
 ```
 
-##### output params
+##### output response
+
+##### code:620
 
 ```typescript
 {
@@ -215,6 +265,41 @@ When rocket is flying, the player can get back his bet money with point
         "winMoney": "10.72",
         "betMoney": "10.00"
     }// this is the game result for this round
+}
+```
+
+##### code:620
+
+GameClassError
+
+```typescript
+{
+    "code": 620, //table not found
+    "message": `Table ${tableId} not found`//`User ${accountID} not found`
+}
+```
+
+##### code:1500
+
+The game action is not at the right time
+
+```typescript
+{
+    "code": 1500,
+    "message": "table not ready",
+    "gameCode": "table:errors:not-ready",
+}
+```
+
+##### code:1400
+
+The game action is not at the right time
+
+```typescript
+{
+    "code": 1400,
+    "message": "player not found on the table",
+    "gameCode": "table:errors:player-not-found",
 }
 ```
 
