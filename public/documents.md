@@ -45,6 +45,26 @@
         - [code:1400](#code1400-1)
       - [/ind/rocket/table/status](#indrockettablestatus)
         - [output params](#output-params-1)
+- [The Mines Game API document](#the-mines-game-api-document)
+  - [/user/mines/minesHandler/joinGame](#userminesmineshandlerjoingame)
+    - [input params](#input-params-6)
+    - [output params](#output-params-2)
+  - [/user/mines/minesHandler/bet](#userminesmineshandlerbet)
+    - [input params](#input-params-7)
+    - [output params](#output-params-3)
+      - [200](#200)
+  - [/user/mines/minesHandler/choseBox](#userminesmineshandlerchosebox)
+    - [input params](#input-params-8)
+    - [output params](#output-params-4)
+      - [200](#200-1)
+  - [/user/mines/minesHandler/cashOut](#userminesmineshandlercashout)
+    - [input params](#input-params-9)
+    - [output params](#output-params-5)
+      - [200](#200-2)
+  - [/user/mines/minesHandler/getTableStatus](#userminesmineshandlergettablestatus)
+    - [input params](#input-params-10)
+    - [output params](#output-params-6)
+      - [200](#200-3)
 
 <!-- /code_chunk_output -->
 
@@ -318,5 +338,222 @@ The server send the table status to the clients
     "cashOutPoint": 1.5436936295863515,
     "tableId": "4LZbC7tL7sPSq2eVV0DnZ",
     "state": "READY"
+}
+```
+
+# The Mines Game API document
+
+All apis are all on Socket.IO
+
+## /user/mines/minesHandler/joinGame
+
+Join the mines game only after login to the Lobby.
+
+### input params
+
+```typescript
+{
+    seq: "1",
+    game: "mines",
+    accountID: "20010001000",
+    session: "xKLxeQLJG0Ri280q2GRTGjB9yqaTi9Tmb8EjSgCaRjJGc7MngDgjc31Zlql3n351"
+}
+```
+
+### output params
+
+```typescript
+{
+  RT: 0.97;
+  beMone: 0;
+  cashOutoun: 0;
+  cod: 20;
+  curentBetAmoun: 0;
+  excludeMinesNu: 0;
+  id: "U9IfQkvghULvdXKP1QeQx";
+  level: 1;
+  maxSeats: 100;
+  maximumBet: 10000;
+  maximumPayment: 10000;
+  minnumBet: 1;
+  players: [];
+  prefix: "mine:172.20.10.3";
+  stat: "CHIPIN";
+  taxMoneyPercent: 0.05;
+}
+```
+
+## /user/mines/minesHandler/bet
+
+### input params
+
+```typescript
+{
+	seq: 2,
+	accountID,
+	session,
+	game: 'mines',
+	bet: 100,
+	level: 5
+}
+```
+
+### output params
+
+#### 200
+
+```typescript
+{
+  accountID: 20010001000;
+  bet: 100;
+  code: 200;
+  game: "mines";
+  level: 5;
+  message: alradyBet: true;
+  tableState: "GAMING";
+  seq: 2;
+  session: "21auq7yhVM2owTnzSiUsus7Y3SSSdXvHC4Opaa417szw7CTIVqEQrNyZlqoxq1cm";
+}
+```
+
+## /user/mines/minesHandler/choseBox
+
+### input params
+
+```typescript
+{
+    game: "mines",
+    accountID: "20010001000",
+    session: "xKLxeQLJG0Ri280q2GRTGjB9yqaTi9Tmb8EjSgCaRjJGc7MngDgjc31Zlql3n351",
+	select: 9
+}
+```
+
+### output params
+
+#### 200
+
+```typescript
+{
+  accountID: 20010001000;
+  code: 200;
+  game: "mines";
+  message: currentSelect: 9;
+  hit: 2;
+  mineInfo: (25)[
+    (3, 1, 3, 3, 3, 3, 3, 3, 4, 2, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 4, 3, 3, 4)
+  ];
+  nextbei: "1.96";
+  nowbei: "1.53";
+  odd: 153;
+  result: {
+    betMoney: 100;
+    level: 5;
+    mineInfo: (25)[
+      (3,
+      1,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      4,
+      2,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      4,
+      3,
+      3,
+      3,
+      4,
+      3,
+      3,
+      4)
+    ];
+    rate: 0;
+    winScore: 0;
+  }
+  select: 9;
+  seq: 2;
+  session: "21auq7yhVM2owTnzSiUsus7Y3SSSdXvHC4Opaa417szw7CTIVqEQrNyZlqoxq1cm";
+}
+```
+
+## /user/mines/minesHandler/cashOut
+
+### input params
+
+```typescript
+{
+    game: "mines",
+    accountID: "20010001000",
+    session: "xKLxeQLJG0Ri280q2GRTGjB9yqaTi9Tmb8EjSgCaRjJGc7MngDgjc31Zlql3n351"
+}
+```
+
+### output params
+
+#### 200
+
+```typescript
+{
+  accountID: 20010001000;
+  code: 200;
+  game: "mines";
+  message: betMoney: 100;
+  level: 5;
+  mineInfo: (25)[
+    (0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+  ];
+  rate: "1.21";
+  winScore: 121;
+  seq: 2;
+  session: "21auq7yhVM2owTnzSiUsus7Y3SSSdXvHC4Opaa417szw7CTIVqEQrNyZlqoxq1cm";
+}
+```
+
+## /user/mines/minesHandler/getTableStatus
+
+### input params
+
+```typescript
+{
+    game: "mines",
+    accountID: "20010001000",
+    session: "xKLxeQLJG0Ri280q2GRTGjB9yqaTi9Tmb8EjSgCaRjJGc7MngDgjc31Zlql3n351"
+}
+```
+
+### output params
+
+#### 200
+
+```typescript
+{
+	accountID: 20010001000
+	code: 200
+	game: "mines"
+	message: game: "mines"
+	level: 1
+	maximumBet: 10000
+	maximumPayment: 10000
+	minnumBet: 1
+	tableId: "9hFnWdARriQzd2LwWy2Oa"
+	tableState: "CHIPIN"
+	seq: 2
+	session: "21auq7yhVM2owTnzSiUsus7Y3SSSdXvHC4Opaa417szw7CTIVqEQrNyZlqoxq1cm"
+	gameRecord:[
+		betMoney: 100
+		level: 5
+		mineInfo: [3, 1, 3, 3, 3, 3, 3, 3, 4, 2, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 4, 3, 3, 4]
+		rate: 0
+		winScore: 0
+	]
 }
 ```
