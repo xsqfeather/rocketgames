@@ -118,6 +118,12 @@ export default function RocketPage() {
 
   const handleBetBtn = () => {
     setIsBet(true);
+    console.log("handleBetBtn", {
+      game: "rocket",
+      accountID: localStorage.getItem("accountID"),
+      session: localStorage.getItem("token"),
+      amount: 10,
+    });
     socket?.emit("/user/rocket/rocketHandler/bet", {
       game: "rocket",
       accountID: localStorage.getItem("accountID"),
@@ -134,6 +140,11 @@ export default function RocketPage() {
 
   const handleEscape = () => {
     setIsBet(false);
+    console.log("handleEscape", {
+      game: "rocket",
+      accountID: localStorage.getItem("accountID"),
+      session: localStorage.getItem("token"),
+    });
     socket?.emit("/user/rocket/rocketHandler/escape", {
       game: "rocket",
       accountID: localStorage.getItem("accountID"),
