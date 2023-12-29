@@ -1,13 +1,13 @@
 # API Document
 
-### END POST https://games-api.8kas.com/
+### END POINT https://games-api.8kas.com/
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
 <!-- code_chunk_output -->
 
 - [API Document](#api-document)
-    - [END POST https://games-api.8kas.com/](#end-post-httpsgames-api8kascom)
+  - [END POST https://games-api.8kas.com/](#end-post-httpsgames-api8kascom)
   - [Lobby](#lobby)
     - [HTTP](#http)
       - [POST /lobby/signUp](#post-lobbysignup)
@@ -228,25 +228,25 @@ GameClassError
 }
 ```
 
-##### code:1500
+##### gameCode: "table:errors:not-ready"
 
 The game action is not at the right time
 
 ```typescript
 {
-    "code": 1500,
+    "code": 200,
     "message": "table not ready",
     "gameCode": "table:errors:not-ready",
 }
 ```
 
-##### code:1400
+##### gameCode:"table:errors:player-not-found"
 
 The game action is not at the right time
 
 ```typescript
 {
-    "code": 1400,
+    "code": 200,
     "message": "player not found on the table",
     "gameCode": "table:errors:player-not-found",
 }
@@ -268,7 +268,7 @@ When rocket is flying, the player can get back his bet money with point
 
 ##### output response
 
-##### code:620
+##### code:200
 
 ```typescript
 {
@@ -299,25 +299,25 @@ GameClassError
 }
 ```
 
-##### code:1500
+##### gameCode: "table:errors:not-ready"
 
 The game action is not at the right time
 
 ```typescript
 {
-    "code": 1500,
+    "code": 200,
     "message": "table not ready",
     "gameCode": "table:errors:not-ready",
 }
 ```
 
-##### code:1400
+##### gameCode: "table:errors:player-not-found"
 
 The game action is not at the right time
 
 ```typescript
 {
-    "code": 1400,
+    "code": 200,
     "message": "player not found on the table",
     "gameCode": "table:errors:player-not-found",
 }
