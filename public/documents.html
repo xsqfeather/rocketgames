@@ -25,11 +25,11 @@
       <div class="crossnote markdown-preview  ">
       
 <h1 id="api-document">API Document </h1>
-<h3 id="end-post-httpsgames-api8kascom">END POST <a href="https://games-api.8kas.com/">https://games-api.8kas.com/</a> </h3>
+<h3 id="end-point-httpsgames-api8kascom">END POINT <a href="https://games-api.8kas.com/">https://games-api.8kas.com/</a> </h3>
 <div class="code-chunk" data-id="code-chunk-id-0" data-cmd="toc"><div class="input-div"><div class="code-chunk-btn-group"><div class="run-btn btn btn-xs btn-primary"><span>▶︎</span></div><div class="run-all-btn btn btn-xs btn-primary">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><ul>
 <li><a href="#api-document">API Document</a>
 <ul>
-<li><a href="#end-post-httpsgames-api8kascom">END POST https://games-api.8kas.com/</a></li>
+<li><a href="#end-point-httpsgames-api8kascom">END POINT https://games-api.8kas.com/</a></li>
 <li><a href="#lobby">Lobby</a>
 <ul>
 <li><a href="#http">HTTP</a>
@@ -76,28 +76,37 @@
 </li>
 </ul>
 </li>
+</ul>
+</li>
 <li><a href="#rocket-api">Rocket API</a>
 <ul>
 <li><a href="#socketio-2">Socket.io</a>
 <ul>
-<li><a href="#userrocketrockethandlerbet">/user/rocket/rocketHandler/bet</a>
+<li><a href="#userrocketrockethandlerjoingame">/user/rocket/rocketHandler/joinGame</a>
 <ul>
 <li><a href="#input-params-4">input params</a></li>
+<li><a href="#output-response-4">output response</a></li>
+<li><a href="#200">200</a></li>
+</ul>
+</li>
+<li><a href="#userrocketrockethandlerbet">/user/rocket/rocketHandler/bet</a>
+<ul>
+<li><a href="#input-params-5">input params</a></li>
 <li><a href="#output-params">output params</a></li>
 <li><a href="#code200-2">code:200</a></li>
 <li><a href="#code620-1">code:620</a></li>
-<li><a href="#code1500">code:1500</a></li>
-<li><a href="#code1400">code:1400</a></li>
+<li><a href="#gamecode-tableerrorsnot-ready">gameCode: "table:errors:not-ready"</a></li>
+<li><a href="#gamecodetableerrorsplayer-not-found">gameCode:"table:errors:player-not-found"</a></li>
 </ul>
 </li>
 <li><a href="#userrocketrockethandlerescape">/user/rocket/rocketHandler/escape</a>
 <ul>
-<li><a href="#input-params-5">input params</a></li>
-<li><a href="#output-response-4">output response</a></li>
+<li><a href="#input-params-6">input params</a></li>
+<li><a href="#output-response-5">output response</a></li>
+<li><a href="#code200-3">code:200</a></li>
 <li><a href="#code620-2">code:620</a></li>
-<li><a href="#code620-3">code:620</a></li>
-<li><a href="#code1500-1">code:1500</a></li>
-<li><a href="#code1400-1">code:1400</a></li>
+<li><a href="#gamecode-tableerrorsnot-ready-1">gameCode: "table:errors:not-ready"</a></li>
+<li><a href="#gamecode-tableerrorsplayer-not-found">gameCode: "table:errors:player-not-found"</a></li>
 </ul>
 </li>
 <li><a href="#indrockettablestatus">/ind/rocket/table/status</a>
@@ -109,52 +118,50 @@
 </li>
 </ul>
 </li>
-</ul>
-</li>
 <li><a href="#the-mines-game-api-document">The Mines Game API document</a>
 <ul>
 <li><a href="#userminesmineshandlerjoingame">/user/mines/minesHandler/joinGame</a>
 <ul>
-<li><a href="#input-params-6">input params</a></li>
+<li><a href="#input-params-7">input params</a></li>
 <li><a href="#output-params-2">output params</a></li>
 </ul>
 </li>
 <li><a href="#userminesmineshandlerbet">/user/mines/minesHandler/bet</a>
 <ul>
-<li><a href="#input-params-7">input params</a></li>
-<li><a href="#output-params-3">output params</a>
-<ul>
-<li><a href="#200">200</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#userminesmineshandlerchosebox">/user/mines/minesHandler/choseBox</a>
-<ul>
 <li><a href="#input-params-8">input params</a></li>
-<li><a href="#output-params-4">output params</a>
+<li><a href="#output-params-3">output params</a>
 <ul>
 <li><a href="#200-1">200</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#userminesmineshandlercashout">/user/mines/minesHandler/cashOut</a>
+<li><a href="#userminesmineshandlerchosebox">/user/mines/minesHandler/choseBox</a>
 <ul>
 <li><a href="#input-params-9">input params</a></li>
-<li><a href="#output-params-5">output params</a>
+<li><a href="#output-params-4">output params</a>
 <ul>
 <li><a href="#200-2">200</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#userminesmineshandlergettablestatus">/user/mines/minesHandler/getTableStatus</a>
+<li><a href="#userminesmineshandlercashout">/user/mines/minesHandler/cashOut</a>
 <ul>
 <li><a href="#input-params-10">input params</a></li>
-<li><a href="#output-params-6">output params</a>
+<li><a href="#output-params-5">output params</a>
 <ul>
 <li><a href="#200-3">200</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#userminesmineshandlergettablestatus">/user/mines/minesHandler/getTableStatus</a>
+<ul>
+<li><a href="#input-params-11">input params</a></li>
+<li><a href="#output-params-6">output params</a>
+<ul>
+<li><a href="#200-4">200</a></li>
 </ul>
 </li>
 </ul>
@@ -228,19 +235,39 @@
     <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">620</span><span class="token punctuation">,</span> <span class="token comment">//table not found</span>
     <span class="token string-property property">"message"</span><span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Table </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>tableId<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> not found</span><span class="token template-punctuation string">`</span></span>
 <span class="token punctuation">}</span>
-</code></pre><h2 id="rocket-api">Rocket API </h2>
-<h3 id="socketio-2"><a href="http://Socket.io">Socket.io</a> </h3>
-<h4 id="userrocketrockethandlerbet">/user/rocket/rocketHandler/bet </h4>
+</code></pre><h1 id="rocket-api">Rocket API </h1>
+<h2 id="socketio-2"><a href="http://Socket.io">Socket.io</a> </h2>
+<h3 id="userrocketrockethandlerjoingame">/user/rocket/rocketHandler/joinGame </h3>
+<p>Join game after joined the lobby</p>
+<h4 id="input-params-4">input params </h4>
+<pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
+    <span class="token string-property property">"game"</span><span class="token operator">:</span> <span class="token string">"rocket"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"accountID"</span><span class="token operator">:</span> <span class="token string">"20010001000"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"session"</span><span class="token operator">:</span> <span class="token string">"A7Boz5U63KVrCcVeQcecy5QKJXAqTQ0Q5FT5qu4bvOgXyV6CXeUJpyaZlqq95kzd"</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</code></pre><h4 id="output-response-4">output response </h4>
+<h4 id="200">200 </h4>
+<pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
+    <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"ticks"</span><span class="token operator">:</span> <span class="token number">63</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"isBet"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"maxSeats"</span><span class="token operator">:</span> <span class="token string">"10000"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"cashOutPoint"</span><span class="token operator">:</span> <span class="token number">1.8667109004833577</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"tableId"</span><span class="token operator">:</span> <span class="token string">"A8t1uBupkVarDcxgWNrw4"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"state"</span><span class="token operator">:</span> <span class="token string">"READY"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"message"</span><span class="token operator">:</span> <span class="token string">"join game success"</span>
+<span class="token punctuation">}</span>
+</code></pre><h3 id="userrocketrockethandlerbet">/user/rocket/rocketHandler/bet </h3>
 <p>When rocket is ready, the player can put money into table to bet</p>
-<h5 id="input-params-4">input params </h5>
+<h4 id="input-params-5">input params </h4>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
     <span class="token string-property property">"game"</span><span class="token operator">:</span> <span class="token string">"rocket"</span><span class="token punctuation">,</span>
     <span class="token string-property property">"accountID"</span><span class="token operator">:</span> <span class="token string">"20010001000"</span><span class="token punctuation">,</span>
     <span class="token string-property property">"session"</span><span class="token operator">:</span> <span class="token string">"A7Boz5U63KVrCcVeQcecy5QKJXAqTQ0Q5FT5qu4bvOgXyV6CXeUJpyaZlqq95kzd"</span><span class="token punctuation">,</span>
     <span class="token string-property property">"amount"</span><span class="token operator">:</span> <span class="token number">10</span>
 <span class="token punctuation">}</span>
-</code></pre><h5 id="output-params">output params </h5>
-<h5 id="code200-2">code:200 </h5>
+</code></pre><h4 id="output-params">output params </h4>
+<h4 id="code200-2">code:200 </h4>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
     <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
     <span class="token string-property property">"ticks"</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
@@ -250,36 +277,36 @@
     <span class="token string-property property">"tableId"</span><span class="token operator">:</span> <span class="token string">"4LZbC7tL7sPSq2eVV0DnZ"</span><span class="token punctuation">,</span>
     <span class="token string-property property">"state"</span><span class="token operator">:</span> <span class="token string">"READY"</span>
 <span class="token punctuation">}</span>
-</code></pre><h5 id="code620-1">code:620 </h5>
+</code></pre><h4 id="code620-1">code:620 </h4>
 <p>GameClassError</p>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
     <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">620</span><span class="token punctuation">,</span> <span class="token comment">//table not found</span>
     <span class="token string-property property">"message"</span><span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Table </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>tableId<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> not found</span><span class="token template-punctuation string">`</span></span><span class="token comment">//`User ${accountID} not found`</span>
 <span class="token punctuation">}</span>
-</code></pre><h5 id="code1500">code:1500 </h5>
+</code></pre><h4 id="gamecode-tableerrorsnot-ready">gameCode: "table:errors:not-ready" </h4>
 <p>The game action is not at the right time</p>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
-    <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">1500</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
     <span class="token string-property property">"message"</span><span class="token operator">:</span> <span class="token string">"table not ready"</span><span class="token punctuation">,</span>
     <span class="token string-property property">"gameCode"</span><span class="token operator">:</span> <span class="token string">"table:errors:not-ready"</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
-</code></pre><h5 id="code1400">code:1400 </h5>
+</code></pre><h4 id="gamecodetableerrorsplayer-not-found">gameCode:"table:errors:player-not-found" </h4>
 <p>The game action is not at the right time</p>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
-    <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">1400</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
     <span class="token string-property property">"message"</span><span class="token operator">:</span> <span class="token string">"player not found on the table"</span><span class="token punctuation">,</span>
     <span class="token string-property property">"gameCode"</span><span class="token operator">:</span> <span class="token string">"table:errors:player-not-found"</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
-</code></pre><h4 id="userrocketrockethandlerescape">/user/rocket/rocketHandler/escape </h4>
+</code></pre><h3 id="userrocketrockethandlerescape">/user/rocket/rocketHandler/escape </h3>
 <p>When rocket is flying, the player can get back his bet money with point</p>
-<h5 id="input-params-5">input params </h5>
+<h4 id="input-params-6">input params </h4>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
     <span class="token string-property property">"game"</span><span class="token operator">:</span> <span class="token string">"rocket"</span><span class="token punctuation">,</span>
     <span class="token string-property property">"accountID"</span><span class="token operator">:</span> <span class="token string">"20010001000"</span><span class="token punctuation">,</span>
     <span class="token string-property property">"session"</span><span class="token operator">:</span> <span class="token string">"A7Boz5U63KVrCcVeQcecy5QKJXAqTQ0Q5FT5qu4bvOgXyV6CXeUJpyaZlqq95kzd"</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
-</code></pre><h5 id="output-response-4">output response </h5>
-<h5 id="code620-2">code:620 </h5>
+</code></pre><h4 id="output-response-5">output response </h4>
+<h4 id="code200-3">code:200 </h4>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
     <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
     <span class="token string-property property">"ticks"</span><span class="token operator">:</span> <span class="token number">12</span><span class="token punctuation">,</span>
@@ -295,29 +322,29 @@
         <span class="token string-property property">"betMoney"</span><span class="token operator">:</span> <span class="token string">"10.00"</span>
     <span class="token punctuation">}</span><span class="token comment">// this is the game result for this round</span>
 <span class="token punctuation">}</span>
-</code></pre><h5 id="code620-3">code:620 </h5>
+</code></pre><h4 id="code620-2">code:620 </h4>
 <p>GameClassError</p>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
     <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">620</span><span class="token punctuation">,</span> <span class="token comment">//table not found</span>
     <span class="token string-property property">"message"</span><span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Table </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>tableId<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> not found</span><span class="token template-punctuation string">`</span></span><span class="token comment">//`User ${accountID} not found`</span>
 <span class="token punctuation">}</span>
-</code></pre><h5 id="code1500-1">code:1500 </h5>
+</code></pre><h4 id="gamecode-tableerrorsnot-ready-1">gameCode: "table:errors:not-ready" </h4>
 <p>The game action is not at the right time</p>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
-    <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">1500</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
     <span class="token string-property property">"message"</span><span class="token operator">:</span> <span class="token string">"table not ready"</span><span class="token punctuation">,</span>
     <span class="token string-property property">"gameCode"</span><span class="token operator">:</span> <span class="token string">"table:errors:not-ready"</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
-</code></pre><h5 id="code1400-1">code:1400 </h5>
+</code></pre><h4 id="gamecode-tableerrorsplayer-not-found">gameCode: "table:errors:player-not-found" </h4>
 <p>The game action is not at the right time</p>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
-    <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">1400</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
     <span class="token string-property property">"message"</span><span class="token operator">:</span> <span class="token string">"player not found on the table"</span><span class="token punctuation">,</span>
     <span class="token string-property property">"gameCode"</span><span class="token operator">:</span> <span class="token string">"table:errors:player-not-found"</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
-</code></pre><h4 id="indrockettablestatus">/ind/rocket/table/status </h4>
+</code></pre><h3 id="indrockettablestatus">/ind/rocket/table/status </h3>
 <p>The server send the table status to the clients</p>
-<h5 id="output-params-1">output params </h5>
+<h4 id="output-params-1">output params </h4>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
     <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
     <span class="token string-property property">"ticks"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
@@ -331,7 +358,7 @@
 <p>All apis are all on <a href="http://Socket.IO">Socket.IO</a></p>
 <h2 id="userminesmineshandlerjoingame">/user/mines/minesHandler/joinGame </h2>
 <p>Join the mines game only after login to the Lobby.</p>
-<h3 id="input-params-6">input params </h3>
+<h3 id="input-params-7">input params </h3>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
     seq<span class="token operator">:</span> <span class="token string">"1"</span><span class="token punctuation">,</span>
     game<span class="token operator">:</span> <span class="token string">"mines"</span><span class="token punctuation">,</span>
@@ -358,7 +385,7 @@
   taxMoneyPercent<span class="token operator">:</span> <span class="token number">0.05</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre><h2 id="userminesmineshandlerbet">/user/mines/minesHandler/bet </h2>
-<h3 id="input-params-7">input params </h3>
+<h3 id="input-params-8">input params </h3>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
 	seq<span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
 	accountID<span class="token punctuation">,</span>
@@ -368,7 +395,7 @@
 	level<span class="token operator">:</span> <span class="token number">5</span>
 <span class="token punctuation">}</span>
 </code></pre><h3 id="output-params-3">output params </h3>
-<h4 id="200">200 </h4>
+<h4 id="200-1">200 </h4>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
   accountID<span class="token operator">:</span> <span class="token number">20010001000</span><span class="token punctuation">;</span>
   bet<span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">;</span>
@@ -381,7 +408,7 @@
   session<span class="token operator">:</span> <span class="token string">"21auq7yhVM2owTnzSiUsus7Y3SSSdXvHC4Opaa417szw7CTIVqEQrNyZlqoxq1cm"</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre><h2 id="userminesmineshandlerchosebox">/user/mines/minesHandler/choseBox </h2>
-<h3 id="input-params-8">input params </h3>
+<h3 id="input-params-9">input params </h3>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
     game<span class="token operator">:</span> <span class="token string">"mines"</span><span class="token punctuation">,</span>
     accountID<span class="token operator">:</span> <span class="token string">"20010001000"</span><span class="token punctuation">,</span>
@@ -389,7 +416,7 @@
 	select<span class="token operator">:</span> <span class="token number">9</span>
 <span class="token punctuation">}</span>
 </code></pre><h3 id="output-params-4">output params </h3>
-<h4 id="200-1">200 </h4>
+<h4 id="200-2">200 </h4>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
   accountID<span class="token operator">:</span> <span class="token number">20010001000</span><span class="token punctuation">;</span>
   code<span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">;</span>
@@ -440,14 +467,14 @@
   session<span class="token operator">:</span> <span class="token string">"21auq7yhVM2owTnzSiUsus7Y3SSSdXvHC4Opaa417szw7CTIVqEQrNyZlqoxq1cm"</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre><h2 id="userminesmineshandlercashout">/user/mines/minesHandler/cashOut </h2>
-<h3 id="input-params-9">input params </h3>
+<h3 id="input-params-10">input params </h3>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
     game<span class="token operator">:</span> <span class="token string">"mines"</span><span class="token punctuation">,</span>
     accountID<span class="token operator">:</span> <span class="token string">"20010001000"</span><span class="token punctuation">,</span>
     session<span class="token operator">:</span> <span class="token string">"xKLxeQLJG0Ri280q2GRTGjB9yqaTi9Tmb8EjSgCaRjJGc7MngDgjc31Zlql3n351"</span>
 <span class="token punctuation">}</span>
 </code></pre><h3 id="output-params-5">output params </h3>
-<h4 id="200-2">200 </h4>
+<h4 id="200-3">200 </h4>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
   accountID<span class="token operator">:</span> <span class="token number">20010001000</span><span class="token punctuation">;</span>
   code<span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">;</span>
@@ -463,14 +490,14 @@
   session<span class="token operator">:</span> <span class="token string">"21auq7yhVM2owTnzSiUsus7Y3SSSdXvHC4Opaa417szw7CTIVqEQrNyZlqoxq1cm"</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre><h2 id="userminesmineshandlergettablestatus">/user/mines/minesHandler/getTableStatus </h2>
-<h3 id="input-params-10">input params </h3>
+<h3 id="input-params-11">input params </h3>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
     game<span class="token operator">:</span> <span class="token string">"mines"</span><span class="token punctuation">,</span>
     accountID<span class="token operator">:</span> <span class="token string">"20010001000"</span><span class="token punctuation">,</span>
     session<span class="token operator">:</span> <span class="token string">"xKLxeQLJG0Ri280q2GRTGjB9yqaTi9Tmb8EjSgCaRjJGc7MngDgjc31Zlql3n351"</span>
 <span class="token punctuation">}</span>
 </code></pre><h3 id="output-params-6">output params </h3>
-<h4 id="200-3">200 </h4>
+<h4 id="200-4">200 </h4>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
 	accountID<span class="token operator">:</span> <span class="token number">20010001000</span>
 	code<span class="token operator">:</span> <span class="token number">200</span>

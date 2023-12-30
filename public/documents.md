@@ -7,7 +7,7 @@
 <!-- code_chunk_output -->
 
 - [API Document](#api-document)
-  - [END POST https://games-api.8kas.com/](#end-post-httpsgames-api8kascom)
+    - [END POINT https://games-api.8kas.com/](#end-point-httpsgames-api8kascom)
   - [Lobby](#lobby)
     - [HTTP](#http)
       - [POST /lobby/signUp](#post-lobbysignup)
@@ -27,44 +27,48 @@
       - [output response](#output-response-3)
         - [code:200](#code200-1)
         - [code:620](#code620)
-  - [Rocket API](#rocket-api)
-    - [Socket.io](#socketio-2)
-      - [/user/rocket/rocketHandler/bet](#userrocketrockethandlerbet)
-        - [input params](#input-params-4)
-        - [output params](#output-params)
-        - [code:200](#code200-2)
-        - [code:620](#code620-1)
-        - [code:1500](#code1500)
-        - [code:1400](#code1400)
-      - [/user/rocket/rocketHandler/escape](#userrocketrockethandlerescape)
-        - [input params](#input-params-5)
-        - [output response](#output-response-4)
-        - [code:620](#code620-2)
-        - [code:620](#code620-3)
-        - [code:1500](#code1500-1)
-        - [code:1400](#code1400-1)
-      - [/ind/rocket/table/status](#indrockettablestatus)
-        - [output params](#output-params-1)
+- [Rocket API](#rocket-api)
+  - [Socket.io](#socketio-2)
+    - [/user/rocket/rocketHandler/joinGame](#userrocketrockethandlerjoingame)
+      - [input params](#input-params-4)
+      - [output response](#output-response-4)
+      - [200](#200)
+    - [/user/rocket/rocketHandler/bet](#userrocketrockethandlerbet)
+      - [input params](#input-params-5)
+      - [output params](#output-params)
+      - [code:200](#code200-2)
+      - [code:620](#code620-1)
+      - [gameCode: "table:errors:not-ready"](#gamecode-tableerrorsnot-ready)
+      - [gameCode:"table:errors:player-not-found"](#gamecodetableerrorsplayer-not-found)
+    - [/user/rocket/rocketHandler/escape](#userrocketrockethandlerescape)
+      - [input params](#input-params-6)
+      - [output response](#output-response-5)
+      - [code:200](#code200-3)
+      - [code:620](#code620-2)
+      - [gameCode: "table:errors:not-ready"](#gamecode-tableerrorsnot-ready-1)
+      - [gameCode: "table:errors:player-not-found"](#gamecode-tableerrorsplayer-not-found)
+    - [/ind/rocket/table/status](#indrockettablestatus)
+      - [output params](#output-params-1)
 - [The Mines Game API document](#the-mines-game-api-document)
   - [/user/mines/minesHandler/joinGame](#userminesmineshandlerjoingame)
-    - [input params](#input-params-6)
+    - [input params](#input-params-7)
     - [output params](#output-params-2)
   - [/user/mines/minesHandler/bet](#userminesmineshandlerbet)
-    - [input params](#input-params-7)
-    - [output params](#output-params-3)
-      - [200](#200)
-  - [/user/mines/minesHandler/choseBox](#userminesmineshandlerchosebox)
     - [input params](#input-params-8)
-    - [output params](#output-params-4)
+    - [output params](#output-params-3)
       - [200](#200-1)
-  - [/user/mines/minesHandler/cashOut](#userminesmineshandlercashout)
+  - [/user/mines/minesHandler/choseBox](#userminesmineshandlerchosebox)
     - [input params](#input-params-9)
-    - [output params](#output-params-5)
+    - [output params](#output-params-4)
       - [200](#200-2)
-  - [/user/mines/minesHandler/getTableStatus](#userminesmineshandlergettablestatus)
+  - [/user/mines/minesHandler/cashOut](#userminesmineshandlercashout)
     - [input params](#input-params-10)
-    - [output params](#output-params-6)
+    - [output params](#output-params-5)
       - [200](#200-3)
+  - [/user/mines/minesHandler/getTableStatus](#userminesmineshandlergettablestatus)
+    - [input params](#input-params-11)
+    - [output params](#output-params-6)
+      - [200](#200-4)
 
 <!-- /code_chunk_output -->
 
@@ -182,15 +186,46 @@ Login to the lobby and get the session, which can be used as token for clients
 }
 ```
 
-## Rocket API
+# Rocket API
 
-### Socket.io
+## Socket.io
 
-#### /user/rocket/rocketHandler/bet
+### /user/rocket/rocketHandler/joinGame
+
+Join game after joined the lobby
+
+#### input params
+
+```typescript
+{
+    "game": "rocket",
+    "accountID": "20010001000",
+    "session": "A7Boz5U63KVrCcVeQcecy5QKJXAqTQ0Q5FT5qu4bvOgXyV6CXeUJpyaZlqq95kzd",
+}
+```
+
+#### output response
+
+#### 200
+
+```typescript
+{
+    "code": 200,
+    "ticks": 63,
+    "isBet": false,
+    "maxSeats": "10000",
+    "cashOutPoint": 1.8667109004833577,
+    "tableId": "A8t1uBupkVarDcxgWNrw4",
+    "state": "READY",
+    "message": "join game success"
+}
+```
+
+### /user/rocket/rocketHandler/bet
 
 When rocket is ready, the player can put money into table to bet
 
-##### input params
+#### input params
 
 ```typescript
 {
@@ -201,9 +236,9 @@ When rocket is ready, the player can put money into table to bet
 }
 ```
 
-##### output params
+#### output params
 
-##### code:200
+#### code:200
 
 ```typescript
 {
@@ -217,7 +252,7 @@ When rocket is ready, the player can put money into table to bet
 }
 ```
 
-##### code:620
+#### code:620
 
 GameClassError
 
@@ -228,7 +263,7 @@ GameClassError
 }
 ```
 
-##### gameCode: "table:errors:not-ready"
+#### gameCode: "table:errors:not-ready"
 
 The game action is not at the right time
 
@@ -240,7 +275,7 @@ The game action is not at the right time
 }
 ```
 
-##### gameCode:"table:errors:player-not-found"
+#### gameCode:"table:errors:player-not-found"
 
 The game action is not at the right time
 
@@ -252,11 +287,11 @@ The game action is not at the right time
 }
 ```
 
-#### /user/rocket/rocketHandler/escape
+### /user/rocket/rocketHandler/escape
 
 When rocket is flying, the player can get back his bet money with point
 
-##### input params
+#### input params
 
 ```typescript
 {
@@ -266,9 +301,9 @@ When rocket is flying, the player can get back his bet money with point
 }
 ```
 
-##### output response
+#### output response
 
-##### code:200
+#### code:200
 
 ```typescript
 {
@@ -288,7 +323,7 @@ When rocket is flying, the player can get back his bet money with point
 }
 ```
 
-##### code:620
+#### code:620
 
 GameClassError
 
@@ -299,7 +334,7 @@ GameClassError
 }
 ```
 
-##### gameCode: "table:errors:not-ready"
+#### gameCode: "table:errors:not-ready"
 
 The game action is not at the right time
 
@@ -311,7 +346,7 @@ The game action is not at the right time
 }
 ```
 
-##### gameCode: "table:errors:player-not-found"
+#### gameCode: "table:errors:player-not-found"
 
 The game action is not at the right time
 
@@ -323,11 +358,11 @@ The game action is not at the right time
 }
 ```
 
-#### /ind/rocket/table/status
+### /ind/rocket/table/status
 
 The server send the table status to the clients
 
-##### output params
+#### output params
 
 ```typescript
 {
