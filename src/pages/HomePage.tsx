@@ -1,77 +1,83 @@
-import { Card, Flex, Stack, UnstyledButton } from "@mantine/core";
-import { Link } from "react-router-dom";
-import { IconCards, IconRocket, IconStorm } from "@tabler/icons-react";
-
-const UnstyledButtonLink = ({
-  children,
-  link,
-}: {
-  children: React.ReactNode;
-  link: string;
-}) => {
-  return (
-    <UnstyledButton
-      variant="light"
-      component={Link}
-      to={link}
-      style={{
-        border: "1px solid #eee",
-        borderRadius: 4,
-        padding: 10,
-        minWidth: 100,
-      }}
-    >
-      {children}
-    </UnstyledButton>
-  );
-};
+import { Button, Card, CardContent, Stack, Typography } from "@mui/joy";
+import { useContext, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import { SnackbarContext } from "../contexts/SnackbarContext";
+import { GlobalMaskLoaderContext } from "../contexts/GlobalMaskLoaderContext";
 
 export default function HomePage() {
+  const [searchParams] = useSearchParams();
+  const loginSuccess = searchParams.get("loginSuccess");
+  const registerSuccess = searchParams.get("registerSuccess");
+  const { showNotify } = useContext(SnackbarContext);
+  const { showMaskLoader } = useContext(GlobalMaskLoaderContext);
+  useEffect(() => {
+    if (loginSuccess) {
+      showNotify({
+        message: "Login Success! 🤥",
+      });
+    }
+  }, [loginSuccess]);
+
+  useEffect(() => {
+    if (registerSuccess) {
+      showNotify({
+        message: "Register Success! 🤥",
+      });
+    }
+  }, [registerSuccess]);
   return (
-    <Stack>
-      <Flex justify={"space-around"}>
+    <Stack gap={3}>
+      <Typography>Games</Typography>
+      <Stack
+        direction="row"
+        gap={2}
+        sx={{ mb: 2 }}
+        justifyContent={"space-around"}
+      >
         <Card
-          component={UnstyledButtonLink}
-          link="/games/rocket"
-          withBorder
-          style={{
-            "&:hover": {
-              backgroundColor: "#d9dbed",
-            },
+          variant="outlined"
+          sx={{
+            textDecoration: "none",
+          }}
+          component={Link}
+          to={"/games/rocket"}
+        >
+          <CardContent>
+            <Typography level="title-md">Rocket</Typography>
+            <Typography>Escape from Rocket by winning Chips</Typography>
+          </CardContent>
+        </Card>
+        <Card
+          variant="outlined"
+          sx={{
+            textDecoration: "none",
+          }}
+          component={Button}
+          onClick={() => {
+            showMaskLoader({
+              message: "Loading...",
+            });
           }}
         >
-          <Stack
-            align="center"
-            gap="sm"
-            style={{
-              "&:hover": {
-                backgroundColor: "#d9dbed",
-              },
-            }}
-          >
-            <Card.Section>
-              <IconCards />
-            </Card.Section>
-            <Card.Section>HILO</Card.Section>
-          </Stack>
+          <CardContent>
+            <Typography level="title-md">Rocket</Typography>
+            <Typography>Escape from Rocket by winning Chips</Typography>
+          </CardContent>
         </Card>
-        <Card component={UnstyledButtonLink} link="/games/rocket" withBorder>
-          <Stack align="center" gap="sm">
-            <Card.Section>
-              <IconStorm />
-            </Card.Section>
-            <Card.Section>挖矿</Card.Section>
-          </Stack>
+        <Card
+          variant="outlined"
+          sx={{
+            textDecoration: "none",
+          }}
+          component={Link}
+          to={"/games/rocket"}
+        >
+          <CardContent>
+            <Typography level="title-md">Rocket</Typography>
+            <Typography>Escape from Rocket by winning Chips</Typography>
+          </CardContent>
         </Card>
-        <Card component={UnstyledButtonLink} link="/games/rocket" withBorder>
-          <Stack align="center" gap="sm">
-            <Card.Section>
-              <IconRocket />
-            </Card.Section>
-            <Card.Section>火箭游戏</Card.Section>
-          </Stack>
-        </Card>
-      </Flex>
+      </Stack>
     </Stack>
   );
 }

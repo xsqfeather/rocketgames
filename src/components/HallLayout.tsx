@@ -1,71 +1,49 @@
-import "@mantine/core/styles.css";
-import "@mantine/notifications/styles.css";
+import { CssVarsProvider } from "@mui/joy/styles";
+import CssBaseline from "@mui/joy/CssBaseline";
+import Box from "@mui/joy/Box";
 
-import { MantineProvider, Text, UnstyledButton } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import { AppShell, Burger, Group } from "@mantine/core";
-import { Link, Outlet, useSearchParams } from "react-router-dom";
-import { HallLeftNavBar } from "./HallLeftNavbar";
+import Sidebar from "./Sidebar";
+import Header from "./Header";
+import { Outlet } from "react-router-dom";
 import { SocketProvider } from "../contexts/SocketContext";
-import { Notifications, notifications } from "@mantine/notifications";
-import { useEffect } from "react";
+import { SnackbarProvider } from "../contexts/SnackbarContext";
+import { GlobalMaskLoaderProvider } from "../contexts/GlobalMaskLoaderContext";
 
 export function HallLayout() {
-  const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
-  const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
-  const [searchParams] = useSearchParams();
-  const loginSuccess = searchParams.get("loginSuccess");
-  useEffect(() => {
-    if (loginSuccess) {
-      notifications.show({
-        title: "登录成功",
-        message: "Welcome",
-        color: "green",
-      });
-    }
-  }, [loginSuccess]);
   return (
-    <MantineProvider>
-      <Notifications position="top-right" />
-      <SocketProvider>
-        <AppShell
-          header={{ height: 60 }}
-          navbar={{
-            width: 300,
-            breakpoint: "sm",
-            collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
-          }}
-          padding="md"
-        >
-          <AppShell.Header>
-            <Group h="100%" px="md">
-              <Burger
-                opened={mobileOpened}
-                onClick={toggleMobile}
-                hiddenFrom="sm"
-                size="sm"
-              />
-              <Burger
-                opened={desktopOpened}
-                onClick={toggleDesktop}
-                visibleFrom="sm"
-                size="sm"
-              />
-              <UnstyledButton component={Link} to={"/"}>
-                <Text size="xl" ml="md" fw={700}>
-                  游戏大厅
-                </Text>
-              </UnstyledButton>
-            </Group>
-          </AppShell.Header>
-          <AppShell.Navbar p="md">
-            <HallLeftNavBar />
-          </AppShell.Navbar>
-          <AppShell.Main>
-            <Outlet />
-          </AppShell.Main>
-        </AppShell>
-      </SocketProvider>
-    </MantineProvider>
+    <SocketProvider>
+      <CssVarsProvider disableTransitionOnChange>
+        <CssBaseline />
+        <GlobalMaskLoaderProvider>
+          <SnackbarProvider>
+            <Box sx={{ display: "flex", minHeight: "100dvh" }}>
+              <Header />
+              <Sidebar />
+              <Box
+                component="main"
+                className="MainContent"
+                sx={{
+                  px: { xs: 2, md: 6 },
+                  pt: {
+                    xs: "calc(12px + var(--Header-height))",
+                    sm: "calc(12px + var(--Header-height))",
+                    md: 3,
+                  },
+                  pb: { xs: 2, sm: 2, md: 3 },
+                  flex: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  minWidth: 0,
+                  height: "100dvh",
+                  gap: 1,
+                }}
+              >
+                <Outlet />
+              </Box>
+            </Box>
+          </SnackbarProvider>
+        </GlobalMaskLoaderProvider>
+      </CssVarsProvider>
+    </SocketProvider>
   );
 }

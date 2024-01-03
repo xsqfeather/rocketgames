@@ -1,145 +1,121 @@
-import { useState } from "react";
-import PropTypes from "prop-types";
-import { useLocation } from "react-router-dom";
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import { useLogin, useNotify } from "react-admin";
 
-import {
-  Avatar,
-  Button,
-  Card,
-  CardActions,
-  CircularProgress,
-  Box,
-} from "@mui/material";
-import { Lock as LockIcon } from "@mui/icons-material";
-import {
-  Form,
-  required,
-  TextInput,
-  useTranslate,
-  useLogin,
-  useNotify,
-} from "react-admin";
-
-const Login = () => {
-  const [loading, setLoading] = useState(false);
-  const translate = useTranslate();
-
-  const notify = useNotify();
+const MyLoginPage = () => {
   const login = useLogin();
-  const location = useLocation();
+  const notify = useNotify();
 
-  const handleSubmit = (auth: FormValues) => {
-    setLoading(true);
-    login(
-      auth,
-      location.state ? (location.state as any).nextPathname : "/"
-    ).catch((error: Error) => {
-      setLoading(false);
-      notify(
-        typeof error === "string"
-          ? error
-          : typeof error === "undefined" || !error.message
-          ? "ra.auth.sign_in_error"
-          : error.message,
-        {
-          type: "error",
-          messageArgs: {
-            _:
-              typeof error === "string"
-                ? error
-                : error && error.message
-                ? error.message
-                : undefined,
-          },
-        }
-      );
-    });
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    login(data).catch(() => notify("Invalid email or password"));
   };
 
   return (
-    <Form onSubmit={handleSubmit} noValidate>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          minHeight: "100vh",
-          alignItems: "center",
-          justifyContent: "flex-start",
-          background: "url(https://source.unsplash.com/featured/1600x900)",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }}
-      >
-        <Card sx={{ minWidth: 300, maxWidth: 400, marginTop: "6em" }}>
+    <>
+      <Grid container component="main" sx={{ height: "100vh" }}>
+        <CssBaseline />
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
+          sx={{
+            backgroundImage:
+              "url(https://source.unsplash.com/random?wallpapers)",
+            backgroundRepeat: "no-repeat",
+            backgroundColor: (t) =>
+              t.palette.mode === "light"
+                ? t.palette.grey[50]
+                : t.palette.grey[900],
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
-              margin: "1em",
+              my: 8,
+              mx: 4,
               display: "flex",
-              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            <Avatar sx={{ bgcolor: "secondary.main" }}>
-              <LockIcon />
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <LockOutlinedIcon />
             </Avatar>
-          </Box>
-          <Box
-            sx={{
-              marginTop: "1em",
-              display: "flex",
-              justifyContent: "center",
-              color: (theme) => theme.palette.grey[500],
-            }}
-          >
-            Hint: demo / demo
-          </Box>
-          <Box sx={{ padding: "0 1em 1em 1em" }}>
-            <Box sx={{ marginTop: "1em" }}>
-              <TextInput
-                autoFocus
-                source="username"
-                label={translate("ra.auth.username")}
-                disabled={loading}
-                validate={required()}
-                fullWidth
-              />
-            </Box>
-            <Box sx={{ marginTop: "1em" }}>
-              <TextInput
-                source="password"
-                label={translate("ra.auth.password")}
-                type="password"
-                disabled={loading}
-                validate={required()}
-                fullWidth
-              />
-            </Box>
-          </Box>
-          <CardActions sx={{ padding: "0 1em 1em 1em" }}>
-            <Button
-              variant="contained"
-              type="submit"
-              color="primary"
-              disabled={loading}
-              fullWidth
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 1 }}
             >
-              {loading && <CircularProgress size={25} thickness={2} />}
-              {translate("ra.auth.sign_in")}
-            </Button>
-          </CardActions>
-        </Card>
-      </Box>
-    </Form>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="Username"
+                label="Username"
+                name="username"
+                autoComplete="username"
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign In
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="#" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        </Grid>
+      </Grid>
+    </>
   );
 };
 
-Login.propTypes = {
-  authProvider: PropTypes.func,
-  previousRoute: PropTypes.string,
-};
-
-export default Login;
-
-interface FormValues {
-  username?: string;
-  password?: string;
-}
+export default MyLoginPage;

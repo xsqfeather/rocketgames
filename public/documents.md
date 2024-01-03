@@ -7,7 +7,7 @@
 <!-- code_chunk_output -->
 
 - [API Document](#api-document)
-    - [END POINT https://games-api.8kas.com/](#end-point-httpsgames-api8kascom)
+  - [END POINT https://games-api.8kas.com/](#end-point-httpsgames-api8kascom)
   - [Lobby](#lobby)
     - [HTTP](#http)
       - [POST /lobby/signUp](#post-lobbysignup)

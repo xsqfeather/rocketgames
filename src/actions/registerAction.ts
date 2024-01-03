@@ -17,12 +17,14 @@ export async function registerAction({ request }: LoaderFunctionArgs) {
     console.log({ regRlt });
     if (regRlt.data.code === 502) {
       //user already exists
-      return redirect(`/auth/register?error=${regRlt.data.message}`);
+      return redirect(
+        `/auth/register?error=${regRlt.data.message}&time=${Date.now()}`
+      );
     }
     localStorage.setItem("token", regRlt.data.session);
     localStorage.setItem("accountID", regRlt.data.accountID);
     const redirectTo = formData.get("redirectTo") as string | null;
-    return redirect(redirectTo || "/");
+    return redirect((redirectTo || "/") + "?registerSuccess=true");
   } catch (error) {
     console.error({ error });
     return null;

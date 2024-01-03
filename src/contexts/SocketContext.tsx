@@ -1,9 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { Socket, io } from "socket.io-client";
 import { ENDPOINT } from "../constants";
-import { Box, LoadingOverlay } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
-import { notifications } from "@mantine/notifications";
 
 export const SocketContext = createContext<Socket | null>(null);
 export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
@@ -35,11 +33,6 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
         localStorage.removeItem("accountID");
         localStorage.removeItem("token");
         nav("/auth/login");
-        notifications.show({
-          title: "登录过期",
-          message: "请重新登录! 🤥",
-          color: "yellow",
-        });
       }
     });
     return () => {
@@ -47,15 +40,6 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
     };
   }, [socket]);
   return (
-    <SocketContext.Provider value={socket}>
-      <Box pos={"relative"}>
-        <LoadingOverlay
-          overlayProps={{ radius: "sm", blur: 2 }}
-          loaderProps={{ color: "pink", type: "bars" }}
-          visible={socket ? false : true}
-        />
-        {children}
-      </Box>
-    </SocketContext.Provider>
+    <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
   );
 };

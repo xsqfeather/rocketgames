@@ -8,6 +8,9 @@ import RegisterPage from "./pages/RegisterPage";
 import { RouteAuthProvider, protectedLoader } from "./auth";
 import { registerAction, loginAction } from "./actions";
 import RocketPage from "./pages/games/RocketPage";
+import OrderPage from "./pages/OrderPage";
+import MessagePage from "./pages/MessagePage";
+import MyProfilePage from "./pages/MyProfilePage";
 
 export const router = createBrowserRouter([
   {
@@ -20,9 +23,19 @@ export const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "/about",
+        path: "/orders",
         loader: protectedLoader,
-        element: <div>About</div>,
+        element: <OrderPage />,
+      },
+      {
+        path: "/messages",
+        loader: protectedLoader,
+        element: <MessagePage />,
+      },
+      {
+        path: "/my-profile",
+        loader: protectedLoader,
+        element: <MyProfilePage />,
       },
       {
         path: "/games/rocket",
