@@ -13,20 +13,20 @@ export function useOne<T>(resource: string, id: string) {
 
 export function useList<T>(
   resource: string,
-  filter: {
+  filter?: {
     [key: string]: string;
   },
-  pagination: {
+  pagination?: {
     page: number;
     perPage: number;
   },
-  sort: {
+  sort?: {
     field: keyof T;
     order: string;
   }
 ) {
-  const { page, perPage } = pagination;
-  const { field, order } = sort;
+  const { page, perPage } = pagination || { page: 1, perPage: 10 };
+  const { field, order } = sort || { field: "id", order: "ASC" };
   const query = {
     sort: JSON.stringify({ field, order }),
     range: JSON.stringify({ page, perPage }),

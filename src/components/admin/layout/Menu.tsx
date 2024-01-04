@@ -11,20 +11,21 @@ import {
 } from "react-admin";
 
 import visitors from "../resources/visitors";
-import orders from "../resources/orders";
-import invoices from "../resources/invoices";
 import products from "../resources/products";
 import categories from "../resources/categories";
 import reviews from "../resources/reviews";
 import SubMenu from "./SubMenu";
+import GameRecords from "../resources/game-records";
+import GameReplays from "../resources/game-replays";
 
-type MenuName = "menuCatalog" | "menuSales" | "menuCustomers";
+type MenuName = "menuCatalog" | "menuSales" | "menuCustomers" | "gameRecords";
 
 const Menu = ({ dense = false }: MenuProps) => {
   const [state, setState] = useState({
     menuCatalog: true,
     menuSales: true,
     menuCustomers: true,
+    gameRecords: true,
   });
   const translate = useTranslate();
   const [open] = useSidebarState();
@@ -48,30 +49,30 @@ const Menu = ({ dense = false }: MenuProps) => {
     >
       <DashboardMenuItem />
       <SubMenu
-        handleToggle={() => handleToggle("menuSales")}
-        isOpen={state.menuSales}
-        name="pos.menu.sales"
-        icon={<orders.icon />}
+        handleToggle={() => handleToggle("gameRecords")}
+        isOpen={state.gameRecords}
+        name="pos.menu.game-records"
+        icon={<GameRecords.icon />}
         dense={dense}
       >
         <MenuItemLink
-          to="/admin/commands"
-          placeholder="Reviews"
+          to="/admin/game-records"
+          placeholder="Game Records"
           state={{ _scrollToTop: true }}
-          primaryText={translate(`resources.commands.name`, {
+          primaryText={translate(`resources.game-records.name`, {
             smart_count: 2,
           })}
-          leftIcon={<orders.icon />}
+          leftIcon={<GameRecords.icon />}
           dense={dense}
         />
         <MenuItemLink
-          to="/admin/invoices"
-          placeholder="Reviews"
+          to="/admin/game-replays"
+          placeholder="Game Replays"
           state={{ _scrollToTop: true }}
-          primaryText={translate(`resources.invoices.name`, {
+          primaryText={translate(`resources.game-replays.name`, {
             smart_count: 2,
           })}
-          leftIcon={<invoices.icon />}
+          leftIcon={<GameReplays.icon />}
           dense={dense}
         />
       </SubMenu>

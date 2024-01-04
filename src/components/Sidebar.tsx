@@ -18,7 +18,8 @@ import Sheet from "@mui/joy/Sheet";
 import Stack from "@mui/joy/Stack";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
-import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
+import VideoFileSharpIcon from "@mui/icons-material/VideoFileSharp";
+import NoteAltSharpIcon from "@mui/icons-material/NoteAltSharp";
 import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded";
 import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
 import SupportRoundedIcon from "@mui/icons-material/SupportRounded";
@@ -168,13 +169,26 @@ export default function Sidebar() {
 
           <ListItem>
             <ListItemButton
-              selected={location.pathname === "/orders"}
+              selected={location.pathname === "/game-records"}
               component={Link}
-              to="/orders"
+              to="/game-records"
             >
-              <ShoppingCartRoundedIcon />
+              <NoteAltSharpIcon />
               <ListItemContent>
-                <Typography level="title-sm">Orders</Typography>
+                <Typography level="title-sm">Game Records</Typography>
+              </ListItemContent>
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem>
+            <ListItemButton
+              selected={location.pathname === "/game-replays"}
+              component={Link}
+              to="/game-replays"
+            >
+              <VideoFileSharpIcon />
+              <ListItemContent>
+                <Typography level="title-sm">Game Replay</Typography>
               </ListItemContent>
             </ListItemButton>
           </ListItem>

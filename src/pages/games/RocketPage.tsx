@@ -11,6 +11,7 @@ export default function RocketPage() {
     handleEscape,
     handleBeginRecord,
     betRecord,
+    records,
   } = useRocketGame();
 
   return (
@@ -69,6 +70,26 @@ export default function RocketPage() {
         <Typography>Win Chips: {betRecord?.winMoney || 0} </Typography>
         <Typography>Cash Point: {betRecord?.point || 0} </Typography>
       </Stack>
+      <Typography>Player Records:</Typography>
+      {records?.map((record, index) => (
+        <Stack
+          key={index}
+          direction={"row"}
+          justifyContent={"space-around"}
+          sx={{
+            width: "100%",
+          }}
+        >
+          <Typography>{record.firstName || 0}</Typography>
+          <Typography>Chips：{(record.chips || 0).toFixed(2)}</Typography>
+          <Typography>
+            Win Chips: {(record.winChips || 0).toFixed(2)}
+          </Typography>
+          <Typography>
+            Cash Point: {(record.chipPoint || 0).toFixed(2)}{" "}
+          </Typography>
+        </Stack>
+      ))}
     </Stack>
   );
 }

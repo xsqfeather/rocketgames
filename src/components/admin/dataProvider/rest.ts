@@ -7,7 +7,7 @@ import {
 } from "react-admin";
 import restProviderFactory from "./restProviderFactory";
 
-const endpoint = "http://localhost:8083/rest";
+const endpoint = import.meta.env.VITE_ENDPOINT + "/admin";
 
 const baseDataProvider = restProviderFactory(endpoint);
 

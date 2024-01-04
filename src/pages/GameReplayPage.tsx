@@ -4,8 +4,9 @@ import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
 import OrderTable from "../components/OrderTable";
 import OrderList from "../components/OrderList";
+import { Link as RouterLink } from "react-router-dom";
 
-export default function OrderPage() {
+export default function GameReplayPage() {
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -18,7 +19,8 @@ export default function OrderPage() {
           <Link
             underline="none"
             color="neutral"
-            href="#some-link"
+            component={RouterLink}
+            to="/"
             aria-label="Home"
           >
             <HomeRoundedIcon />
@@ -26,14 +28,15 @@ export default function OrderPage() {
           <Link
             underline="hover"
             color="neutral"
-            href="#some-link"
+            component={RouterLink}
+            to="/"
             fontSize={12}
             fontWeight={500}
           >
-            Dashboard
+            Lobby
           </Link>
           <Typography color="primary" fontWeight={500} fontSize={12}>
-            Orders
+            Game Replays
           </Typography>
         </Breadcrumbs>
       </Box>
@@ -49,7 +52,7 @@ export default function OrderPage() {
         }}
       >
         <Typography level="h2" component="h1">
-          Orders
+          My Game Replays
         </Typography>
         <Button
           color="primary"

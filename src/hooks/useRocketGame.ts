@@ -65,6 +65,7 @@ export default function useRocketGame() {
   useEffect(() => {
     socket?.on("/user/rocket/rocketHandler/escape", (data: any) => {
       console.log("/user/rocket/rocketHandler/escape", data);
+      setRecords(data?.gameRecords || []);
       setBetRecord({
         ...betRecord,
         betMoney: data.result.chips,
@@ -81,6 +82,7 @@ export default function useRocketGame() {
   useEffect(() => {
     socket?.on("/user/rocket/rocketHandler/bet", (data: any) => {
       console.log("/user/rocket/rocketHandler/bet", data);
+      setRecords(data?.gameRecords);
     });
     return () => {
       socket?.off("/user/rocket/rocketHandler/bet");
@@ -91,6 +93,7 @@ export default function useRocketGame() {
     socket?.on("/ind/rocket/table/status", (data: any) => {
       const tableStatus = data;
       setTicks(0);
+      setRecords(data?.gameRecords || []);
       console.log("/ind/rocket/table/status", tableStatus);
       setTableStatus(tableStatus?.state);
       if (tableStatus?.state !== tableStatus) {
@@ -106,7 +109,6 @@ export default function useRocketGame() {
 
   useEffect(() => {
     if (tableStatus === "FINISH" && betRecord?.betMoney > 0) {
-      setRecords(() => [betRecord, ...records]);
       setBetRecord({
         betMoney: 0,
         point: 0,

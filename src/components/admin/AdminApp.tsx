@@ -14,15 +14,10 @@ import { Dashboard } from "./dashboard";
 import englishMessages from "./i18n/en";
 import { Layout, Login } from "./layout";
 
-import invoices from "./resources/invoices";
-import categories from "./resources/categories";
-import orders from "./resources/orders";
-import products from "./resources/products";
-import reviews from "./resources/reviews";
 import Segments from "./resources/segments/Segments";
-import visitors from "./resources/visitors";
 import { themes, ThemeName } from "./themes/themes";
 import { restProvider } from "./dataProvider/rest";
+import gameRecords from "./resources/game-records";
 
 const i18nProvider = polyglotI18nProvider(
   (locale) => {
@@ -65,12 +60,13 @@ const AdminApp = () => {
       <CustomRoutes>
         <Route path="segments" element={<Segments />} />
       </CustomRoutes>
-      <Resource name="customers" {...visitors} />
+      {/* <Resource name="customers" {...visitors} />
       <Resource name="commands" {...orders} options={{ label: "Orders" }} />
       <Resource name="invoices" {...invoices} />
       <Resource name="products" {...products} />
       <Resource name="categories" {...categories} />
-      <Resource name="reviews" {...reviews} />
+      <Resource name="reviews" {...reviews} /> */}
+      <Resource name="game-records" {...gameRecords} />
     </Admin>
   );
 };
