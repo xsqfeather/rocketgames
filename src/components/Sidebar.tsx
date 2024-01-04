@@ -19,7 +19,6 @@ import Stack from "@mui/joy/Stack";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
-import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
 import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded";
 import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
 import SupportRoundedIcon from "@mui/icons-material/SupportRounded";
@@ -178,37 +177,6 @@ export default function Sidebar() {
                 <Typography level="title-sm">Orders</Typography>
               </ListItemContent>
             </ListItemButton>
-          </ListItem>
-
-          <ListItem nested>
-            <Toggler
-              renderToggle={({ open, setOpen }) => (
-                <ListItemButton onClick={() => setOpen(!open)}>
-                  <AssignmentRoundedIcon />
-                  <ListItemContent>
-                    <Typography level="title-sm">Tasks</Typography>
-                  </ListItemContent>
-                  <KeyboardArrowDownIcon
-                    sx={{ transform: open ? "rotate(180deg)" : "none" }}
-                  />
-                </ListItemButton>
-              )}
-            >
-              <List sx={{ gap: 0.5 }}>
-                <ListItem sx={{ mt: 0.5 }}>
-                  <ListItemButton>All tasks</ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton>Backlog</ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton>In progress</ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton>Done</ListItemButton>
-                </ListItem>
-              </List>
-            </Toggler>
           </ListItem>
 
           <ListItem>
