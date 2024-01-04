@@ -61,7 +61,9 @@ export default function HomePage() {
         >
           <CardContent>
             <Typography level="title-md">Rocket</Typography>
-            <Typography>Escape from Rocket by winning Chips</Typography>
+            <Typography>
+              Escape From the Dangerous Rocket With Winning Chips!
+            </Typography>
           </CardContent>
         </Card>
         <Card
