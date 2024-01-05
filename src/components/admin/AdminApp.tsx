@@ -18,6 +18,7 @@ import Segments from "./resources/segments/Segments";
 import { themes, ThemeName } from "./themes/themes";
 import { restProvider } from "./dataProvider/rest";
 import gameRecords from "./resources/game-records";
+import users from "./resources/users";
 
 const i18nProvider = polyglotI18nProvider(
   (locale) => {
@@ -67,6 +68,7 @@ const AdminApp = () => {
       <Resource name="categories" {...categories} />
       <Resource name="reviews" {...reviews} /> */}
       <Resource name="game-records" {...gameRecords} />
+      <Resource name="users" {...users} />
     </Admin>
   );
 };

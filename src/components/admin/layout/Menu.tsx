@@ -17,8 +17,14 @@ import reviews from "../resources/reviews";
 import SubMenu from "./SubMenu";
 import GameRecords from "../resources/game-records";
 import GameReplays from "../resources/game-replays";
+import Users from "../resources/users";
 
-type MenuName = "menuCatalog" | "menuSales" | "menuCustomers" | "gameRecords";
+type MenuName =
+  | "menuCatalog"
+  | "menuSales"
+  | "menuCustomers"
+  | "gameRecords"
+  | "menuUser";
 
 const Menu = ({ dense = false }: MenuProps) => {
   const [state, setState] = useState({
@@ -26,6 +32,7 @@ const Menu = ({ dense = false }: MenuProps) => {
     menuSales: true,
     menuCustomers: true,
     gameRecords: true,
+    menuUser: true,
   });
   const translate = useTranslate();
   const [open] = useSidebarState();
@@ -77,20 +84,20 @@ const Menu = ({ dense = false }: MenuProps) => {
         />
       </SubMenu>
       <SubMenu
-        handleToggle={() => handleToggle("menuCatalog")}
-        isOpen={state.menuCatalog}
-        name="pos.menu.catalog"
+        handleToggle={() => handleToggle("menuUser")}
+        isOpen={state.menuUser}
+        name="pos.menu.users"
         icon={<products.icon />}
         dense={dense}
       >
         <MenuItemLink
-          to="/admin/products"
-          placeholder="Reviews"
+          to="/admin/users"
+          placeholder="Users"
           state={{ _scrollToTop: true }}
-          primaryText={translate(`resources.products.name`, {
+          primaryText={translate(`resources.users.name`, {
             smart_count: 2,
           })}
-          leftIcon={<products.icon />}
+          leftIcon={<Users.icon />}
           dense={dense}
         />
         <MenuItemLink

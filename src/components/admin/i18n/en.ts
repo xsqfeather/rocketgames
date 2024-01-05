@@ -37,6 +37,8 @@ const customEnglishMessages: TranslationMessages = {
       sales: "Sales",
       catalog: "Catalog",
       customers: "Customers",
+      "game-records": "Game Records",
+      users: "Users",
     },
     events: {
       review: {
@@ -136,6 +138,32 @@ const customEnglishMessages: TranslationMessages = {
     },
     "game-records": {
       name: "Game Record |||| Game Records",
+      fields: {
+        accountID: "Account ID",
+        chips: "Game Chips",
+        winChips: "Win Chips",
+        gameName: "Game Name",
+        chipPoint: "Win Point",
+        firstName: "First Name",
+        createdAt: "Created At",
+        updatedAt: "Updated At",
+      },
+    },
+    users: {
+      name: "User |||| Users",
+      fields: {
+        accountID: "Account ID",
+        chips: "Game Chips",
+        isOnline: "Online",
+        gameName: "Game Name",
+        chipPoint: "Win Point",
+        firstName: "First Name",
+        createdAt: "Created At",
+        updatedAt: "Updated At",
+      },
+    },
+    "game-replays": {
+      name: "Game Replay |||| Game Replays",
       fields: {
         accountID: "Account ID",
         chips: "Game Chips",

@@ -1,0 +1,206 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum DeviceOS {
+  IOS
+  ANDROID
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  UNKNOWN
+}
+
+enum SettingKey {
+  GLOBAL_MAINTENANCE
+  MAINTENANCE
+  MAINTENANCE_LEVEL
+  MAINTENANCE_IPS
+}
+
+enum SettingRange {
+  GLOBAL
+  ROCKET
+  LOBBY
+  MINES
+}
+
+model Pocket {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  coupon  Int    @default(0)
+  lottory Int    @default(0)
+  userId  String @unique @db.ObjectId
+
+  //base props
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  version   Int      @default(0)
+  //relations
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model User {
+  accountID   Int          @unique
+  socialID    String?
+  firstName   String       @unique
+  lastName    String?
+  email       String?
+  bio         String?
+  gender      Gender
+  country     String?
+  deviceOS    DeviceOS
+  gameChips   Int          @default(0)
+  goldCoin    Int          @default(0)
+  expPoint    Int          @default(0)
+  vipPoint    Int          @default(0)
+  vipLevel    Int          @default(0)
+  pocket      Pocket?
+  isOnline    Boolean      @default(false)
+  ip          String?
+  isTesting   Boolean?     @default(false)
+  isRobot     Boolean?     @default(false)
+  //base props
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  version     Int          @default(0)
+  //relations
+  gameRecords GameRecord[]
+  vipLevels   VipLevel[]
+  GameReplay  GameReplay[]
+  Settings    Settings[]
+  BalanceLog  BalanceLog[]
+}
+
+model Admin {
+  username  String   @unique
+  password  String
+  //base props
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  version   Int      @default(0)
+}
+
+model GameReplay {
+  title     String
+  content   String
+  dirPath   String
+  userId    String @db.ObjectId
+  accountID Int
+  start     Int?
+  end       Int?
+
+  //base props
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  version   Int      @default(0)
+  //relations
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Settings {
+  key       SettingKey   @unique
+  value     String
+  range     SettingRange @default(GLOBAL) //global, gameName
+  //base props
+  id        String       @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  version   Int          @default(0)
+
+  //relations
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String? @db.ObjectId
+}
+
+model GameRecord {
+  gameName  String
+  firstName String @default("")
+  gameType  String
+  userId    String @db.ObjectId
+  tableId   String
+  accountID Int
+  chips     Float  @default(0)
+  winChips  Float  @default(0)
+  chipPoint Float  @default(0)
+  actions   Json?
+
+  //base props
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  version   Int      @default(0)
+  //relations
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model VipLevel {
+  level      Int      @default(0)
+  intro      String   @default("")
+  gameChips  Int      @default(0)
+  promoChips Int      @default(0)
+  promoCoin  Int      @default(0)
+  promoLott  Int      @default(0)
+  promoGift  Int      @default(0)
+  vipSupport Boolean  @default(false)
+  //base props
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  version    Int      @default(0)
+
+  //relations
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String? @db.ObjectId
+}
+
+enum BalanceLogType {
+  IN
+  OUT
+}
+
+enum BalanceLogAmountType {
+  GAME_CHIPS
+  GOLD_COIN
+  EXP_POINT
+  VIP_POINT
+}
+
+enum BalanceLogAmountReason {
+  Desposit
+  Withdraw
+  Game
+  Gift
+  Promo
+  Exchange
+}
+
+model BalanceLog {
+  userId       String                 @db.ObjectId
+  accountID    Int
+  firstName    String
+  game         String
+  amount       Float
+  type         BalanceLogType
+  amountType   BalanceLogAmountType
+  amountReason BalanceLogAmountReason
+  //base props
+  id           String                 @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt    DateTime               @default(now())
+  updatedAt    DateTime               @updatedAt
+  version      Int                    @default(0)
+  //relations
+  user         User                   @relation(fields: [userId], references: [id])
+}

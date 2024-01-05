@@ -8,7 +8,6 @@ import GameRecordList from "../components/GameRecordList";
 
 export default function GameRecordPage() {
   const { data } = useList("my/game-records");
-  console.log(data);
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center" }}>
