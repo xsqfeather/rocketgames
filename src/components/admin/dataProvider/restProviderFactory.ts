@@ -50,7 +50,13 @@ export default (
       filter: JSON.stringify(params.filter),
     };
     const url = `${apiUrl}/${resource}?${stringify(query)}`;
-    return httpClient(url).then(({ json }) => {
+
+    return httpClient(url, {
+      method: "GET",
+      headers: new Headers({
+        Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
+      }),
+    }).then(({ json }) => {
       return {
         data: json.list,
         total: json.total,

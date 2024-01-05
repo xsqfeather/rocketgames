@@ -20,7 +20,11 @@ const MyLoginPage = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    login(data).catch(() => notify("Invalid email or password"));
+    const username = data.get("username") as string;
+    const password = data.get("password") as string;
+    login({ username, password }).catch(() =>
+      notify("Invalid email or password")
+    );
   };
 
   return (

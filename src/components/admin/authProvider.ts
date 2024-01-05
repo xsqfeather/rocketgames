@@ -1,18 +1,29 @@
+import axios from "axios";
 import { AuthProvider } from "react-admin";
 
 const authProvider: AuthProvider = {
-  login: ({ username }) => {
-    localStorage.setItem("username", username);
-    // accept all username/password combinations
-    return Promise.resolve();
+  login: async ({ username, password }: any) => {
+    const rlt = await axios.post(
+      `${import.meta.env.VITE_ENDPOINT}/admin/login`,
+      {
+        username,
+        password,
+      }
+    );
+    const { data } = rlt;
+    if (data.error) {
+      throw new Error(data.error);
+    }
+    localStorage.setItem("admin_token", data.session);
+    return rlt;
   },
   logout: () => {
-    localStorage.removeItem("username");
+    localStorage.removeItem("admin_token");
     return Promise.resolve();
   },
   checkError: () => Promise.resolve(),
   checkAuth: () =>
-    localStorage.getItem("username") ? Promise.resolve() : Promise.reject(),
+    localStorage.getItem("admin_token") ? Promise.resolve() : Promise.reject(),
   getPermissions: () => Promise.resolve(),
   getIdentity: () =>
     Promise.resolve({
