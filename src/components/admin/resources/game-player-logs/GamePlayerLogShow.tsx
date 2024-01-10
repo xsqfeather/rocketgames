@@ -1,9 +1,10 @@
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
 import { ReferenceField, TextField, useRecordContext } from "react-admin";
 
+import Basket from "../orders/Basket";
 import { Customer, Invoice } from "../../types";
 
-const GameRelayShow = () => {
+const GamePlayerLogShow = () => {
   const record = useRecordContext<Invoice>();
   if (!record) return null;
   return (
@@ -61,6 +62,11 @@ const GameRelayShow = () => {
             </ReferenceField>
           </Grid>
         </Grid>
+        <Box margin="10px 0">
+          <ReferenceField reference="commands" source="command_id" link={false}>
+            <Basket />
+          </ReferenceField>
+        </Box>
       </CardContent>
     </Card>
   );
@@ -79,4 +85,4 @@ const CustomerField = () => {
   ) : null;
 };
 
-export default GameRelayShow;
+export default GamePlayerLogShow;

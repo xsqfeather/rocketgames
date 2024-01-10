@@ -12,22 +12,22 @@ const listFilters = [
   <DateInput source="date_lte" alwaysOn />,
 ];
 
-const GameRecordList = () => (
+const GamePlayerLogList = () => (
   <List
     filters={listFilters}
     perPage={25}
     sort={{ field: "date", order: "DESC" }}
   >
-    <Datagrid rowClick="expand">
+    <Datagrid>
       <TextField source="accountID" />
-      <TextField source="firstName" />
+      <TextField source="logId" />
       <TextField source="gameName" />
-      <NumberField source="chips" />
-      <NumberField source="winChips" />
+      <NumberField source="round" />
+      <NumberField source="seat" />
       <DateField source="createdAt" showTime />
       <DateField source="updatedAt" showTime />
     </Datagrid>
   </List>
 );
 
-export default GameRecordList;
+export default GamePlayerLogList;

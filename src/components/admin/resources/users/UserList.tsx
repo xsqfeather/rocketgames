@@ -23,8 +23,8 @@ const UserList = () => (
       <TextField source="accountID" />
       <TextField source="firstName" />
       <NumberField source="goldCoin" />
-      <NumberField source="gameChips" />
       <Button variant="contained" color="primary" label="Deposit Gold Coin" />
+      <NumberField source="gameChips" />
       <Button
         variant="contained"
         color="secondary"

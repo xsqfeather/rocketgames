@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Box from "@mui/material/Box";
-import { Label as LabelIcon } from "@mui/icons-material";
 
 import {
   useTranslate,
@@ -10,14 +9,13 @@ import {
   useSidebarState,
 } from "react-admin";
 
-import visitors from "../resources/visitors";
 import products from "../resources/products";
 import categories from "../resources/categories";
-import reviews from "../resources/reviews";
 import SubMenu from "./SubMenu";
 import GameRecords from "../resources/game-records";
-import GameReplays from "../resources/game-replays";
+import GameReplays from "../resources/game-player-logs";
 import Users from "../resources/users";
+import Settings from "../resources/settings";
 
 type MenuName =
   | "menuCatalog"
@@ -73,10 +71,10 @@ const Menu = ({ dense = false }: MenuProps) => {
           dense={dense}
         />
         <MenuItemLink
-          to="/admin/game-replays"
+          to="/admin/player-action-game-logs"
           placeholder="Game Replays"
           state={{ _scrollToTop: true }}
-          primaryText={translate(`resources.game-replays.name`, {
+          primaryText={translate(`resources.player-action-game-logs.name`, {
             smart_count: 2,
           })}
           leftIcon={<GameReplays.icon />}
@@ -111,7 +109,7 @@ const Menu = ({ dense = false }: MenuProps) => {
           dense={dense}
         />
       </SubMenu>
-      <SubMenu
+      {/* <SubMenu
         handleToggle={() => handleToggle("menuCustomers")}
         isOpen={state.menuCustomers}
         name="pos.menu.customers"
@@ -138,8 +136,8 @@ const Menu = ({ dense = false }: MenuProps) => {
           leftIcon={<LabelIcon />}
           dense={dense}
         />
-      </SubMenu>
-      <MenuItemLink
+      </SubMenu> */}
+      {/* <MenuItemLink
         to="/admin/reviews"
         placeholder="Reviews"
         state={{ _scrollToTop: true }}
@@ -147,6 +145,16 @@ const Menu = ({ dense = false }: MenuProps) => {
           smart_count: 2,
         })}
         leftIcon={<reviews.icon />}
+        dense={dense}
+      /> */}
+      <MenuItemLink
+        to="/admin/settings"
+        placeholder="Settings"
+        state={{ _scrollToTop: true }}
+        primaryText={translate(`resources.settings.name`, {
+          smart_count: 2,
+        })}
+        leftIcon={<Settings.icon />}
         dense={dense}
       />
     </Box>

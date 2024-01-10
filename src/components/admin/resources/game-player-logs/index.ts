@@ -1,8 +1,7 @@
 import { LibraryBooks as InvoiceIcon } from "@mui/icons-material";
-
-import GameRecordList from "./GameReplayList";
+import GamePlayerLogList from "./GamePlayerLogList";
 
 export default {
-  list: GameRecordList,
+  list: GamePlayerLogList,
   icon: InvoiceIcon,
 };

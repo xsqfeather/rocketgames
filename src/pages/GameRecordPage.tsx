@@ -5,9 +5,10 @@ import { Link as RouterLink } from "react-router-dom";
 import { useList } from "../hooks/restful";
 import GameRecordTable from "../components/GameRecordTable";
 import GameRecordList from "../components/GameRecordList";
+import Prisma from "@prisma/client";
 
 export default function GameRecordPage() {
-  const { data } = useList("my/game-records");
+  const { data } = useList<Prisma.GameRecord>("my/game-records");
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -56,8 +57,8 @@ export default function GameRecordPage() {
           My Game Records
         </Typography>
       </Box>
-      {data && <GameRecordTable rows={(data as any).list} />}
-      {data && <GameRecordList listItems={(data as any).list} />}
+      {data && <GameRecordTable rows={data.list} />}
+      {data && <GameRecordList listItems={data.list} />}
     </>
   );
 }

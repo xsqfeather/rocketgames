@@ -15,7 +15,6 @@ export async function loginAction({ request }: LoaderFunctionArgs) {
       firstName,
       email,
     });
-    console.log({ loginRlt });
     if (loginRlt.data.code === 504) {
       //user already exists
       return redirect(

@@ -5,7 +5,6 @@ import {
   Resource,
   localStorageStore,
   useStore,
-  StoreContextProvider,
 } from "react-admin";
 import { Route } from "react-router";
 
@@ -19,6 +18,8 @@ import { themes, ThemeName } from "./themes/themes";
 import { restProvider } from "./dataProvider/rest";
 import gameRecords from "./resources/game-records";
 import users from "./resources/users";
+import settings from "./resources/settings";
+import gamePlayerLogs from "./resources/game-player-logs";
 
 const i18nProvider = polyglotI18nProvider(
   (locale) => {
@@ -37,7 +38,6 @@ const i18nProvider = polyglotI18nProvider(
 );
 
 const store = localStorageStore(undefined, "ECommerce");
-
 const AdminApp = () => {
   const [themeName] = useStore<ThemeName>("themeName", "soft");
   const lightTheme = themes.find((theme) => theme.name === themeName)?.light;
@@ -67,16 +67,12 @@ const AdminApp = () => {
       <Resource name="products" {...products} />
       <Resource name="categories" {...categories} />
       <Resource name="reviews" {...reviews} /> */}
+      <Resource name="player-action-game-logs" {...gamePlayerLogs} />
       <Resource name="game-records" {...gameRecords} />
       <Resource name="users" {...users} />
+      <Resource name="settings" {...settings} />
     </Admin>
   );
 };
 
-const AdminAppWrapper = () => (
-  <StoreContextProvider value={store}>
-    <AdminApp />
-  </StoreContextProvider>
-);
-
-export default AdminAppWrapper;
+export default AdminApp;

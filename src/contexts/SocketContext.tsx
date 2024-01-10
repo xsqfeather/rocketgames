@@ -14,6 +14,11 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
     socket.on("connect", () => {
       console.log("connect");
       setSocket(socket);
+      console.log("login", {
+        seq: "1",
+        accountID: localStorage.getItem("accountID"),
+        session: localStorage.getItem("token"),
+      });
       socket.emit("/user/lobby/lobbyHandler/login", {
         seq: "1",
         accountID: localStorage.getItem("accountID"),

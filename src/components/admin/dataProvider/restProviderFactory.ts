@@ -65,7 +65,12 @@ export default (
   },
 
   getOne: (resource, params) =>
-    httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => ({
+    httpClient(`${apiUrl}/${resource}/${params.id}`, {
+      method: "GET",
+      headers: new Headers({
+        Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
+      }),
+    }).then(({ json }) => ({
       data: json,
     })),
 
@@ -103,6 +108,9 @@ export default (
     httpClient(`${apiUrl}/${resource}/${params.id}`, {
       method: "PUT",
       body: JSON.stringify(params.data),
+      headers: new Headers({
+        Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
+      }),
     }).then(({ json }) => ({ data: json })),
 
   // simple-rest doesn't handle provide an updateMany route, so we fallback to calling update n times instead
@@ -112,6 +120,9 @@ export default (
         httpClient(`${apiUrl}/${resource}/${id}`, {
           method: "PUT",
           body: JSON.stringify(params.data),
+          headers: new Headers({
+            Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
+          }),
         })
       )
     ).then((responses) => ({ data: responses.map(({ json }) => json.id) })),

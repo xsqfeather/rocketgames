@@ -12,8 +12,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import moment from "moment";
+import { GameRecord } from "@prisma/client";
 
-export default function GameRecordTable(props: { rows: any[] }) {
+export default function GameRecordTable(props: { rows: GameRecord[] }) {
   const { rows } = props;
 
   return (

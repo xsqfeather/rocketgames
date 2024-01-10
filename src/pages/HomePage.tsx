@@ -3,6 +3,7 @@ import { useContext, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { SnackbarContext } from "../contexts/SnackbarContext";
 import { GlobalMaskLoaderContext } from "../contexts/GlobalMaskLoaderContext";
+import { SocketContext } from "../contexts/SocketContext";
 
 export default function HomePage() {
   const [searchParams] = useSearchParams();
@@ -10,6 +11,7 @@ export default function HomePage() {
   const registerSuccess = searchParams.get("registerSuccess");
   const { showNotify } = useContext(SnackbarContext);
   const { showMaskLoader } = useContext(GlobalMaskLoaderContext);
+  const socket = useContext(SocketContext);
   useEffect(() => {
     if (loginSuccess) {
       showNotify({
@@ -25,6 +27,23 @@ export default function HomePage() {
       });
     }
   }, [registerSuccess]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.emit("/user/lobby/lobbyHandler/gameList", {
+        seq: "1",
+        accountID: localStorage.getItem("accountID"),
+        session: localStorage.getItem("token"),
+      });
+    }
+  }, [socket]);
+  useEffect(() => {
+    if (socket) {
+      socket.on("/user/lobby/lobbyHandler/gameList", (data: any) => {
+        console.log("/user/lobby/lobbyHandler/gameList", data);
+      });
+    }
+  }, [socket]);
   return (
     <Stack gap={3}>
       <Typography>Games</Typography>
@@ -71,8 +90,10 @@ export default function HomePage() {
           sx={{
             textDecoration: "none",
           }}
-          component={Link}
-          to={"/games/rocket"}
+          component={Button}
+          onClick={() => {
+            socket?.emit("/user/lobby/lobbyHandler/gameList");
+          }}
         >
           <CardContent>
             <Typography level="title-md">Rocket</Typography>

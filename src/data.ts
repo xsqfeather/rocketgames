@@ -1,3 +1,4 @@
+import { SettingKey, SettingRange } from "@prisma/client";
 import { ChatProps, UserProps } from "./types";
 
 export const users: UserProps[] = [
@@ -272,3 +273,19 @@ export const chats: ChatProps[] = [
     ],
   },
 ];
+
+export const Settings: {
+  [key in SettingKey]: string;
+} = {
+  [SettingKey.MAINTENANCE]: "Maintenance",
+  [SettingKey.MAINTENANCE_LEVEL]: "Maintenance Level",
+  [SettingKey.MAINTENANCE_IPS]: "Maintenance IPs",
+  GLOBAL_MAINTENANCE: "",
+};
+
+export const SettingValues = {
+  [SettingRange.GLOBAL]: "Global",
+  off: "Off",
+  on: "On",
+  ip: "IP",
+};

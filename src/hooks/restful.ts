@@ -34,5 +34,12 @@ export function useList<T>(
   };
   const url = `${ENDPOINT}/${resource}?${stringify(query)}`;
   const { data, error, isLoading } = useSWR(url, fetcher);
-  return { data: data as T[], error, isLoading };
+  return {
+    data: data as {
+      list: T[];
+      total: number;
+    },
+    error,
+    isLoading,
+  };
 }
