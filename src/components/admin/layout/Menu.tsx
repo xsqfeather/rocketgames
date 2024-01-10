@@ -145,7 +145,6 @@ const Menu = ({ dense = false }: MenuProps) => {
       /> */}
       <MenuItemLink
         to="/admin/settings"
-        placeholder="Settings"
         state={{ _scrollToTop: true }}
         primaryText={translate(`resources.settings.name`, {
           smart_count: 2,
