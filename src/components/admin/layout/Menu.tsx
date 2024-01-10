@@ -62,7 +62,6 @@ const Menu = ({ dense = false }: MenuProps) => {
       >
         <MenuItemLink
           to="/admin/game-records"
-          placeholder="Game Records"
           state={{ _scrollToTop: true }}
           primaryText={translate(`resources.game-records.name`, {
             smart_count: 2,
@@ -72,7 +71,6 @@ const Menu = ({ dense = false }: MenuProps) => {
         />
         <MenuItemLink
           to="/admin/player-action-game-logs"
-          placeholder="Game Replays"
           state={{ _scrollToTop: true }}
           primaryText={translate(`resources.player-action-game-logs.name`, {
             smart_count: 2,
@@ -90,7 +88,6 @@ const Menu = ({ dense = false }: MenuProps) => {
       >
         <MenuItemLink
           to="/admin/users"
-          placeholder="Users"
           state={{ _scrollToTop: true }}
           primaryText={translate(`resources.users.name`, {
             smart_count: 2,
@@ -100,7 +97,6 @@ const Menu = ({ dense = false }: MenuProps) => {
         />
         <MenuItemLink
           to="/admin/categories"
-          placeholder="Reviews"
           state={{ _scrollToTop: true }}
           primaryText={translate(`resources.categories.name`, {
             smart_count: 2,
