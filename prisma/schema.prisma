@@ -48,36 +48,36 @@ model Pocket {
 }
 
 model User {
-  accountID   Int          @unique
-  socialID    String?
-  firstName   String       @unique
-  lastName    String?
-  email       String?
-  bio         String?
-  gender      Gender
-  country     String?
-  deviceOS    DeviceOS
-  gameChips   Int          @default(0)
-  goldCoin    Int          @default(0)
-  expPoint    Int          @default(0)
-  vipPoint    Int          @default(0)
-  vipLevel    Int          @default(0)
-  pocket      Pocket?
-  isOnline    Boolean      @default(false)
-  ip          String?
-  isTesting   Boolean?     @default(false)
-  isRobot     Boolean?     @default(false)
+  accountID           Int                   @unique
+  socialID            String?
+  firstName           String                @unique
+  lastName            String?
+  email               String?
+  bio                 String?
+  gender              Gender
+  country             String?
+  deviceOS            DeviceOS
+  gameChips           Int                   @default(0)
+  goldCoin            Int                   @default(0)
+  expPoint            Int                   @default(0)
+  vipPoint            Int                   @default(0)
+  vipLevel            Int                   @default(0)
+  pocket              Pocket?
+  isOnline            Boolean               @default(false)
+  ip                  String?
+  isTesting           Boolean?              @default(false)
+  isRobot             Boolean?              @default(false)
   //base props
-  id          String       @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  version     Int          @default(0)
+  id                  String                @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  version             Int                   @default(0)
   //relations
-  gameRecords GameRecord[]
-  vipLevels   VipLevel[]
-  GameReplay  GameReplay[]
-  BalanceLog  BalanceLog[]
-  LoginLog    LoginLog[]
+  gameRecords         GameRecord[]
+  vipLevels           VipLevel[]
+  BalanceLog          BalanceLog[]
+  LoginLog            LoginLog[]
+  PlayerActionGameLog PlayerActionGameLog[]
 }
 
 model LoginLog {
@@ -105,15 +105,18 @@ model Admin {
   version   Int      @default(0)
 }
 
-model GameReplay {
-  title     String
-  content   String
-  dirPath   String
-  gameName  String
-  userId    String @db.ObjectId
-  accountID Int
-  start     Int?
-  end       Int?
+model PlayerActionGameLog {
+  logId       String  @unique
+  gameName    String
+  userId      String  @db.ObjectId
+  accountID   Int
+  seat        Int
+  round       Int
+  tableId     String
+  ip          String?
+  gameType    String?
+  title       String?
+  description String?
 
   //base props
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
