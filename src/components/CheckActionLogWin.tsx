@@ -1,7 +1,6 @@
 import { Button, Modal, ModalClose, ModalDialog, Typography } from "@mui/joy";
 import axios from "axios";
 import React, { useEffect } from "react";
-import { set } from "zod";
 
 export default function CheckActionLogWin(props: {
   logId: string;
