@@ -13,24 +13,49 @@ export function useOne<T>(resource: string, id: string) {
 
 export function useList<T>(
   resource: string,
-  filter?: {
-    [key: string]: string;
-  },
-  pagination?: {
-    page: number;
-    perPage: number;
-  },
-  sort?: {
-    field: keyof T;
-    order: string;
+  params?: {
+    pagination?: {
+      page: number;
+      perPage?: number;
+    };
+    sort?: {
+      field: string;
+      order: string;
+    };
+    filter?: {
+      [key: string]: string;
+    };
   }
 ) {
-  const { page, perPage } = pagination || { page: 1, perPage: 10 };
-  const { field, order } = sort || { field: "id", order: "ASC" };
+  if (!params) {
+    params = {
+      pagination: {
+        page: 1,
+        perPage: 10,
+      },
+      sort: {
+        field: "createdAt",
+        order: "DESC",
+      },
+      filter: {},
+    };
+  }
+  const { page, perPage } = params.pagination || {
+    page: 1,
+    perPage: 10,
+  };
+  const { field, order } = params.sort || {
+    field: "createdAt",
+    order: "DESC",
+  };
+
+  const rangeStart = (page - 1) * (perPage || 10);
+  const rangeEnd = page * (perPage || 10) - 1;
+
   const query = {
-    sort: JSON.stringify({ field, order }),
-    range: JSON.stringify({ page, perPage }),
-    filter: JSON.stringify(filter),
+    sort: JSON.stringify([field, order]),
+    range: JSON.stringify([rangeStart, rangeEnd]),
+    filter: JSON.stringify(params.filter || {}),
   };
   const url = `${ENDPOINT}/${resource}?${stringify(query)}`;
   const { data, error, isLoading } = useSWR(url, fetcher);

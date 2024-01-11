@@ -11,11 +11,11 @@ import { GlobalMaskLoaderProvider } from "../contexts/GlobalMaskLoaderContext";
 
 export function HallLayout() {
   return (
-    <SocketProvider>
-      <CssVarsProvider disableTransitionOnChange>
-        <CssBaseline />
-        <GlobalMaskLoaderProvider>
-          <SnackbarProvider>
+    <SnackbarProvider>
+      <SocketProvider>
+        <CssVarsProvider disableTransitionOnChange>
+          <CssBaseline />
+          <GlobalMaskLoaderProvider>
             <Box sx={{ display: "flex", minHeight: "100dvh" }}>
               <Header />
               <Sidebar />
@@ -41,9 +41,9 @@ export function HallLayout() {
                 <Outlet />
               </Box>
             </Box>
-          </SnackbarProvider>
-        </GlobalMaskLoaderProvider>
-      </CssVarsProvider>
-    </SocketProvider>
+          </GlobalMaskLoaderProvider>
+        </CssVarsProvider>
+      </SocketProvider>
+    </SnackbarProvider>
   );
 }

@@ -12,10 +12,11 @@ import SearchIcon from "@mui/icons-material/Search";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import moment from "moment";
-import { GameRecord } from "@prisma/client";
+import { PlayerActionGameLog } from "@prisma/client";
+import CheckActionLogWin from "./CheckActionLogWin";
 
-export default function GameRecordTable(props: {
-  rows: GameRecord[];
+export default function GameReplayTable(props: {
+  rows: PlayerActionGameLog[];
   handlePageChange: (page: number) => void;
   page: number;
 }) {
@@ -77,17 +78,17 @@ export default function GameRecordTable(props: {
               <th
                 style={{ width: 140, padding: "12px 6px", textAlign: "center" }}
               >
-                Chips
+                Action Logs
               </th>
               <th
                 style={{ width: 240, padding: "12px 6px", textAlign: "center" }}
               >
-                Win Chips
+                Seat
               </th>
               <th
                 style={{ width: 140, padding: "12px 6px", textAlign: "center" }}
               >
-                Chip Point
+                Round
               </th>
               <th
                 style={{ width: 140, padding: "12px 6px", textAlign: "center" }}
@@ -97,25 +98,19 @@ export default function GameRecordTable(props: {
             </tr>
           </thead>
           <tbody>
-            {rows?.map((row: any) => (
+            {rows?.map((row: PlayerActionGameLog) => (
               <tr key={row.id}>
                 <td>
                   <Typography level="body-xs">{row.gameName}</Typography>
                 </td>
                 <td>
-                  <Typography level="body-xs">
-                    {row.chips.toFixed(2)}
-                  </Typography>
+                  <CheckActionLogWin logId={row.logId} game={row.gameName} />
                 </td>
                 <td>
-                  <Typography level="body-xs">
-                    {row.winChips.toFixed(2)}
-                  </Typography>
+                  <Typography level="body-xs">{row.seat}</Typography>
                 </td>
                 <td>
-                  <Typography level="body-xs">
-                    {row.chipPoint.toFixed(2)}
-                  </Typography>
+                  <Typography level="body-xs">{row.round}</Typography>
                 </td>
                 <td>
                   <Typography level="body-xs">

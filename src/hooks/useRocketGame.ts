@@ -46,6 +46,7 @@ export default function useRocketGame() {
       if (joinRlt.code === 200) {
         setTableStatus(joinRlt?.state);
         setTicks(joinRlt?.ticks);
+        setRecords(joinRlt?.gameRecords || []);
       }
     });
     return () => {

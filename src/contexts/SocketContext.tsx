@@ -1,12 +1,15 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { Socket, io } from "socket.io-client";
 import { ENDPOINT } from "../constants";
 import { useNavigate } from "react-router-dom";
+import { SnackbarContext } from "./SnackbarContext";
 
 export const SocketContext = createContext<Socket | null>(null);
 export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   const [socket, setSocket] = useState<Socket | null>(null);
   const nav = useNavigate();
+  const { showNotify } = useContext(SnackbarContext);
+
   useEffect(() => {
     const socket = io(`${ENDPOINT}`, {
       transports: ["websocket"],
@@ -29,6 +32,24 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
     socket.on("disconnect", () => {
       console.log("disconnect");
       setSocket(null);
+      showNotify({
+        message: "連線已斷開",
+        color: "warning",
+        variant: "soft",
+      });
+    });
+
+    socket.on("connect_error", (err) => {
+      if (err) {
+        console.error(err.message);
+        localStorage.clear();
+        nav("/auth/login");
+        showNotify({
+          message: "連線已斷開",
+          color: "warning",
+          variant: "soft",
+        });
+      }
     });
   }, []);
   useEffect(() => {

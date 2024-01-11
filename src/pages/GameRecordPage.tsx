@@ -6,9 +6,18 @@ import { useList } from "../hooks/restful";
 import GameRecordTable from "../components/GameRecordTable";
 import GameRecordList from "../components/GameRecordList";
 import Prisma from "@prisma/client";
+import { useState } from "react";
 
 export default function GameRecordPage() {
-  const { data } = useList<Prisma.GameRecord>("my/game-records");
+  const [page, setPage] = useState(1);
+  const { data } = useList<Prisma.GameRecord>("my/game-records", {
+    pagination: { page },
+  });
+
+  const handlePageChange = (page: number) => {
+    setPage(page);
+  };
+
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -57,8 +66,21 @@ export default function GameRecordPage() {
           My Game Records
         </Typography>
       </Box>
-      {data && <GameRecordTable rows={data.list} />}
-      {data && <GameRecordList listItems={data.list} />}
+      {data && (
+        <GameRecordTable
+          rows={data.list}
+          handlePageChange={handlePageChange}
+          page={page}
+        />
+      )}
+      {data && (
+        <GameRecordList
+          totalPage={Math.ceil(data.total / 10)}
+          handlePageChange={handlePageChange}
+          page={page}
+          listItems={data.list}
+        />
+      )}
     </>
   );
 }

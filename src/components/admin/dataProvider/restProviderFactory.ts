@@ -79,7 +79,12 @@ export default (
       filter: JSON.stringify({ id: params.ids }),
     };
     const url = `${apiUrl}/${resource}?${stringify(query)}`;
-    return httpClient(url).then(({ json }) => ({ data: json }));
+    return httpClient(url, {
+      method: "GET",
+      headers: new Headers({
+        Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
+      }),
+    }).then(({ json }) => ({ data: json.list }));
   },
 
   getManyReference: (resource, params) => {
@@ -96,7 +101,12 @@ export default (
     };
     const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
-    return httpClient(url).then(({ json }) => {
+    return httpClient(url, {
+      method: "GET",
+      headers: new Headers({
+        Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
+      }),
+    }).then(({ json }) => {
       return {
         data: json.list,
         total: json.total,

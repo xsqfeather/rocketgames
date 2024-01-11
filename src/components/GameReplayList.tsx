@@ -10,9 +10,10 @@ import ListDivider from "@mui/joy/ListDivider";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import moment from "moment";
+import { PlayerActionGameLog } from "@prisma/client";
 
-export default function GameRecordList(props: {
-  listItems: any[];
+export default function GameReplayList(props: {
+  listItems: PlayerActionGameLog[];
   page: number;
   totalPage: number;
   handlePageChange: (page: number) => void;
@@ -44,13 +45,13 @@ export default function GameRecordList(props: {
           >
             <Typography level="body-sm">Game</Typography>
             <Typography level="body-sm" color="neutral">
-              Game Chips
+              Action Logs
             </Typography>
             <Typography level="body-sm" color="neutral">
-              Win Chips
+              Seat
             </Typography>
             <Typography level="body-sm" color="neutral">
-              Chip Point
+              Round
             </Typography>
             <Typography level="body-sm" color="neutral">
               Time
@@ -85,13 +86,13 @@ export default function GameRecordList(props: {
             >
               <Typography level="body-sm">{listItem.gameName}</Typography>
               <Typography level="body-sm" color="neutral">
-                {listItem.chips.toFixed(2)}
+                {listItem.logId}
               </Typography>
               <Typography level="body-sm" color="neutral">
-                {listItem.winChips.toFixed(2)}
+                {listItem.seat}
               </Typography>
               <Typography level="body-sm" color="neutral">
-                {listItem.chipPoint.toFixed(2)}
+                {listItem.round}
               </Typography>
               <Typography level="body-sm" color="neutral">
                 {moment(listItem.createdAt).fromNow()}

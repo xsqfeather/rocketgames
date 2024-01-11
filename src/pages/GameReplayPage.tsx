@@ -1,12 +1,26 @@
-import { Box, Breadcrumbs, Button, Link, Typography } from "@mui/joy";
+import { Box, Breadcrumbs, Link, Typography } from "@mui/joy";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
-import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
-import OrderTable from "../components/OrderTable";
-import OrderList from "../components/OrderList";
 import { Link as RouterLink } from "react-router-dom";
+import { useList } from "../hooks/restful";
+import Prisma from "@prisma/client";
+import { useState } from "react";
+import GameReplayTable from "../components/GameReplayTable";
+import GameReplayList from "../components/GameReplayList";
 
-export default function GameReplayPage() {
+export default function GameRecordPage() {
+  const [page, setPage] = useState(1);
+  const { data } = useList<Prisma.PlayerActionGameLog>(
+    "my/player-action-game-logs",
+    {
+      pagination: { page },
+    }
+  );
+
+  const handlePageChange = (page: number) => {
+    setPage(page);
+  };
+
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -36,7 +50,7 @@ export default function GameReplayPage() {
             Lobby
           </Link>
           <Typography color="primary" fontWeight={500} fontSize={12}>
-            Game Replays
+            My Game Action Logs
           </Typography>
         </Breadcrumbs>
       </Box>
@@ -52,18 +66,24 @@ export default function GameReplayPage() {
         }}
       >
         <Typography level="h2" component="h1">
-          My Game Replays
+          My Game Action Logs
         </Typography>
-        <Button
-          color="primary"
-          startDecorator={<DownloadRoundedIcon />}
-          size="sm"
-        >
-          Download PDF
-        </Button>
       </Box>
-      <OrderTable />
-      <OrderList />
+      {data && (
+        <GameReplayTable
+          rows={data.list}
+          handlePageChange={handlePageChange}
+          page={page}
+        />
+      )}
+      {data && (
+        <GameReplayList
+          totalPage={Math.ceil(data.total / 10)}
+          handlePageChange={handlePageChange}
+          page={page}
+          listItems={data.list}
+        />
+      )}
     </>
   );
 }

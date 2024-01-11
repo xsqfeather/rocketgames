@@ -5,6 +5,7 @@ import {
   DateField,
   NumberField,
   DateInput,
+  ReferenceField,
 } from "react-admin";
 
 const listFilters = [
@@ -20,6 +21,9 @@ const GameRecordList = () => (
   >
     <Datagrid rowClick="expand">
       <TextField source="accountID" />
+      <ReferenceField source="userId" reference="users" link="show">
+        <TextField source="firstName" />
+      </ReferenceField>
       <TextField source="firstName" />
       <TextField source="gameName" />
       <NumberField source="chips" />

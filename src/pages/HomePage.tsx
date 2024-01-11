@@ -1,8 +1,7 @@
-import { Button, Card, CardContent, Stack, Typography } from "@mui/joy";
-import { useContext, useEffect } from "react";
+import { Card, CardContent, Stack, Typography } from "@mui/joy";
+import { useContext, useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { SnackbarContext } from "../contexts/SnackbarContext";
-import { GlobalMaskLoaderContext } from "../contexts/GlobalMaskLoaderContext";
 import { SocketContext } from "../contexts/SocketContext";
 
 export default function HomePage() {
@@ -10,8 +9,8 @@ export default function HomePage() {
   const loginSuccess = searchParams.get("loginSuccess");
   const registerSuccess = searchParams.get("registerSuccess");
   const { showNotify } = useContext(SnackbarContext);
-  const { showMaskLoader } = useContext(GlobalMaskLoaderContext);
   const socket = useContext(SocketContext);
+  const [games, setGames] = useState<string[]>([]);
   useEffect(() => {
     if (loginSuccess) {
       showNotify({
@@ -40,7 +39,8 @@ export default function HomePage() {
   useEffect(() => {
     if (socket) {
       socket.on("/user/lobby/lobbyHandler/gameList", (data: any) => {
-        console.log("/user/lobby/lobbyHandler/gameList", data);
+        console.log("/user/lobby/lobbyHandler/gameList", data.games);
+        setGames(data.games);
       });
     }
   }, [socket]);
@@ -53,53 +53,23 @@ export default function HomePage() {
         sx={{ mb: 2 }}
         justifyContent={"space-around"}
       >
-        <Card
-          variant="outlined"
-          sx={{
-            textDecoration: "none",
-          }}
-          component={Link}
-          to={"/games/rocket"}
-        >
-          <CardContent>
-            <Typography level="title-md">Rocket</Typography>
-            <Typography>Escape from Rocket by winning Chips</Typography>
-          </CardContent>
-        </Card>
-        <Card
-          variant="outlined"
-          sx={{
-            textDecoration: "none",
-          }}
-          component={Button}
-          onClick={() => {
-            showMaskLoader({
-              message: "Loading...",
-            });
-          }}
-        >
-          <CardContent>
-            <Typography level="title-md">Rocket</Typography>
-            <Typography>
-              Escape From the Dangerous Rocket With Winning Chips!
-            </Typography>
-          </CardContent>
-        </Card>
-        <Card
-          variant="outlined"
-          sx={{
-            textDecoration: "none",
-          }}
-          component={Button}
-          onClick={() => {
-            socket?.emit("/user/lobby/lobbyHandler/gameList");
-          }}
-        >
-          <CardContent>
-            <Typography level="title-md">Rocket</Typography>
-            <Typography>Escape from Rocket by winning Chips</Typography>
-          </CardContent>
-        </Card>
+        {games.map((game: string) => (
+          <Card
+            variant="outlined"
+            sx={{
+              textDecoration: "none",
+            }}
+            component={Link}
+            to={`/games/${game}`}
+          >
+            <CardContent>
+              <Typography level="title-md">
+                {game.toLocaleUpperCase()}
+              </Typography>
+              <Typography>game description</Typography>
+            </CardContent>
+          </Card>
+        ))}
       </Stack>
     </Stack>
   );
