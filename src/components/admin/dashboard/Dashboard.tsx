@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
 import { Paper, CardContent } from "@mui/material";
 import { Stack, Typography, Card } from "@mui/material";
-import OnLineStatic from "./OnLineStatic";
+import OnLineStatic from "./OnlineStatic";
 
 const styles = {
   flex: { display: "flex" },
