@@ -1,22 +1,33 @@
 import { Box, Breadcrumbs, Link, Typography } from "@mui/joy";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useList } from "../hooks/restful";
 import GameRecordTable from "../components/GameRecordTable";
 import GameRecordList from "../components/GameRecordList";
 import Prisma from "@prisma/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function GameRecordPage() {
   const [page, setPage] = useState(1);
-  const { data } = useList<Prisma.GameRecord>("my/game-records", {
+  const { data, error } = useList<Prisma.GameRecord>("my/game-records", {
     pagination: { page },
   });
+  const nav = useNavigate();
+
+  useEffect(() => {
+    if (error) {
+      nav("/auth/login");
+    }
+  }, [error]);
 
   const handlePageChange = (page: number) => {
     setPage(page);
   };
+
+  if (error) {
+    return null;
+  }
 
   return (
     <>

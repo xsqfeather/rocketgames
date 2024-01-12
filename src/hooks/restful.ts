@@ -2,6 +2,8 @@ import useSWR from "swr";
 import { stringify } from "query-string";
 
 import { ENDPOINT, fetcher } from "../constants";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function useOne<T>(resource: string, id: string) {
   const { data, error, isLoading } = useSWR(
@@ -59,6 +61,28 @@ export function useList<T>(
   };
   const url = `${ENDPOINT}/${resource}?${stringify(query)}`;
   const { data, error, isLoading } = useSWR(url, fetcher);
+  const nav = useNavigate();
+
+  useEffect(() => {
+    if (error) {
+      nav("/auth/login");
+    }
+  }, [error]);
+
+  if (error) {
+    return {
+      data: {
+        list: [],
+        total: 0,
+      } as {
+        list: T[];
+        total: number;
+      },
+      error,
+      isLoading,
+    };
+  }
+
   return {
     data: data as {
       list: T[];

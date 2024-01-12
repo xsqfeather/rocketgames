@@ -21,9 +21,15 @@ const authProvider: AuthProvider = {
     localStorage.removeItem("admin_token");
     return Promise.resolve();
   },
-  checkError: () => Promise.resolve(),
-  checkAuth: () =>
-    localStorage.getItem("admin_token") ? Promise.resolve() : Promise.reject(),
+  checkError: () => {
+    localStorage.removeItem("admin_token");
+    return Promise.resolve();
+  },
+  checkAuth: () => {
+    return localStorage.getItem("admin_token")
+      ? Promise.resolve()
+      : Promise.reject();
+  },
   getPermissions: () => Promise.resolve(),
   getIdentity: () =>
     Promise.resolve({

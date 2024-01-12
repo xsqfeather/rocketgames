@@ -9,7 +9,6 @@ export default function RocketPage() {
     isBet,
     handleBetBtn,
     handleEscape,
-    handleBeginRecord,
     betRecord,
     records,
   } = useRocketGame();
@@ -56,8 +55,6 @@ export default function RocketPage() {
           On Board ($10)
         </Button>
       </Stack>
-
-      <Button onClick={handleBeginRecord}>Record The Game</Button>
       <Stack
         direction={"row"}
         justifyContent={"space-around"}
