@@ -5,4 +5,13 @@ export const fetcher = (...args: [string, ...any]) =>
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     }),
-  }).then((res) => res.json());
+  })
+    .then((res) =>
+      res.status < 400
+        ? res.json()
+        : res.json().then((err) => Promise.reject(err))
+    )
+    .catch((err) => {
+      console.log(err);
+      return Promise.reject(err);
+    });

@@ -5,7 +5,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -23,7 +22,7 @@ const MyLoginPage = () => {
     const username = data.get("username") as string;
     const password = data.get("password") as string;
     login({ username, password }).catch(() =>
-      notify("Invalid email or password")
+      notify("Invalid username or password", { type: "error" })
     );
   };
 
@@ -62,7 +61,7 @@ const MyLoginPage = () => {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Admin Sign In
             </Typography>
             <Box
               component="form"
@@ -90,10 +89,7 @@ const MyLoginPage = () => {
                 id="password"
                 autoComplete="current-password"
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
+
               <Button
                 type="submit"
                 fullWidth
@@ -102,18 +98,6 @@ const MyLoginPage = () => {
               >
                 Sign In
               </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid>
             </Box>
           </Box>
         </Grid>

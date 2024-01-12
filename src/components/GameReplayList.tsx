@@ -11,6 +11,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import moment from "moment";
 import { PlayerActionGameLog } from "@prisma/client";
+import CheckActionLogWin from "./CheckActionLogWin";
 
 export default function GameReplayList(props: {
   listItems: PlayerActionGameLog[];
@@ -85,9 +86,10 @@ export default function GameReplayList(props: {
               }}
             >
               <Typography level="body-sm">{listItem.gameName}</Typography>
-              <Typography level="body-sm" color="neutral">
-                {listItem.logId}
-              </Typography>
+              <CheckActionLogWin
+                logId={listItem.logId}
+                game={listItem.gameName}
+              />
               <Typography level="body-sm" color="neutral">
                 {listItem.seat}
               </Typography>

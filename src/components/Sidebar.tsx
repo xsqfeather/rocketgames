@@ -2,20 +2,16 @@ import * as React from "react";
 import GlobalStyles from "@mui/joy/GlobalStyles";
 import Avatar from "@mui/joy/Avatar";
 import Box from "@mui/joy/Box";
-import Button from "@mui/joy/Button";
-import Card from "@mui/joy/Card";
 import Chip from "@mui/joy/Chip";
 import Divider from "@mui/joy/Divider";
 import IconButton from "@mui/joy/IconButton";
 import Input from "@mui/joy/Input";
-import LinearProgress from "@mui/joy/LinearProgress";
 import List from "@mui/joy/List";
 import ListItem from "@mui/joy/ListItem";
 import ListItemButton, { listItemButtonClasses } from "@mui/joy/ListItemButton";
 import ListItemContent from "@mui/joy/ListItemContent";
 import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
-import Stack from "@mui/joy/Stack";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 import VideoFileSharpIcon from "@mui/icons-material/VideoFileSharp";
@@ -24,7 +20,6 @@ import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded
 import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
 import SupportRoundedIcon from "@mui/icons-material/SupportRounded";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
-import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import BrightnessAutoRoundedIcon from "@mui/icons-material/BrightnessAutoRounded";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -126,7 +121,7 @@ export default function Sidebar() {
         <IconButton variant="soft" color="primary" size="sm">
           <BrightnessAutoRoundedIcon />
         </IconButton>
-        <Typography level="title-lg">Acme Co.</Typography>
+        <Typography level="title-sm">Rocket Games</Typography>
         <ColorSchemeToggle sx={{ ml: "auto" }} />
       </Box>
       <Input
@@ -269,36 +264,6 @@ export default function Sidebar() {
             </ListItemButton>
           </ListItem>
         </List>
-        <Card
-          invertedColors
-          variant="soft"
-          color="warning"
-          size="sm"
-          sx={{ boxShadow: "none" }}
-        >
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Typography level="title-sm">Used space</Typography>
-            <IconButton size="sm">
-              <CloseRoundedIcon />
-            </IconButton>
-          </Stack>
-          <Typography level="body-xs">
-            Your team has used 80% of your available space. Need more?
-          </Typography>
-          <LinearProgress
-            variant="outlined"
-            value={80}
-            determinate
-            sx={{ my: 1 }}
-          />
-          <Button size="sm" variant="solid">
-            Upgrade plan
-          </Button>
-        </Card>
       </Box>
       <Divider />
       <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>

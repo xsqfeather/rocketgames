@@ -1,4 +1,13 @@
-import { Button, Modal, ModalClose, ModalDialog, Typography } from "@mui/joy";
+import {
+  Box,
+  Button,
+  DialogActions,
+  Modal,
+  ModalClose,
+  ModalDialog,
+  Typography,
+} from "@mui/joy";
+import { IconX } from "@tabler/icons-react";
 import axios from "axios";
 import React, { useEffect } from "react";
 
@@ -26,9 +35,27 @@ export default function CheckActionLogWin(props: {
       <Modal open={open} onClose={() => setOpen(false)}>
         <ModalDialog>
           <ModalClose />
-          <Typography>{logId}</Typography>
-          <Typography>{game}</Typography>
-          <Typography>{JSON.stringify(log)}</Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              overflow: "auto",
+              padding: 2,
+            }}
+          >
+            <Typography>{logId}</Typography>
+            <Typography>{game}</Typography>
+            <Typography>{JSON.stringify(log)}</Typography>
+          </Box>
+          <DialogActions>
+            <Button
+              variant="plain"
+              color="neutral"
+              onClick={() => setOpen(false)}
+            >
+              Close <IconX />
+            </Button>
+          </DialogActions>
         </ModalDialog>
       </Modal>
     </>

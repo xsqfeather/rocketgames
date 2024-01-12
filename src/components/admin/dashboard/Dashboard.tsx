@@ -1,5 +1,7 @@
 import { CSSProperties } from "react";
-import { useMediaQuery, Theme } from "@mui/material";
+import { Paper, CardContent } from "@mui/material";
+import { Stack, Typography, Card } from "@mui/material";
+import OnLineStatic from "./OnLineStatic";
 
 const styles = {
   flex: { display: "flex" },
@@ -10,19 +12,40 @@ const styles = {
 };
 
 const Dashboard = () => {
-  const isXSmall = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down("sm")
-  );
-  const isSmall = useMediaQuery((theme: Theme) => theme.breakpoints.down("lg"));
-
-  return isXSmall ? (
-    <div>mobile</div>
-  ) : isSmall ? (
-    <div style={styles.flexColumn as CSSProperties}>small</div>
-  ) : (
-    <>
-      <div style={styles.flex}>medium</div>
-    </>
+  return (
+    <Paper
+      style={styles.flexColumn as CSSProperties}
+      sx={{
+        padding: 2,
+        marginTop: 2,
+      }}
+    >
+      <Typography variant="h5">Current User Activities </Typography>
+      <Stack
+        direction={"row"}
+        justifyContent={"space-around"}
+        flexWrap={"wrap"}
+      >
+        <Card>
+          <CardContent>
+            <OnLineStatic duration={600} />
+            <Typography variant="caption">10 mins</Typography>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent>
+            <OnLineStatic duration={3600} />
+            <Typography variant="caption">1 hour</Typography>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent>
+            <OnLineStatic duration={3600 * 24} />
+            <Typography variant="caption">1 day</Typography>
+          </CardContent>
+        </Card>
+      </Stack>
+    </Paper>
   );
 };
 
