@@ -9,9 +9,11 @@ export interface GlobalMaskLoaderProps {
 export const GlobalMaskLoaderContext = React.createContext<{
   open: boolean;
   showMaskLoader: (props: GlobalMaskLoaderProps) => void;
+  closeMaskLoader: (props: GlobalMaskLoaderProps) => void;
 }>({
   open: false,
   showMaskLoader: () => {},
+  closeMaskLoader: () => {},
 });
 export function GlobalMaskLoaderProvider({
   children,
@@ -24,6 +26,11 @@ export function GlobalMaskLoaderProvider({
   const showMaskLoader = (notify: { message: string }) => {
     setMessage(notify.message);
     setMaskOpen(true);
+  };
+
+  const closeMaskLoader = (notify: { message: string }) => {
+    setMessage(notify.message);
+    setMaskOpen(false);
   };
 
   return (
@@ -46,7 +53,11 @@ export function GlobalMaskLoaderProvider({
         </Stack>
       </Modal>
       <GlobalMaskLoaderContext.Provider
-        value={{ open: maskOpen, showMaskLoader: showMaskLoader }}
+        value={{
+          open: maskOpen,
+          showMaskLoader: showMaskLoader,
+          closeMaskLoader: closeMaskLoader,
+        }}
       >
         {children}
       </GlobalMaskLoaderContext.Provider>

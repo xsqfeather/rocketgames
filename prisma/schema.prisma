@@ -200,6 +200,7 @@ enum BalanceLogAmountReason {
   Gift
   Promo
   Exchange
+  Refund
 }
 
 model BalanceLog {
@@ -211,11 +212,52 @@ model BalanceLog {
   type         BalanceLogType
   amountType   BalanceLogAmountType
   amountReason BalanceLogAmountReason
+
   //base props
-  id           String                 @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt    DateTime               @default(now())
-  updatedAt    DateTime               @updatedAt
-  version      Int                    @default(0)
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  version   Int      @default(0)
   //relations
-  user         User                   @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+enum SlotIcon {
+  greenHat
+  clover
+  pipe
+  horseshoe
+  beer
+  bread
+  A
+  K
+  Q
+  J
+  ten
+  scatter
+  wild
+}
+
+model SlotPayRate {
+  icon     SlotIcon
+  rate     Json
+  gameName String
+
+  //base props
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  version   Int      @default(0)
+}
+
+model SlotGameWeight {
+  gameName     String
+  columnNumber Int
+  icon         SlotIcon
+  weight       Int
+  //base props
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  version      Int      @default(0)
 }
