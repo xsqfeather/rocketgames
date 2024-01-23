@@ -22,7 +22,7 @@ const authProvider: AuthProvider = {
     return Promise.resolve();
   },
   checkError: () => {
-    localStorage.removeItem("admin_token");
+    // localStorage.removeItem("admin_token");
     return Promise.resolve();
   },
   checkAuth: () => {

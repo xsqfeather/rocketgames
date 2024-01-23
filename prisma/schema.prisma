@@ -194,7 +194,7 @@ enum BalanceLogAmountType {
 }
 
 enum BalanceLogAmountReason {
-  Desposit
+  Deposit
   Withdraw
   Game
   Gift
@@ -204,7 +204,7 @@ enum BalanceLogAmountReason {
 }
 
 model BalanceLog {
-  userId       String                 @db.ObjectId
+  userId       String?                @db.ObjectId
   accountID    Int
   firstName    String
   game         String
@@ -212,6 +212,8 @@ model BalanceLog {
   type         BalanceLogType
   amountType   BalanceLogAmountType
   amountReason BalanceLogAmountReason
+  note         String?
+  isSystem     Boolean?               @default(false)
 
   //base props
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
@@ -219,7 +221,7 @@ model BalanceLog {
   updatedAt DateTime @updatedAt
   version   Int      @default(0)
   //relations
-  user      User     @relation(fields: [userId], references: [id])
+  user      User?    @relation(fields: [userId], references: [id])
 }
 
 enum SlotIcon {

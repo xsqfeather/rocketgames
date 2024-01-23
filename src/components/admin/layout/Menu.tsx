@@ -10,12 +10,12 @@ import {
 } from "react-admin";
 
 import products from "../resources/products";
-import categories from "../resources/categories";
 import SubMenu from "./SubMenu";
 import GameRecords from "../resources/game-records";
 import GameReplays from "../resources/game-player-logs";
 import Users from "../resources/users";
 import Settings from "../resources/settings";
+import BalanceLogs from "../resources/balance-logs";
 
 type MenuName =
   | "menuCatalog"
@@ -96,12 +96,12 @@ const Menu = ({ dense = false }: MenuProps) => {
           dense={dense}
         />
         <MenuItemLink
-          to="/admin/categories"
+          to="/admin/balance-logs"
           state={{ _scrollToTop: true }}
-          primaryText={translate(`resources.categories.name`, {
+          primaryText={translate(`resources.balance-logs.name`, {
             smart_count: 2,
           })}
-          leftIcon={<categories.icon />}
+          leftIcon={<BalanceLogs.icon />}
           dense={dense}
         />
       </SubMenu>

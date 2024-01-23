@@ -3,33 +3,20 @@ import {
   Datagrid,
   TextField,
   NumberField,
-  DateInput,
   BooleanField,
   Button,
 } from "react-admin";
-
-const listFilters = [
-  <DateInput source="date_gte" alwaysOn />,
-  <DateInput source="date_lte" alwaysOn />,
-];
+import DepositWin from "./DepositWin";
 
 const UserList = () => (
-  <List
-    filters={listFilters}
-    perPage={25}
-    sort={{ field: "date", order: "DESC" }}
-  >
+  <List perPage={25} sort={{ field: "createdAt", order: "DESC" }}>
     <Datagrid rowClick="expand">
       <TextField source="accountID" />
       <TextField source="firstName" />
       <NumberField source="goldCoin" />
-      <Button variant="contained" color="primary" label="Deposit Gold Coin" />
+      <DepositWin label="Deposit Gold Coin" source="goldCoin" />
       <NumberField source="gameChips" />
-      <Button
-        variant="contained"
-        color="secondary"
-        label="Deposit Game Chips"
-      />
+      <DepositWin label="Deposit Game Chips" source="gameChips" />
       <BooleanField source="isOnline" />
       <Button label="Kick Out" variant="outlined" color="error" />
     </Datagrid>

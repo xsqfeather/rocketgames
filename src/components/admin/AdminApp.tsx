@@ -20,6 +20,7 @@ import gameRecords from "./resources/game-records";
 import users from "./resources/users";
 import settings from "./resources/settings";
 import gamePlayerLogs from "./resources/game-player-logs";
+import balanceLogs from "./resources/balance-logs";
 
 const i18nProvider = polyglotI18nProvider(
   (locale) => {
@@ -71,6 +72,7 @@ const AdminApp = () => {
       <Resource name="game-records" {...gameRecords} />
       <Resource name="users" {...users} />
       <Resource name="settings" {...settings} />
+      <Resource name="balance-logs" {...balanceLogs} />
     </Admin>
   );
 };

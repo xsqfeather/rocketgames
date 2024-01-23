@@ -150,6 +150,19 @@ const customEnglishMessages: TranslationMessages = {
         updatedAt: "Updated At",
       },
     },
+    "balance-logs": {
+      name: "Balance Log |||| Balance Logs",
+      fields: {
+        accountID: "Account ID",
+        chips: "Game Chips",
+        winChips: "Win Chips",
+        gameName: "Game Name",
+        chipPoint: "Win Point",
+        firstName: "First Name",
+        createdAt: "Created At",
+        updatedAt: "Updated At",
+      },
+    },
     users: {
       name: "User |||| Users",
       fields: {
