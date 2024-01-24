@@ -10,11 +10,12 @@ const authProvider: AuthProvider = {
         password,
       }
     );
+    console.log({ rlt });
     const { data } = rlt;
     if (data.error) {
       throw new Error(data.error);
     }
-    localStorage.setItem("admin_token", data.session);
+    localStorage.setItem("admin_token", data.session.token);
     return rlt;
   },
   logout: () => {

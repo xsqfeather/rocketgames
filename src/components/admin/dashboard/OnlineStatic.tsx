@@ -21,5 +21,5 @@ export default function OnLineStatic(props: { duration: number }) {
         setRlt(data);
       });
   }, []);
-  return <Typography variant="h3">{rlt.activity}P</Typography>;
+  return <Typography variant="h3">{rlt.activity?.activity}P</Typography>;
 }
