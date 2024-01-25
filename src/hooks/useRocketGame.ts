@@ -14,6 +14,10 @@ export default function useRocketGame() {
 
   const [records, setRecords] = useState<any[]>([]);
 
+  const [betId, setBetId] = useState("");
+
+  const [cashOutPoint, setCashOutPoint] = useState(0);
+
   const [betRecord, setBetRecord] = useState({
     betMoney: 0,
     point: 0,
@@ -83,7 +87,10 @@ export default function useRocketGame() {
   useEffect(() => {
     socket?.on("/user/rocket/rocketHandler/bet", (data: any) => {
       console.log("/user/rocket/rocketHandler/bet", data);
-      setRecords(data?.gameRecords);
+      if (data.code === 200) {
+        setRecords(data?.gameRecords);
+        setBetId(data?.betId);
+      }
     });
     return () => {
       socket?.off("/user/rocket/rocketHandler/bet");
@@ -105,6 +112,15 @@ export default function useRocketGame() {
     });
     return () => {
       socket?.off("/ind/rocket/table/status");
+    };
+  }, [socket]);
+
+  useEffect(() => {
+    socket?.on("/ind/rocket/table/points", (data: any) => {
+      setCashOutPoint(data.cashOutPoint);
+    });
+    return () => {
+      socket?.off("/ind/rocket/table/points");
     };
   }, [socket]);
 
@@ -153,6 +169,7 @@ export default function useRocketGame() {
       game: "rocket",
       accountID: localStorage.getItem("accountID"),
       session: localStorage.getItem("token"),
+      betId,
     });
   };
 
@@ -166,6 +183,7 @@ export default function useRocketGame() {
   };
   return {
     tableStatus,
+    cashOutPoint,
     ticks,
     isBet,
     handleBetBtn,

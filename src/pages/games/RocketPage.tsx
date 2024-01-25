@@ -5,6 +5,7 @@ import { Button, Stack, Typography } from "@mui/joy";
 export default function RocketPage() {
   const {
     tableStatus,
+    cashOutPoint,
     ticks,
     isBet,
     handleBetBtn,
@@ -29,7 +30,7 @@ export default function RocketPage() {
       {tableStatus === "GAMING" && (
         <Stack>
           <Typography>Flying...</Typography>
-          <p>{(0.96 * Math.exp(0.05 * (1 + ticks / 10))).toFixed(2)}X</p>
+          <p>{cashOutPoint.toFixed(2)}X</p>
         </Stack>
       )}
       {tableStatus === "FINISH" && (
