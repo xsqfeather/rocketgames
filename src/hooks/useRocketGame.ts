@@ -10,8 +10,6 @@ export default function useRocketGame() {
   const [tableStatus, setTableStatus] = useState("UNKNOWN");
   const [isBet, setIsBet] = useState(false);
 
-  const [betIds, setBetIds] = useState<string[]>([]);
-
   const [ticks, setTicks] = useState(0);
 
   const [records, setRecords] = useState<any[]>([]);
