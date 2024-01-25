@@ -50,12 +50,13 @@ export default function RocketPage() {
           onClick={handleEscape}
           disabled={tableStatus !== "GAMING" || !isBet}
         >
-          Cash Out
+          Cash Out-1
         </Button>
         <Button onClick={handleBetBtn} disabled={tableStatus !== "READY"}>
-          On Board ($10)
+          On Board ($10)-1
         </Button>
       </Stack>
+
       <Stack
         direction={"row"}
         justifyContent={"space-around"}
