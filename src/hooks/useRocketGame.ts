@@ -8,9 +8,10 @@ export default function useRocketGame() {
   const nav = useNavigate();
 
   const [tableStatus, setTableStatus] = useState("UNKNOWN");
-  const [isBet, setIsBet] = useState(false);
 
   const [ticks, setTicks] = useState(0);
+
+  const [isBets, setIsBets] = useState([false, false]);
 
   const [records, setRecords] = useState<any[]>([]);
 
@@ -18,27 +19,24 @@ export default function useRocketGame() {
 
   const [cashOutPoint, setCashOutPoint] = useState(0);
 
-  const [betRecord, setBetRecord] = useState({
-    betMoney: 0,
-    point: 0,
-    profit: 0,
-    winMoney: 0,
-  });
   useInterval(() => {
     setTicks(1 + ticks);
   }, 100);
 
   useEffect(() => {
-    socket?.emit("/user/rocket/rocketHandler/joinGame", {
+    const input = {
       seq: "1",
       game: "rocket",
       accountID: localStorage.getItem("accountID"),
       session: localStorage.getItem("token"),
-    });
+    };
+    console.log("input:/user/rocket/rocketHandler/joinGame", input);
+    socket?.emit("/user/rocket/rocketHandler/joinGame", input);
   }, [socket]);
 
   useEffect(() => {
     socket?.on("/user/rocket/rocketHandler/joinGame", (data: any) => {
+      console.log("output:/user/rocket/rocketHandler/joinGame", data);
       const joinRlt = data;
       console.log("/user/rocket/rocketHandler/joinGame", joinRlt);
 
@@ -69,51 +67,56 @@ export default function useRocketGame() {
 
   useEffect(() => {
     socket?.on("/user/rocket/rocketHandler/escape", (data: any) => {
-      console.log("/user/rocket/rocketHandler/escape", data);
-      setRecords(data?.gameRecords || []);
-      setBetRecord({
-        ...betRecord,
-        betMoney: data.result.chips,
-        point: data.cashOutPoint,
-        winMoney: data.result.winChips,
-      });
+      console.log("output:/user/rocket/rocketHandler/escape", data);
+      if (data.code === 200) {
+        setRecords([data?.result, ...records, ...data?.gameRecords]);
+        setBetId(data.result.betId);
+        setIsBets(data.isBet);
+      }
     });
 
     return () => {
       socket?.off("/user/rocket/rocketHandler/escape");
     };
-  }, [socket]);
+  }, [socket, records, isBets]);
 
   useEffect(() => {
     socket?.on("/user/rocket/rocketHandler/bet", (data: any) => {
       console.log("/user/rocket/rocketHandler/bet", data);
       if (data.code === 200) {
-        setRecords(data?.gameRecords);
-        setBetId(data?.betId);
+        setRecords([data?.result, ...records, ...data?.gameRecords]);
+        setBetId(data.result.betId);
+        setIsBets(data.isBet);
       }
     });
     return () => {
       socket?.off("/user/rocket/rocketHandler/bet");
     };
-  }, [socket]);
+  }, [socket, records, isBets]);
 
   useEffect(() => {
     socket?.on("/ind/rocket/table/status", (data: any) => {
+      console.log("output:/ind/rocket/table/status", data);
       const tableStatus = data;
-      setTicks(0);
-      setRecords(data?.gameRecords || []);
-      console.log("/ind/rocket/table/status", tableStatus);
+      const gameRecords = tableStatus?.gameRecords;
+      const recordNotInRecords = gameRecords?.filter(
+        (record: any) => !records?.find((r) => r.betId === record.betId)
+      );
+      setRecords([...recordNotInRecords, ...records]);
+
       setTableStatus(tableStatus?.state);
       if (tableStatus?.state !== tableStatus) {
         const ticks = tableStatus?.ticks;
         setTicks(ticks);
       }
-      setIsBet(tableStatus.isBet);
+      if (tableStatus?.state === "FINISH") {
+        setIsBets([false, false]);
+      }
     });
     return () => {
       socket?.off("/ind/rocket/table/status");
     };
-  }, [socket]);
+  }, [records, socket]);
 
   useEffect(() => {
     socket?.on("/ind/rocket/table/points", (data: any) => {
@@ -124,72 +127,37 @@ export default function useRocketGame() {
     };
   }, [socket]);
 
-  useEffect(() => {
-    if (tableStatus === "FINISH" && betRecord?.betMoney > 0) {
-      setBetRecord({
-        betMoney: 0,
-        point: 0,
-        profit: 0,
-        winMoney: 0,
-      });
-    }
-  }, [tableStatus, betRecord?.betMoney]);
-
-  const handleBetBtn = () => {
-    setIsBet(true);
-    console.log("handleBetBtn", {
+  const handleBetBtn = (tag = 1) => {
+    const input = {
       game: "rocket",
       accountID: localStorage.getItem("accountID"),
       session: localStorage.getItem("token"),
       amount: 10,
-    });
-    socket?.emit("/user/rocket/rocketHandler/bet", {
-      game: "rocket",
-      accountID: localStorage.getItem("accountID"),
-      session: localStorage.getItem("token"),
-      amount: 10,
-    });
-    console.log("betRecord======", betRecord?.betMoney + 10);
-    setBetRecord({
-      betMoney: betRecord?.betMoney + 10,
-      point: 0,
-      profit: 0,
-      winMoney: 0,
-    });
+      tag,
+    };
+    console.log("input:/user/rocket/rocketHandler/bet", input);
+    socket?.emit("/user/rocket/rocketHandler/bet", input);
   };
 
-  const handleEscape = () => {
-    setIsBet(false);
-    console.log("handleEscape", {
-      game: "rocket",
-      accountID: localStorage.getItem("accountID"),
-      session: localStorage.getItem("token"),
-    });
-    socket?.emit("/user/rocket/rocketHandler/escape", {
+  const handleEscape = (tag = 1) => {
+    const input = {
       game: "rocket",
       accountID: localStorage.getItem("accountID"),
       session: localStorage.getItem("token"),
       betId,
-    });
+      tag,
+    };
+    console.log("input:/user/rocket/rocketHandler/escape", input);
+    socket?.emit("/user/rocket/rocketHandler/escape", input);
   };
 
-  const handleBeginRecord = () => {
-    setIsBet(false);
-    socket?.emit("/user/rocket/rocketHandler/beginRecord", {
-      game: "rocket",
-      accountID: localStorage.getItem("accountID"),
-      session: localStorage.getItem("token"),
-    });
-  };
   return {
     tableStatus,
     cashOutPoint,
     ticks,
-    isBet,
+    isBets,
     handleBetBtn,
     handleEscape,
-    handleBeginRecord,
-    betRecord,
     records,
   };
 }

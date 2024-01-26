@@ -241,9 +241,10 @@
 <p>Join game after joined the lobby</p>
 <h4 id="input-params-4">input params </h4>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
+    <span class="token string-property property">"seq"</span><span class="token operator">:</span> <span class="token string">"1"</span><span class="token punctuation">,</span>
     <span class="token string-property property">"game"</span><span class="token operator">:</span> <span class="token string">"rocket"</span><span class="token punctuation">,</span>
     <span class="token string-property property">"accountID"</span><span class="token operator">:</span> <span class="token string">"20010001000"</span><span class="token punctuation">,</span>
-    <span class="token string-property property">"session"</span><span class="token operator">:</span> <span class="token string">"A7Boz5U63KVrCcVeQcecy5QKJXAqTQ0Q5FT5qu4bvOgXyV6CXeUJpyaZlqq95kzd"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"session"</span><span class="token operator">:</span> <span class="token string">"XFRKFuM52edYnnKOUUNywgamzfOII6x9UBgkX8BOqyEIzokv8qIG8XeZlru8dgks"</span>
 <span class="token punctuation">}</span>
 </code></pre><h4 id="output-response-4">output response </h4>
 <h4 id="200">200 </h4>
@@ -263,19 +264,47 @@
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
     <span class="token string-property property">"game"</span><span class="token operator">:</span> <span class="token string">"rocket"</span><span class="token punctuation">,</span>
     <span class="token string-property property">"accountID"</span><span class="token operator">:</span> <span class="token string">"20010001000"</span><span class="token punctuation">,</span>
-    <span class="token string-property property">"session"</span><span class="token operator">:</span> <span class="token string">"A7Boz5U63KVrCcVeQcecy5QKJXAqTQ0Q5FT5qu4bvOgXyV6CXeUJpyaZlqq95kzd"</span><span class="token punctuation">,</span>
-    <span class="token string-property property">"amount"</span><span class="token operator">:</span> <span class="token number">10</span>
+    <span class="token string-property property">"session"</span><span class="token operator">:</span> <span class="token string">"XFRKFuM52edYnnKOUUNywgamzfOII6x9UBgkX8BOqyEIzokv8qIG8XeZlru8dgks"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"amount"</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"tag"</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token comment">//指定那个按钮下注</span>
 <span class="token punctuation">}</span>
 </code></pre><h4 id="output-params">output params </h4>
 <h4 id="code200-2">code:200 </h4>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
     <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
-    <span class="token string-property property">"ticks"</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
-    <span class="token string-property property">"isBet"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    <span class="token string-property property">"maxSeats"</span><span class="token operator">:</span> <span class="token string">"10000"</span><span class="token punctuation">,</span>
-    <span class="token string-property property">"cashOutPoint"</span><span class="token operator">:</span> <span class="token number">2.5578779922522403</span><span class="token punctuation">,</span>
-    <span class="token string-property property">"tableId"</span><span class="token operator">:</span> <span class="token string">"4LZbC7tL7sPSq2eVV0DnZ"</span><span class="token punctuation">,</span>
-    <span class="token string-property property">"state"</span><span class="token operator">:</span> <span class="token string">"READY"</span>
+    <span class="token string-property property">"ticks"</span><span class="token operator">:</span> <span class="token number">17</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"isBet"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token boolean">false</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">//按钮 1,2 是否下注</span>
+    <span class="token string-property property">"cashOutPoint"</span><span class="token operator">:</span> <span class="token number">1.8760678278105019</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"tableId"</span><span class="token operator">:</span> <span class="token string">"QTjWdW476mOHAM2CIAR-C"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"state"</span><span class="token operator">:</span> <span class="token string">"READY"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"recordStatus"</span><span class="token operator">:</span> <span class="token string">"none"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gameRecords"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"seat"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"message"</span><span class="token operator">:</span> <span class="token string">"bet success"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"updatedUserChips"</span><span class="token operator">:</span> <span class="token number">2097.111618683594</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"result"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"chips"</span><span class="token operator">:</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token comment">//下注金额</span>
+        <span class="token string-property property">"winChips"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token comment">//赢得的金额</span>
+        <span class="token string-property property">"accountID"</span><span class="token operator">:</span> <span class="token number">20010001000</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"tableId"</span><span class="token operator">:</span> <span class="token string">"QTjWdW476mOHAM2CIAR-C"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"firstName"</span><span class="token operator">:</span> <span class="token string">"simon"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"gameName"</span><span class="token operator">:</span> <span class="token string">"rocket"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"gameType"</span><span class="token operator">:</span> <span class="token string">"slot"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"actions"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token string-property property">"bet"</span><span class="token operator">:</span> <span class="token number">9</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"betId"</span><span class="token operator">:</span> <span class="token string">"A_cxWzX9vm0zd92b8lHiP"</span><span class="token punctuation">,</span> <span class="token comment">//这个也可以区分是那个按钮发出的下注</span>
+        <span class="token string-property property">"user"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token string-property property">"connect"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token string">"65b183eadf7402bec137701b"</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"tag"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"betId"</span><span class="token operator">:</span> <span class="token string">"A_cxWzX9vm0zd92b8lHiP"</span><span class="token punctuation">,</span> <span class="token comment">//这个也可以区分是那个按钮发出的下注</span>
 <span class="token punctuation">}</span>
 </code></pre><h4 id="code620-1">code:620 </h4>
 <p>GameClassError</p>
@@ -286,14 +315,14 @@
 </code></pre><h4 id="gamecode-tableerrorsnot-ready">gameCode: "table:errors:not-ready" </h4>
 <p>The game action is not at the right time</p>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
-    <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">520</span><span class="token punctuation">,</span>
     <span class="token string-property property">"message"</span><span class="token operator">:</span> <span class="token string">"table not ready"</span><span class="token punctuation">,</span>
     <span class="token string-property property">"gameCode"</span><span class="token operator">:</span> <span class="token string">"table:errors:not-ready"</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
 </code></pre><h4 id="gamecodetableerrorsplayer-not-found">gameCode:"table:errors:player-not-found" </h4>
 <p>The game action is not at the right time</p>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
-    <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">520</span><span class="token punctuation">,</span>
     <span class="token string-property property">"message"</span><span class="token operator">:</span> <span class="token string">"player not found on the table"</span><span class="token punctuation">,</span>
     <span class="token string-property property">"gameCode"</span><span class="token operator">:</span> <span class="token string">"table:errors:player-not-found"</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
@@ -303,24 +332,48 @@
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
     <span class="token string-property property">"game"</span><span class="token operator">:</span> <span class="token string">"rocket"</span><span class="token punctuation">,</span>
     <span class="token string-property property">"accountID"</span><span class="token operator">:</span> <span class="token string">"20010001000"</span><span class="token punctuation">,</span>
-    <span class="token string-property property">"session"</span><span class="token operator">:</span> <span class="token string">"A7Boz5U63KVrCcVeQcecy5QKJXAqTQ0Q5FT5qu4bvOgXyV6CXeUJpyaZlqq95kzd"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"session"</span><span class="token operator">:</span> <span class="token string">"nfOFSedMt02bOntpruHX2lCKtEGFFDyghYdn8gqEnsaWPJ4xyjjT1ciZlruf0nzc"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"betId"</span><span class="token operator">:</span> <span class="token string">"iVoV5Z2j5trwpxXucwfjV"</span><span class="token punctuation">,</span> <span class="token comment">//bet 接口返回的betId</span>
+    <span class="token string-property property">"tag"</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token comment">//按钮相关</span>
 <span class="token punctuation">}</span>
 </code></pre><h4 id="output-response-5">output response </h4>
 <h4 id="code200-3">code:200 </h4>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
     <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
-    <span class="token string-property property">"ticks"</span><span class="token operator">:</span> <span class="token number">12</span><span class="token punctuation">,</span>
-    <span class="token string-property property">"isBet"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
-    <span class="token string-property property">"maxSeats"</span><span class="token operator">:</span> <span class="token string">"10000"</span><span class="token punctuation">,</span>
-    <span class="token string-property property">"cashOutPoint"</span><span class="token operator">:</span> <span class="token number">1.0716269476405165</span><span class="token punctuation">,</span>
-    <span class="token string-property property">"tableId"</span><span class="token operator">:</span> <span class="token string">"4LZbC7tL7sPSq2eVV0DnZ"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"ticks"</span><span class="token operator">:</span> <span class="token number">16</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"isBet"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token boolean">true</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"cashOutPoint"</span><span class="token operator">:</span> <span class="token number">1.0932752479916368</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"tableId"</span><span class="token operator">:</span> <span class="token string">"v3vzNmogncAiFwhaGkqvs"</span><span class="token punctuation">,</span>
     <span class="token string-property property">"state"</span><span class="token operator">:</span> <span class="token string">"GAMING"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"recordStatus"</span><span class="token operator">:</span> <span class="token string">"none"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gameRecords"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">//这个的数据接口和result一致</span>
+    <span class="token string-property property">"seat"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
     <span class="token string-property property">"result"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-        <span class="token string-property property">"point"</span><span class="token operator">:</span> <span class="token string">"1.07"</span><span class="token punctuation">,</span>
-        <span class="token string-property property">"profit"</span><span class="token operator">:</span> <span class="token string">"0.72"</span><span class="token punctuation">,</span>
-        <span class="token string-property property">"winMoney"</span><span class="token operator">:</span> <span class="token string">"10.72"</span><span class="token punctuation">,</span>
-        <span class="token string-property property">"betMoney"</span><span class="token operator">:</span> <span class="token string">"10.00"</span>
-    <span class="token punctuation">}</span><span class="token comment">// this is the game result for this round</span>
+        <span class="token string-property property">"chips"</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token comment">//投注金额</span>
+        <span class="token string-property property">"winChips"</span><span class="token operator">:</span> <span class="token number">10.932752479916367</span><span class="token punctuation">,</span> <span class="token comment">//返回赢的金额</span>
+        <span class="token string-property property">"accountID"</span><span class="token operator">:</span> <span class="token number">20010001000</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"tableId"</span><span class="token operator">:</span> <span class="token string">"v3vzNmogncAiFwhaGkqvs"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"firstName"</span><span class="token operator">:</span> <span class="token string">"simon"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"gameName"</span><span class="token operator">:</span> <span class="token string">"rocket"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"gameType"</span><span class="token operator">:</span> <span class="token string">"slot"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"actions"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token string-property property">"bet"</span><span class="token operator">:</span> <span class="token number">11</span><span class="token punctuation">,</span>
+            <span class="token string-property property">"cashOut"</span><span class="token operator">:</span> <span class="token number">16</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"betId"</span><span class="token operator">:</span> <span class="token string">"s6LUWOwxPwycQOskMextX"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"user"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token string-property property">"connect"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token string">"65b183eadf7402bec137701b"</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"chipPoint"</span><span class="token operator">:</span> <span class="token number">1.0932752479916368</span> <span class="token comment">//倍率</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"updatedUserChips"</span><span class="token operator">:</span> <span class="token number">1490.058244320346</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"betId"</span><span class="token operator">:</span> <span class="token string">"iVoV5Z2j5trwpxXucwfjV"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"tag"</span><span class="token operator">:</span> <span class="token number">1</span>
 <span class="token punctuation">}</span>
 </code></pre><h4 id="code620-2">code:620 </h4>
 <p>GameClassError</p>
@@ -331,14 +384,14 @@
 </code></pre><h4 id="gamecode-tableerrorsnot-ready-1">gameCode: "table:errors:not-ready" </h4>
 <p>The game action is not at the right time</p>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
-    <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">520</span><span class="token punctuation">,</span>
     <span class="token string-property property">"message"</span><span class="token operator">:</span> <span class="token string">"table not ready"</span><span class="token punctuation">,</span>
     <span class="token string-property property">"gameCode"</span><span class="token operator">:</span> <span class="token string">"table:errors:not-ready"</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
 </code></pre><h4 id="gamecode-tableerrorsplayer-not-found">gameCode: "table:errors:player-not-found" </h4>
 <p>The game action is not at the right time</p>
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
-    <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">520</span><span class="token punctuation">,</span>
     <span class="token string-property property">"message"</span><span class="token operator">:</span> <span class="token string">"player not found on the table"</span><span class="token punctuation">,</span>
     <span class="token string-property property">"gameCode"</span><span class="token operator">:</span> <span class="token string">"table:errors:player-not-found"</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
@@ -348,11 +401,55 @@
 <pre data-role="codeBlock" data-info="typescript" class="language-typescript typescript"><code><span class="token punctuation">{</span>
     <span class="token string-property property">"code"</span><span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
     <span class="token string-property property">"ticks"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-    <span class="token string-property property">"isBet"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
-    <span class="token string-property property">"maxSeats"</span><span class="token operator">:</span> <span class="token string">"10000"</span><span class="token punctuation">,</span>
-    <span class="token string-property property">"cashOutPoint"</span><span class="token operator">:</span> <span class="token number">1.5436936295863515</span><span class="token punctuation">,</span>
-    <span class="token string-property property">"tableId"</span><span class="token operator">:</span> <span class="token string">"4LZbC7tL7sPSq2eVV0DnZ"</span><span class="token punctuation">,</span>
-    <span class="token string-property property">"state"</span><span class="token operator">:</span> <span class="token string">"READY"</span>
+    <span class="token string-property property">"isBet"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token boolean">false</span><span class="token punctuation">,</span>
+        <span class="token boolean">false</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"cashOutPoint"</span><span class="token operator">:</span> <span class="token number">2.0942133748782727</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"tableId"</span><span class="token operator">:</span> <span class="token string">"v3vzNmogncAiFwhaGkqvs"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"state"</span><span class="token operator">:</span> <span class="token string">"FINISH"</span><span class="token punctuation">,</span> <span class="token comment">//GAMING, 飞行中， READY, 准备中（可以下注）, FINISH, 爆炸了，可以结算</span>
+    <span class="token string-property property">"recordStatus"</span><span class="token operator">:</span> <span class="token string">"none"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gameRecords"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token string-property property">"chips"</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+            <span class="token string-property property">"winChips"</span><span class="token operator">:</span> <span class="token number">10.932752479916367</span><span class="token punctuation">,</span>
+            <span class="token string-property property">"accountID"</span><span class="token operator">:</span> <span class="token number">20010001000</span><span class="token punctuation">,</span>
+            <span class="token string-property property">"tableId"</span><span class="token operator">:</span> <span class="token string">"v3vzNmogncAiFwhaGkqvs"</span><span class="token punctuation">,</span>
+            <span class="token string-property property">"firstName"</span><span class="token operator">:</span> <span class="token string">"simon"</span><span class="token punctuation">,</span>
+            <span class="token string-property property">"gameName"</span><span class="token operator">:</span> <span class="token string">"rocket"</span><span class="token punctuation">,</span>
+            <span class="token string-property property">"gameType"</span><span class="token operator">:</span> <span class="token string">"slot"</span><span class="token punctuation">,</span>
+            <span class="token string-property property">"actions"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token string-property property">"bet"</span><span class="token operator">:</span> <span class="token number">11</span><span class="token punctuation">,</span>
+                <span class="token string-property property">"cashOut"</span><span class="token operator">:</span> <span class="token number">16</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token string-property property">"betId"</span><span class="token operator">:</span> <span class="token string">"s6LUWOwxPwycQOskMextX"</span><span class="token punctuation">,</span>
+            <span class="token string-property property">"user"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token string-property property">"connect"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                    <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token string">"65b183eadf7402bec137701b"</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token string-property property">"chipPoint"</span><span class="token operator">:</span> <span class="token number">1.0932752479916368</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token string-property property">"chips"</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+            <span class="token string-property property">"winChips"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+            <span class="token string-property property">"accountID"</span><span class="token operator">:</span> <span class="token number">20010001000</span><span class="token punctuation">,</span>
+            <span class="token string-property property">"tableId"</span><span class="token operator">:</span> <span class="token string">"v3vzNmogncAiFwhaGkqvs"</span><span class="token punctuation">,</span>
+            <span class="token string-property property">"firstName"</span><span class="token operator">:</span> <span class="token string">"simon"</span><span class="token punctuation">,</span>
+            <span class="token string-property property">"gameName"</span><span class="token operator">:</span> <span class="token string">"rocket"</span><span class="token punctuation">,</span>
+            <span class="token string-property property">"gameType"</span><span class="token operator">:</span> <span class="token string">"slot"</span><span class="token punctuation">,</span>
+            <span class="token string-property property">"actions"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token string-property property">"bet"</span><span class="token operator">:</span> <span class="token number">23</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token string-property property">"betId"</span><span class="token operator">:</span> <span class="token string">"iVoV5Z2j5trwpxXucwfjV"</span><span class="token punctuation">,</span>
+            <span class="token string-property property">"user"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token string-property property">"connect"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                    <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token string">"65b183eadf7402bec137701b"</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"seat"</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token comment">//座位号</span>
 <span class="token punctuation">}</span>
 </code></pre><h1 id="the-mines-game-api-document">The Mines Game API document </h1>
 <p>All apis are all on <a href="http://Socket.IO">Socket.IO</a></p>

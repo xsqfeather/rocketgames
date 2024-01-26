@@ -7,10 +7,9 @@ export default function RocketPage() {
     tableStatus,
     cashOutPoint,
     ticks,
-    isBet,
+    isBets,
     handleBetBtn,
     handleEscape,
-    betRecord,
     records,
   } = useRocketGame();
 
@@ -47,16 +46,18 @@ export default function RocketPage() {
         }}
       >
         <Button
-          onClick={handleEscape}
-          disabled={tableStatus !== "GAMING" || !isBet}
+          onClick={() => handleEscape(1)}
+          disabled={tableStatus !== "GAMING" || !isBets[0]}
         >
           Cash Out-1
         </Button>
-        <Button onClick={handleBetBtn} disabled={tableStatus !== "READY"}>
+        <Button
+          onClick={() => handleBetBtn(1)}
+          disabled={tableStatus !== "READY" || isBets[0]}
+        >
           On Board ($10)-1
         </Button>
       </Stack>
-
       <Stack
         direction={"row"}
         justifyContent={"space-around"}
@@ -64,11 +65,20 @@ export default function RocketPage() {
           width: "100%",
         }}
       >
-        <Typography>Current</Typography>
-        <Typography>Chips：{betRecord?.betMoney || 0}</Typography>
-        <Typography>Win Chips: {betRecord?.winMoney || 0} </Typography>
-        <Typography>Cash Point: {betRecord?.point || 0} </Typography>
+        <Button
+          onClick={() => handleEscape(2)}
+          disabled={tableStatus !== "GAMING" || !isBets[1]}
+        >
+          Cash Out-2
+        </Button>
+        <Button
+          onClick={() => handleBetBtn(2)}
+          disabled={tableStatus !== "READY" || isBets[1]}
+        >
+          On Board ($10)-2
+        </Button>
       </Stack>
+
       <Typography>Player Records:</Typography>
       {records?.map((record, index) => (
         <Stack

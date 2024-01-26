@@ -198,9 +198,10 @@ Join game after joined the lobby
 
 ```typescript
 {
+    "seq": "1",
     "game": "rocket",
     "accountID": "20010001000",
-    "session": "A7Boz5U63KVrCcVeQcecy5QKJXAqTQ0Q5FT5qu4bvOgXyV6CXeUJpyaZlqq95kzd",
+    "session": "XFRKFuM52edYnnKOUUNywgamzfOII6x9UBgkX8BOqyEIzokv8qIG8XeZlru8dgks"
 }
 ```
 
@@ -231,8 +232,9 @@ When rocket is ready, the player can put money into table to bet
 {
     "game": "rocket",
     "accountID": "20010001000",
-    "session": "A7Boz5U63KVrCcVeQcecy5QKJXAqTQ0Q5FT5qu4bvOgXyV6CXeUJpyaZlqq95kzd",
-    "amount": 10
+    "session": "XFRKFuM52edYnnKOUUNywgamzfOII6x9UBgkX8BOqyEIzokv8qIG8XeZlru8dgks",
+    "amount": 10,
+    "tag": 1 //指定那个按钮下注
 }
 ```
 
@@ -243,12 +245,39 @@ When rocket is ready, the player can put money into table to bet
 ```typescript
 {
     "code": 200,
-    "ticks": 10,
-    "isBet": true,
-    "maxSeats": "10000",
-    "cashOutPoint": 2.5578779922522403,
-    "tableId": "4LZbC7tL7sPSq2eVV0DnZ",
-    "state": "READY"
+    "ticks": 17,
+    "isBet": [
+        true,
+        false
+    ], //按钮 1,2 是否下注
+    "cashOutPoint": 1.8760678278105019,
+    "tableId": "QTjWdW476mOHAM2CIAR-C",
+    "state": "READY",
+    "recordStatus": "none",
+    "gameRecords": [],
+    "seat": 1,
+    "message": "bet success",
+    "updatedUserChips": 2097.111618683594,
+    "result": {
+        "chips": 20, //下注金额
+        "winChips": 0, //赢得的金额
+        "accountID": 20010001000,
+        "tableId": "QTjWdW476mOHAM2CIAR-C",
+        "firstName": "simon",
+        "gameName": "rocket",
+        "gameType": "slot",
+        "actions": {
+            "bet": 9
+        },
+        "betId": "A_cxWzX9vm0zd92b8lHiP", //这个也可以区分是那个按钮发出的下注
+        "user": {
+            "connect": {
+                "id": "65b183eadf7402bec137701b"
+            }
+        }
+    },
+    "tag": 1,
+    "betId": "A_cxWzX9vm0zd92b8lHiP", //这个也可以区分是那个按钮发出的下注
 }
 ```
 
@@ -269,7 +298,7 @@ The game action is not at the right time
 
 ```typescript
 {
-    "code": 200,
+    "code": 520,
     "message": "table not ready",
     "gameCode": "table:errors:not-ready",
 }
@@ -281,7 +310,7 @@ The game action is not at the right time
 
 ```typescript
 {
-    "code": 200,
+    "code": 520,
     "message": "player not found on the table",
     "gameCode": "table:errors:player-not-found",
 }
@@ -297,7 +326,9 @@ When rocket is flying, the player can get back his bet money with point
 {
     "game": "rocket",
     "accountID": "20010001000",
-    "session": "A7Boz5U63KVrCcVeQcecy5QKJXAqTQ0Q5FT5qu4bvOgXyV6CXeUJpyaZlqq95kzd",
+    "session": "nfOFSedMt02bOntpruHX2lCKtEGFFDyghYdn8gqEnsaWPJ4xyjjT1ciZlruf0nzc",
+    "betId": "iVoV5Z2j5trwpxXucwfjV", //bet 接口返回的betId
+    "tag": 1 //按钮相关
 }
 ```
 
@@ -308,18 +339,40 @@ When rocket is flying, the player can get back his bet money with point
 ```typescript
 {
     "code": 200,
-    "ticks": 12,
-    "isBet": false,
-    "maxSeats": "10000",
-    "cashOutPoint": 1.0716269476405165,
-    "tableId": "4LZbC7tL7sPSq2eVV0DnZ",
+    "ticks": 16,
+    "isBet": [
+        true,
+        true
+    ],
+    "cashOutPoint": 1.0932752479916368,
+    "tableId": "v3vzNmogncAiFwhaGkqvs",
     "state": "GAMING",
+    "recordStatus": "none",
+    "gameRecords": [], //这个的数据接口和result一致
+    "seat": 1,
     "result": {
-        "point": "1.07",
-        "profit": "0.72",
-        "winMoney": "10.72",
-        "betMoney": "10.00"
-    }// this is the game result for this round
+        "chips": 10, //投注金额
+        "winChips": 10.932752479916367, //返回赢的金额
+        "accountID": 20010001000,
+        "tableId": "v3vzNmogncAiFwhaGkqvs",
+        "firstName": "simon",
+        "gameName": "rocket",
+        "gameType": "slot",
+        "actions": {
+            "bet": 11,
+            "cashOut": 16
+        },
+        "betId": "s6LUWOwxPwycQOskMextX",
+        "user": {
+            "connect": {
+                "id": "65b183eadf7402bec137701b"
+            }
+        },
+        "chipPoint": 1.0932752479916368 //倍率
+    },
+    "updatedUserChips": 1490.058244320346,
+    "betId": "iVoV5Z2j5trwpxXucwfjV",
+    "tag": 1
 }
 ```
 
@@ -340,7 +393,7 @@ The game action is not at the right time
 
 ```typescript
 {
-    "code": 200,
+    "code": 520,
     "message": "table not ready",
     "gameCode": "table:errors:not-ready",
 }
@@ -352,7 +405,7 @@ The game action is not at the right time
 
 ```typescript
 {
-    "code": 200,
+    "code": 520,
     "message": "player not found on the table",
     "gameCode": "table:errors:player-not-found",
 }
@@ -368,11 +421,55 @@ The server send the table status to the clients
 {
     "code": 200,
     "ticks": 1,
-    "isBet": false,
-    "maxSeats": "10000",
-    "cashOutPoint": 1.5436936295863515,
-    "tableId": "4LZbC7tL7sPSq2eVV0DnZ",
-    "state": "READY"
+    "isBet": [
+        false,
+        false
+    ],
+    "cashOutPoint": 2.0942133748782727,
+    "tableId": "v3vzNmogncAiFwhaGkqvs",
+    "state": "FINISH", //GAMING, 飞行中， READY, 准备中（可以下注）, FINISH, 爆炸了，可以结算
+    "recordStatus": "none",
+    "gameRecords": [
+        {
+            "chips": 10,
+            "winChips": 10.932752479916367,
+            "accountID": 20010001000,
+            "tableId": "v3vzNmogncAiFwhaGkqvs",
+            "firstName": "simon",
+            "gameName": "rocket",
+            "gameType": "slot",
+            "actions": {
+                "bet": 11,
+                "cashOut": 16
+            },
+            "betId": "s6LUWOwxPwycQOskMextX",
+            "user": {
+                "connect": {
+                    "id": "65b183eadf7402bec137701b"
+                }
+            },
+            "chipPoint": 1.0932752479916368
+        },
+        {
+            "chips": 10,
+            "winChips": 0,
+            "accountID": 20010001000,
+            "tableId": "v3vzNmogncAiFwhaGkqvs",
+            "firstName": "simon",
+            "gameName": "rocket",
+            "gameType": "slot",
+            "actions": {
+                "bet": 23
+            },
+            "betId": "iVoV5Z2j5trwpxXucwfjV",
+            "user": {
+                "connect": {
+                    "id": "65b183eadf7402bec137701b"
+                }
+            }
+        }
+    ],
+    "seat": 1 //座位号
 }
 ```
 
