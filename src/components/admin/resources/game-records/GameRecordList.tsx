@@ -4,21 +4,11 @@ import {
   TextField,
   DateField,
   NumberField,
-  DateInput,
   ReferenceField,
 } from "react-admin";
 
-const listFilters = [
-  <DateInput source="date_gte" alwaysOn />,
-  <DateInput source="date_lte" alwaysOn />,
-];
-
 const GameRecordList = () => (
-  <List
-    filters={listFilters}
-    perPage={25}
-    sort={{ field: "date", order: "DESC" }}
-  >
+  <List perPage={25} sort={{ field: "createdAt", order: "DESC" }}>
     <Datagrid rowClick="expand">
       <TextField source="accountID" />
       <ReferenceField source="userId" reference="users" link="show">

@@ -21,6 +21,8 @@ import users from "./resources/users";
 import settings from "./resources/settings";
 import gamePlayerLogs from "./resources/game-player-logs";
 import balanceLogs from "./resources/balance-logs";
+import slotGameWeights from "./resources/slot-game-weights";
+import slotPayRates from "./resources/slot-pay-rates";
 
 const i18nProvider = polyglotI18nProvider(
   (locale) => {
@@ -73,6 +75,8 @@ const AdminApp = () => {
       <Resource name="users" {...users} />
       <Resource name="settings" {...settings} />
       <Resource name="balance-logs" {...balanceLogs} />
+      <Resource name="slot-game-weights" {...slotGameWeights} />
+      <Resource name="slot-pay-rates" {...slotPayRates} />
     </Admin>
   );
 };

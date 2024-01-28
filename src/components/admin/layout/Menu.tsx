@@ -16,13 +16,16 @@ import GameReplays from "../resources/game-player-logs";
 import Users from "../resources/users";
 import Settings from "../resources/settings";
 import BalanceLogs from "../resources/balance-logs";
+import SlotGameWeights from "../resources/slot-game-weights";
+import SlotPayRates from "../resources/slot-pay-rates";
 
 type MenuName =
   | "menuCatalog"
   | "menuSales"
   | "menuCustomers"
   | "gameRecords"
-  | "menuUser";
+  | "menuUser"
+  | "menuSettings";
 
 const Menu = ({ dense = false }: MenuProps) => {
   const [state, setState] = useState({
@@ -31,6 +34,7 @@ const Menu = ({ dense = false }: MenuProps) => {
     menuCustomers: true,
     gameRecords: true,
     menuUser: true,
+    menuSettings: true,
   });
   const translate = useTranslate();
   const [open] = useSidebarState();
@@ -143,15 +147,41 @@ const Menu = ({ dense = false }: MenuProps) => {
         leftIcon={<reviews.icon />}
         dense={dense}
       /> */}
-      <MenuItemLink
-        to="/admin/settings"
-        state={{ _scrollToTop: true }}
-        primaryText={translate(`resources.settings.name`, {
-          smart_count: 2,
-        })}
-        leftIcon={<Settings.icon />}
+      <SubMenu
+        handleToggle={() => handleToggle("menuSettings")}
+        isOpen={state.menuSettings}
+        name="pos.menu.settings"
+        icon={<products.icon />}
         dense={dense}
-      />
+      >
+        <MenuItemLink
+          to="/admin/settings"
+          state={{ _scrollToTop: true }}
+          primaryText={translate(`resources.settings.name`, {
+            smart_count: 2,
+          })}
+          leftIcon={<Settings.icon />}
+          dense={dense}
+        />
+        <MenuItemLink
+          to="/admin/slot-game-weights"
+          state={{ _scrollToTop: true }}
+          primaryText={translate(`resources.slot-game-weights.name`, {
+            smart_count: 2,
+          })}
+          leftIcon={<SlotGameWeights.icon />}
+          dense={dense}
+        />
+        <MenuItemLink
+          to="/admin/slot-pay-rates"
+          state={{ _scrollToTop: true }}
+          primaryText={translate(`resources.slot-pay-rates.name`, {
+            smart_count: 2,
+          })}
+          leftIcon={<SlotPayRates.icon />}
+          dense={dense}
+        />
+      </SubMenu>
     </Box>
   );
 };

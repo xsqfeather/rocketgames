@@ -202,6 +202,32 @@ const customEnglishMessages: TranslationMessages = {
         updatedAt: "Updated At",
       },
     },
+    "slot-game-weights": {
+      name: "Slot Game Weight |||| Slot Game Weights",
+      fields: {
+        accountID: "Account ID",
+        chips: "Game Chips",
+        winChips: "Win Chips",
+        gameName: "Game Name",
+        chipPoint: "Win Point",
+        firstName: "First Name",
+        createdAt: "Created At",
+        updatedAt: "Updated At",
+      },
+    },
+    "slot-pay-rates": {
+      name: "Slot Pay Rate |||| Slot Pay Rates",
+      fields: {
+        accountID: "Account ID",
+        chips: "Game Chips",
+        winChips: "Win Chips",
+        gameName: "Game Name",
+        chipPoint: "Win Point",
+        firstName: "First Name",
+        createdAt: "Created At",
+        updatedAt: "Updated At",
+      },
+    },
     products: {
       name: "Poster |||| Posters",
       fields: {

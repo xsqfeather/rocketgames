@@ -57,10 +57,10 @@ model User {
   gender              Gender
   country             String?
   deviceOS            DeviceOS
-  gameChips           Int                   @default(0)
-  goldCoin            Int                   @default(0)
-  expPoint            Int                   @default(0)
-  vipPoint            Int                   @default(0)
+  gameChips           Float                 @default(0)
+  goldCoin            Float                 @default(0)
+  expPoint            Float                 @default(0)
+  vipPoint            Float                 @default(0)
   vipLevel            Int                   @default(0)
   pocket              Pocket?
   isOnline            Boolean               @default(false)
@@ -71,7 +71,7 @@ model User {
   id                  String                @id @default(auto()) @map("_id") @db.ObjectId
   createdAt           DateTime              @default(now())
   updatedAt           DateTime              @updatedAt
-  version             Int                   @default(0)
+  version             Int                   @default(0) //for optimistic lock
   //relations
   gameRecords         GameRecord[]
   vipLevels           VipLevel[]
@@ -142,15 +142,16 @@ model Setting {
 
 model GameRecord {
   gameName  String
-  firstName String @default("")
+  firstName String  @default("")
   gameType  String
-  userId    String @db.ObjectId
+  userId    String  @db.ObjectId
   tableId   String
   accountID Int
-  chips     Float  @default(0)
-  winChips  Float  @default(0)
-  chipPoint Float  @default(0)
+  chips     Float   @default(0)
+  winChips  Float   @default(0)
+  chipPoint Float   @default(0)
   actions   Json?
+  betId     String?
 
   //base props
   id        String   @id @default(auto()) @map("_id") @db.ObjectId

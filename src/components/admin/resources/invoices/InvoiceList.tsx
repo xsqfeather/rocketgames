@@ -5,24 +5,14 @@ import {
   DateField,
   ReferenceField,
   NumberField,
-  DateInput,
 } from "react-admin";
 
 import FullNameField from "../visitors/FullNameField";
 import AddressField from "../visitors/AddressField";
 import InvoiceShow from "./InvoiceShow";
 
-const listFilters = [
-  <DateInput source="date_gte" alwaysOn />,
-  <DateInput source="date_lte" alwaysOn />,
-];
-
 const InvoiceList = () => (
-  <List
-    filters={listFilters}
-    perPage={25}
-    sort={{ field: "date", order: "DESC" }}
-  >
+  <List perPage={25} sort={{ field: "createdAt", order: "DESC" }}>
     <Datagrid
       rowClick="expand"
       expand={<InvoiceShow />}
