@@ -19,6 +19,8 @@ export default function useRocketGame() {
 
   const [cashOutPoint, setCashOutPoint] = useState(0);
 
+  const [gameChips, setGameChips] = useState(0);
+
   useInterval(() => {
     setTicks(1 + ticks);
   }, 100);
@@ -48,6 +50,7 @@ export default function useRocketGame() {
       if (joinRlt.code === 200) {
         setTableStatus(joinRlt?.data.state);
         setTicks(joinRlt?.data.ticks);
+        setGameChips(joinRlt?.data.updatedUserChips);
         setRecords(joinRlt?.data.gameRecords || []);
       }
     });
@@ -127,6 +130,16 @@ export default function useRocketGame() {
     };
   }, [socket]);
 
+  useEffect(() => {
+    socket?.on("/ind/lobby/balance/updated", (data: any) => {
+      console.log("/ind/lobby/balance/updated", data);
+      setGameChips(data.gameChips);
+    });
+    return () => {
+      socket?.off("/ind/lobby/balance/updated");
+    };
+  }, [socket]);
+
   const handleBetBtn = (tag = 1) => {
     const input = {
       game: "rocket",
@@ -159,5 +172,6 @@ export default function useRocketGame() {
     handleBetBtn,
     handleEscape,
     records,
+    gameChips,
   };
 }
