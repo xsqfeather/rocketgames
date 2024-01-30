@@ -39,8 +39,8 @@ export default function HomePage() {
   useEffect(() => {
     if (socket) {
       socket.on("/user/lobby/lobbyHandler/gameList", (data: any) => {
-        console.log("/user/lobby/lobbyHandler/gameList", data.games);
-        setGames(data.games);
+        console.log("/user/lobby/lobbyHandler/gameList", data);
+        setGames(data.data);
       });
     }
   }, [socket]);

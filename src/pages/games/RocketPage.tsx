@@ -1,6 +1,8 @@
 import { IconRocket, IconRocketOff, IconSparkles } from "@tabler/icons-react";
 import useRocketGame from "../../hooks/useRocketGame";
 import { Button, Stack, Typography } from "@mui/joy";
+import { useContext, useEffect } from "react";
+import { SocketContext } from "../../contexts/SocketContext";
 
 export default function RocketPage() {
   const {
@@ -12,6 +14,16 @@ export default function RocketPage() {
     handleEscape,
     records,
   } = useRocketGame();
+  const socket = useContext(SocketContext);
+
+  useEffect(() => {
+    socket?.on("/ind/lobby/balance/updated", (data: any) => {
+      console.log("/ind/lobby/balance/updated", data);
+    });
+    return () => {
+      socket?.off("/ind/lobby/balance/updated");
+    };
+  }, [socket]);
 
   return (
     <Stack alignItems={"center"} gap={5}>
@@ -78,7 +90,7 @@ export default function RocketPage() {
           On Board ($10)-2
         </Button>
       </Stack>
-
+      <Typography>Updated Game Chips:</Typography>
       <Typography>Player Records:</Typography>
       {records?.map((record, index) => (
         <Stack

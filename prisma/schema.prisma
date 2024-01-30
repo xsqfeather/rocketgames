@@ -239,6 +239,10 @@ enum SlotIcon {
   ten
   scatter
   wild
+  diamond
+  bow
+  dragon
+  snake
 }
 
 model SlotPayRate {

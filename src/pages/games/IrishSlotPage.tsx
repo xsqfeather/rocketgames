@@ -134,7 +134,6 @@ export default function IrishSlotPage() {
           const rlt: any = await toSlot();
           const data = rlt.data;
           const results = data.results;
-          console.log("摇奖结果========", rlt.data);
           setPrizeIcons(rlt.data.prizeIcons);
           setResults(results);
           setSloting(false);

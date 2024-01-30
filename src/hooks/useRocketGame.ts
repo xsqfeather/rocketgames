@@ -46,9 +46,9 @@ export default function useRocketGame() {
         return;
       }
       if (joinRlt.code === 200) {
-        setTableStatus(joinRlt?.state);
-        setTicks(joinRlt?.ticks);
-        setRecords(joinRlt?.gameRecords || []);
+        setTableStatus(joinRlt?.data.state);
+        setTicks(joinRlt?.data.ticks);
+        setRecords(joinRlt?.data.gameRecords || []);
       }
     });
     return () => {
@@ -69,9 +69,9 @@ export default function useRocketGame() {
     socket?.on("/user/rocket/rocketHandler/escape", (data: any) => {
       console.log("output:/user/rocket/rocketHandler/escape", data);
       if (data.code === 200) {
-        setRecords([data?.result, ...records, ...data?.gameRecords]);
-        setBetId(data.result.betId);
-        setIsBets(data.isBet);
+        setRecords([data?.data.result, ...records, ...data?.data.gameRecords]);
+        setBetId(data.data.result.betId);
+        setIsBets(data.data.isBet);
       }
     });
 
@@ -84,9 +84,9 @@ export default function useRocketGame() {
     socket?.on("/user/rocket/rocketHandler/bet", (data: any) => {
       console.log("/user/rocket/rocketHandler/bet", data);
       if (data.code === 200) {
-        setRecords([data?.result, ...records, ...data?.gameRecords]);
-        setBetId(data.result.betId);
-        setIsBets(data.isBet);
+        setRecords([data?.data.result, ...records, ...data?.data.gameRecords]);
+        setBetId(data.data.result.betId);
+        setIsBets(data.data.isBet);
       }
     });
     return () => {
