@@ -1,17 +1,48 @@
-import { Button, Card, CircularProgress, Stack, Typography } from "@mui/joy";
+import {
+  Avatar,
+  Button,
+  CircularProgress,
+  Stack,
+  Typography,
+  Sheet,
+} from "@mui/joy";
 import { useContext, useEffect, useState } from "react";
 import { SocketContext } from "../../contexts/SocketContext";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
+let timer: any = null;
 
 export default function IrishSlotPage() {
   const socket = useContext(SocketContext);
   const [login, setLogin] = useState(false);
   const [results, setResults] = useState<any[][]>([]);
-  const [prizeIcons, setPrizeIcons] = useState<any[][]>([]);
+  const [playerPrizeCheckTimes, setPlayerPrizeCheckTimes] = useState<any[][]>(
+    []
+  );
   const [sloting, setSloting] = useState(false);
 
+  const [currentSlotIndex, setCurrentSlotIndex] = useState(0);
+
+  const [columnsHasPrize, setColumnsHasPrize] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (results.length > 1 && results[currentSlotIndex + 1]) {
+      timer = setTimeout(() => {
+        setCurrentSlotIndex(currentSlotIndex + 1);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [results, currentSlotIndex]);
+
+  // useEffect(() => {
+  //   if (results[currentSlotIndex] && !sloting) {
+  //     setCurrentSlot(results[currentSlotIndex]);
+  //   }
+  // }, [currentSlotIndex, results, !sloting]);
+
   const toLogin = () => {
-    socket?.emit("/user/irishslot/irishslotHandler/join", {
+    socket?.emit("/user/irishslot/irishslotHandler/joinGame", {
       seq: "1",
       game: "irishslot",
       accountID: localStorage.getItem("accountID"),
@@ -20,7 +51,7 @@ export default function IrishSlotPage() {
     });
 
     return new Promise((resolve, _reject) => {
-      socket?.on("/user/irishslot/irishslotHandler/join", (rlt) => {
+      socket?.on("/user/irishslot/irishslotHandler/joinGame", (rlt) => {
         resolve(rlt);
       });
     });
@@ -52,8 +83,6 @@ export default function IrishSlotPage() {
     }
   }, [socket]);
 
-  console.log({ login, sloting });
-
   if (!login) {
     return (
       <Stack alignItems={"center"} gap={5}>
@@ -76,13 +105,18 @@ export default function IrishSlotPage() {
         }}
       >
         {results.map((rlt, currentIndex) => {
-          const prizeIconsOne = prizeIcons ? prizeIcons[currentIndex] : [];
+          const checkTimes = playerPrizeCheckTimes
+            ? playerPrizeCheckTimes[currentIndex]
+            : [];
+
+          const hasPrize = columnsHasPrize ? columnsHasPrize[currentIndex] : [];
+
           return (
-            <>
-              {" "}
-              <Typography>第{currentIndex + 1}次</Typography>
+            <Stack justifyContent={"center"} alignItems={"center"}>
+              <Typography level="h2">第{currentIndex + 1}次</Typography>
               <Stack key={currentIndex} direction={"row"} flexWrap={"nowrap"}>
                 {rlt?.map((r, i) => {
+                  const columnHasPrize = hasPrize ? hasPrize[i] : false;
                   return (
                     <Stack
                       sx={{
@@ -93,37 +127,64 @@ export default function IrishSlotPage() {
                       alignItems={"center"}
                     >
                       {r.map((icon: any, index: number) => {
+                        const checkPrizes = checkTimes
+                          ? checkTimes[icon.icon]
+                          : [];
+                        let isPrize = checkPrizes ? checkPrizes[i] > 0 : false;
+
                         return (
-                          <Card
-                            sx={{
-                              width: "4rem",
-                              height: `${icon.span * 4}rem`,
-                              display: "flex",
-                              justifyItems: "center",
-                              justifyContent: "center",
-                              flexDirection: "column",
-                              borderColor: icon.borderColor,
-                              borderStyle: icon.borderColor
-                                ? "outset"
-                                : "dashed",
-                              borderWidth: icon.borderColor ? 5 : 3,
-                              backgroundColor: prizeIconsOne?.includes(
-                                icon.icon
-                              )
-                                ? "#ef420ad4"
-                                : "inherit",
+                          <motion.div
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{
+                              duration: 0.3,
+                              ease: [0, 0.71, 0.2, 1.01],
+                              scale: {
+                                type: "tween",
+                                damping: 5,
+                                stiffness: 100,
+                                restDelta: 0.001,
+                              },
                             }}
-                            key={index}
                           >
-                            {icon.icon}
-                          </Card>
+                            <Sheet
+                              sx={{
+                                width: "4rem",
+                                height: `${icon.span * 4}rem`,
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                borderColor: icon.borderColor,
+                                borderStyle: icon.borderColor
+                                  ? "outset"
+                                  : "dashed",
+                                borderWidth: icon.borderColor ? 5 : 3,
+                                backgroundColor:
+                                  isPrize ||
+                                  (columnHasPrize && icon.icon === "wild")
+                                    ? "#ef420ad4"
+                                    : "inherit",
+                              }}
+                              key={index}
+                            >
+                              <Avatar
+                                sx={{
+                                  width: "3rem",
+                                  height: "3rem",
+                                }}
+                                alt={`${icon.icon}-${icon.span}`}
+                                src={`/slot_icons/icon_${icon.imgNumber}_${icon.span}.png`}
+                              />
+                            </Sheet>
+                          </motion.div>
                         );
                       })}
                     </Stack>
                   );
                 })}
               </Stack>
-            </>
+            </Stack>
           );
         })}
       </Stack>
@@ -132,11 +193,18 @@ export default function IrishSlotPage() {
         onClick={async () => {
           setSloting(true);
           const rlt: any = await toSlot();
+          console.log("slot结果", { rlt });
           const data = rlt.data;
           const results = data.results;
-          setPrizeIcons(rlt.data.prizeIcons);
+          const playerPrizeCheckTimes = data.playerPrizeCheckTimes;
+          const columnsHasPrize = data.columnsHasPrize;
+          setPlayerPrizeCheckTimes(playerPrizeCheckTimes);
+          setColumnsHasPrize(columnsHasPrize);
+          // setPrizeIcons(rlt.data.prizeIcons);
           setResults(results);
           setSloting(false);
+          setCurrentSlotIndex(0);
+          clearTimeout(timer);
         }}
       >
         Slot One
