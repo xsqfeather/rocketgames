@@ -5,11 +5,18 @@ import {
   Stack,
   Typography,
   Sheet,
+  Select,
+  Option,
+  FormLabel,
+  Box,
+  List,
+  ListItem,
 } from "@mui/joy";
 import { useContext, useEffect, useState } from "react";
 import { SocketContext } from "../../contexts/SocketContext";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { IconX } from "@tabler/icons-react";
 
 let timer: any = null;
 
@@ -25,6 +32,21 @@ export default function IrishSlotPage() {
   const [currentSlotIndex, setCurrentSlotIndex] = useState(0);
 
   const [columnsHasPrize, setColumnsHasPrize] = useState<any[]>([]);
+
+  const [gameChips, setGameChips] = useState(0);
+
+  const [betAmount, setBetAmount] = useState(0.1);
+  const [betRate, setBetRate] = useState(1);
+
+  const [winPrizes, setWinPrizes] = useState<number[]>([]);
+
+  const handleChange = (_event: any, newValue: any) => {
+    setBetAmount(newValue);
+  };
+
+  const handleRateChange = (_event: any, newValue: any) => {
+    setBetRate(newValue);
+  };
 
   useEffect(() => {
     if (results.length > 1 && results[currentSlotIndex + 1]) {
@@ -42,31 +64,37 @@ export default function IrishSlotPage() {
   // }, [currentSlotIndex, results, !sloting]);
 
   const toLogin = () => {
-    socket?.emit("/user/irishslot/irishslotHandler/joinGame", {
+    const input = {
       seq: "1",
       game: "irishslot",
       accountID: localStorage.getItem("accountID"),
       session: localStorage.getItem("token"),
-      testingRound: 100000,
-    });
+    };
+    console.log("input: /user/irishslot/irishslotHandler/joinGame", input);
+    socket?.emit("/user/irishslot/irishslotHandler/joinGame", input);
 
     return new Promise((resolve, _reject) => {
       socket?.on("/user/irishslot/irishslotHandler/joinGame", (rlt) => {
+        console.log("output: /user/irishslot/irishslotHandler/joinGame", rlt);
         resolve(rlt);
       });
     });
   };
   const toSlot = () => {
-    socket?.emit("/user/irishslot/irishslotHandler/slot", {
+    const input = {
       seq: "1",
       game: "irishslot",
       accountID: localStorage.getItem("accountID"),
       session: localStorage.getItem("token"),
-      testingRound: 100000,
-    });
+      betAmount,
+      betRate,
+    };
+    console.log("input: /user/irishslot/irishslotHandler/slot", input);
+    socket?.emit("/user/irishslot/irishslotHandler/slot", input);
 
     return new Promise((resolve, _reject) => {
       socket?.on("/user/irishslot/irishslotHandler/slot", (rlt: any) => {
+        console.log("output: /user/irishslot/irishslotHandler/slot", rlt);
         resolve(rlt);
       });
     });
@@ -77,10 +105,21 @@ export default function IrishSlotPage() {
       toLogin().then((rlt: any) => {
         if (rlt.code === 200) {
           setResults(rlt.data.results);
+          setGameChips(rlt.data.updatedUserChips);
           setLogin(true);
         }
       });
     }
+  }, [socket]);
+
+  useEffect(() => {
+    socket?.on("/ind/lobby/balance/updated", (data: any) => {
+      console.log("/ind/lobby/balance/updated", data);
+      setGameChips(data.gameChips);
+    });
+    return () => {
+      socket?.off("/ind/lobby/balance/updated");
+    };
   }, [socket]);
 
   if (!login) {
@@ -184,25 +223,103 @@ export default function IrishSlotPage() {
                   );
                 })}
               </Stack>
+              <List>
+                {Object.keys(playerPrizeCheckTimes[currentIndex] || {}).map(
+                  (key) => {
+                    return (
+                      <ListItem>
+                        <Typography>{key}:</Typography>
+                        {playerPrizeCheckTimes[currentIndex][key as any].map(
+                          (times: any, index: number) => {
+                            const checkTimes =
+                              playerPrizeCheckTimes[currentIndex];
+                            return (
+                              <>
+                                <Typography>
+                                  {times}
+                                  {index <
+                                    checkTimes[key as any].length - 1 && (
+                                    <IconX size={"10px"} />
+                                  )}
+                                </Typography>
+                              </>
+                            );
+                          }
+                        )}
+                        {playerPrizeCheckTimes[currentIndex][key as any].reduce(
+                          (a: number, b: number) => a * b
+                        )}
+                      </ListItem>
+                    );
+                  }
+                )}
+              </List>
+              {winPrizes[currentIndex] && (
+                <Typography>Win: {winPrizes[currentIndex]}</Typography>
+              )}
             </Stack>
           );
         })}
       </Stack>
-
+      <Typography>GameChips: {gameChips}</Typography>
+      <Stack
+        direction={"row"}
+        justifyContent={"space-around"}
+        sx={{
+          width: "100%",
+        }}
+      >
+        <Box>
+          <FormLabel>Bet Amount:</FormLabel>
+          <Select value={String(betAmount)} onChange={handleChange}>
+            <Option value="0.1">0.1</Option>
+            <Option value="0.2">0.2</Option>
+            <Option value="0.3">0.3</Option>
+            <Option value="0.4">0.4</Option>
+            <Option value="0.5">0.5</Option>
+            <Option value="0.6">0.6</Option>
+            <Option value="0.7">0.7</Option>
+            <Option value="0.8">0.8</Option>
+            <Option value="0.9">0.9</Option>
+          </Select>
+        </Box>
+        <Box>
+          <FormLabel>Bet Rate:</FormLabel>
+          <Select value={String(betRate)} onChange={handleRateChange}>
+            <Option value="1">1</Option>
+            <Option value="2">2</Option>
+            <Option value="3">3</Option>
+            <Option value="4">4</Option>
+            <Option value="5">5</Option>
+            <Option value="6">6</Option>
+            <Option value="7">7</Option>
+            <Option value="8">8</Option>
+            <Option value="9">9</Option>
+            <Option value="10">10</Option>
+          </Select>
+        </Box>
+        <Box>
+          <FormLabel>Base Bet:</FormLabel>
+          <Typography>20</Typography>
+        </Box>
+        <Box>
+          <FormLabel>Total Bet</FormLabel>
+          <Typography>{betAmount * betRate * 20}</Typography>
+        </Box>
+      </Stack>
       <Button
         onClick={async () => {
           setSloting(true);
           const rlt: any = await toSlot();
-          console.log("slot结果", { rlt });
           const data = rlt.data;
           const results = data.results;
           const playerPrizeCheckTimes = data.playerPrizeCheckTimes;
           const columnsHasPrize = data.columnsHasPrize;
           setPlayerPrizeCheckTimes(playerPrizeCheckTimes);
           setColumnsHasPrize(columnsHasPrize);
-          // setPrizeIcons(rlt.data.prizeIcons);
           setResults(results);
           setSloting(false);
+          setWinPrizes(data.winPrizes);
           setCurrentSlotIndex(0);
           clearTimeout(timer);
         }}
