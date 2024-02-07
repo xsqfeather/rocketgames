@@ -1,4 +1,4 @@
-import { Box, Breadcrumbs, Link, Typography } from "@mui/joy";
+import { Box, Breadcrumbs, Input, Link, Typography } from "@mui/joy";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
@@ -10,7 +10,11 @@ import { useEffect, useState } from "react";
 
 export default function GameRecordPage() {
   const [page, setPage] = useState(1);
+  const [search, setSearch] = useState();
   const { data, error } = useList<Prisma.GameRecord>("my/game-records", {
+    filter: {
+      q: search as unknown as string,
+    },
     pagination: { page },
   });
   const nav = useNavigate();
@@ -77,6 +81,13 @@ export default function GameRecordPage() {
           My Game Records
         </Typography>
       </Box>
+      <Input
+        value={search}
+        onChange={(e: any) => {
+          setSearch(e.target.value);
+        }}
+        placeholder="Search"
+      />
       {data && (
         <GameRecordTable
           rows={data.list}

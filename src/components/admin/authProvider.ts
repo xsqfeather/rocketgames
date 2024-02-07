@@ -26,10 +26,14 @@ const authProvider: AuthProvider = {
     // localStorage.removeItem("admin_token");
     return Promise.resolve();
   },
-  checkAuth: () => {
-    return localStorage.getItem("admin_token")
-      ? Promise.resolve()
-      : Promise.reject();
+  checkAuth: async () => {
+    const token = localStorage.getItem("admin_token");
+    if (token) {
+      return Promise.resolve();
+    } else {
+      localStorage.removeItem("admin_token");
+      Promise.reject();
+    }
   },
   getPermissions: () => Promise.resolve(),
   getIdentity: () =>

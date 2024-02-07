@@ -14,6 +14,7 @@ import GameRecordPage from "./pages/GameRecordPage";
 import GameReplayPage from "./pages/GameReplayPage";
 import IrishSlotPage from "./pages/games/IrishSlotPage";
 import IrishSlotTestPage from "./pages/games/IrshSlotTesting";
+import BillingPage from "./pages/BillingPage";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,11 @@ export const router = createBrowserRouter([
         path: "/game-replays",
         loader: protectedLoader,
         element: <GameReplayPage />,
+      },
+      {
+        path: "/balance-logs",
+        loader: protectedLoader,
+        element: <BillingPage />,
       },
       {
         path: "/messages",

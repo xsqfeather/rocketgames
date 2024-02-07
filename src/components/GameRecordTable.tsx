@@ -71,6 +71,11 @@ export default function GameRecordTable(props: {
               <th
                 style={{ width: 140, padding: "12px 6px", textAlign: "center" }}
               >
+                Order ID
+              </th>
+              <th
+                style={{ width: 140, padding: "12px 6px", textAlign: "center" }}
+              >
                 Game
               </th>
 
@@ -89,6 +94,12 @@ export default function GameRecordTable(props: {
               >
                 Chip Point
               </th>
+
+              <th
+                style={{ width: 140, padding: "12px 6px", textAlign: "center" }}
+              >
+                Check Detail
+              </th>
               <th
                 style={{ width: 140, padding: "12px 6px", textAlign: "center" }}
               >
@@ -99,6 +110,9 @@ export default function GameRecordTable(props: {
           <tbody>
             {rows?.map((row: any) => (
               <tr key={row.id}>
+                <td>
+                  <Typography level="body-xs">{row.betId}</Typography>
+                </td>
                 <td>
                   <Typography level="body-xs">{row.gameName}</Typography>
                 </td>
@@ -116,6 +130,9 @@ export default function GameRecordTable(props: {
                   <Typography level="body-xs">
                     {row.chipPoint.toFixed(2)}
                   </Typography>
+                </td>
+                <td>
+                  <Button>Check Detail</Button>
                 </td>
                 <td>
                   <Typography level="body-xs">

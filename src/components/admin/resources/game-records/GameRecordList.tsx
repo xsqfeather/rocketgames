@@ -5,11 +5,25 @@ import {
   DateField,
   NumberField,
   ReferenceField,
+  DateTimeInput,
 } from "react-admin";
 
+import { SearchInput } from "react-admin";
+
+const recordFilters = [
+  <SearchInput source="q" alwaysOn />,
+  <DateTimeInput source="createdAt.gte" alwaysOn />,
+  <DateTimeInput source="createdAt.lte" alwaysOn />,
+];
+
 const GameRecordList = () => (
-  <List perPage={25} sort={{ field: "createdAt", order: "DESC" }}>
+  <List
+    perPage={25}
+    sort={{ field: "createdAt", order: "DESC" }}
+    filters={recordFilters}
+  >
     <Datagrid rowClick="expand">
+      <TextField source="betId" label="ORDER ID" />
       <TextField source="accountID" />
       <ReferenceField source="userId" reference="users" link="show">
         <TextField source="firstName" />

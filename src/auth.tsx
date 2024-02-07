@@ -63,6 +63,7 @@ export async function loginAction({ request }: LoaderFunctionArgs) {
 
 export async function protectedLoader({ request }: LoaderFunctionArgs) {
   const token = localStorage.getItem("token");
+  console.log("token");
   if (!token) {
     const params = new URLSearchParams();
     params.set("from", new URL(request.url).pathname);

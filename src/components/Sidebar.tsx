@@ -190,6 +190,19 @@ export default function Sidebar() {
 
           <ListItem>
             <ListItemButton
+              selected={location.pathname === "/balance-logs"}
+              component={Link}
+              to="/balance-logs"
+            >
+              <NoteAltSharpIcon />
+              <ListItemContent>
+                <Typography level="title-sm">Balance</Typography>
+              </ListItemContent>
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem>
+            <ListItemButton
               role="menuitem"
               selected={location.pathname === "/messages"}
               component={Link}
