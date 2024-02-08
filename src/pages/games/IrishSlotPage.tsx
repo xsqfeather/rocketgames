@@ -14,7 +14,6 @@ import {
 } from "@mui/joy";
 import { useContext, useEffect, useState } from "react";
 import { SocketContext } from "../../contexts/SocketContext";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { IconX } from "@tabler/icons-react";
 
@@ -326,7 +325,7 @@ export default function IrishSlotPage() {
       >
         Slot One
       </Button>
-      <Link to="/games/irishslot/test">去测试</Link>
+      {/* <Link to="/games/irishslot/test">去测试</Link> */}
     </Stack>
   );
 }

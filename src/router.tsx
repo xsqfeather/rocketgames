@@ -13,7 +13,6 @@ import MyProfilePage from "./pages/MyProfilePage";
 import GameRecordPage from "./pages/GameRecordPage";
 import GameReplayPage from "./pages/GameReplayPage";
 import IrishSlotPage from "./pages/games/IrishSlotPage";
-import IrishSlotTestPage from "./pages/games/IrshSlotTesting";
 import BillingPage from "./pages/BillingPage";
 
 export const router = createBrowserRouter([
@@ -60,11 +59,6 @@ export const router = createBrowserRouter([
         path: "/games/irishslot",
         loader: protectedLoader,
         element: <IrishSlotPage />,
-      },
-      {
-        path: "/games/irishslot/test",
-        loader: protectedLoader,
-        element: <IrishSlotTestPage />,
       },
     ],
   },
