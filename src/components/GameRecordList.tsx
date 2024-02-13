@@ -85,13 +85,13 @@ export default function GameRecordList(props: {
             >
               <Typography level="body-sm">{listItem.gameName}</Typography>
               <Typography level="body-sm" color="neutral">
-                {listItem.chips.toFixed(2)}
+                {listItem?.chips?.toFixed(2)}
               </Typography>
               <Typography level="body-sm" color="neutral">
-                {listItem.winChips.toFixed(2)}
+                {listItem?.winChips?.toFixed(2)}
               </Typography>
               <Typography level="body-sm" color="neutral">
-                {listItem.chipPoint.toFixed(2)}
+                {listItem?.chipPoint?.toFixed(2)}
               </Typography>
               <Typography level="body-sm" color="neutral">
                 {moment(listItem.createdAt).fromNow()}

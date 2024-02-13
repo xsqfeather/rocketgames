@@ -13,6 +13,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import moment from "moment";
 import { GameRecord } from "@prisma/client";
+import CheckRecordDetailWin from "./CheckRecordDetailWin";
 
 export default function GameRecordTable(props: {
   rows: GameRecord[];
@@ -118,21 +119,21 @@ export default function GameRecordTable(props: {
                 </td>
                 <td>
                   <Typography level="body-xs">
-                    {row.chips.toFixed(2)}
+                    {row.chips?.toFixed(2)}
                   </Typography>
                 </td>
                 <td>
                   <Typography level="body-xs">
-                    {row.winChips.toFixed(2)}
+                    {row.winChips?.toFixed(2)}
                   </Typography>
                 </td>
                 <td>
                   <Typography level="body-xs">
-                    {row.chipPoint.toFixed(2)}
+                    {row.chipPoint?.toFixed(2)}
                   </Typography>
                 </td>
                 <td>
-                  <Button>Check Detail</Button>
+                  <CheckRecordDetailWin betId={row.betId} />
                 </td>
                 <td>
                   <Typography level="body-xs">
