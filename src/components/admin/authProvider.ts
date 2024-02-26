@@ -12,10 +12,12 @@ const authProvider: AuthProvider = {
     );
     console.log({ rlt });
     const { data } = rlt;
+    console.log("token=======", data.session);
+
     if (data.error) {
       throw new Error(data.error);
     }
-    localStorage.setItem("admin_token", data.session.token);
+    localStorage.setItem("admin_token", data.session);
     return rlt;
   },
   logout: () => {

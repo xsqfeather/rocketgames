@@ -14,14 +14,16 @@ const MyLoginPage = () => {
   const login = useLogin();
   const notify = useNotify();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const username = data.get("username") as string;
     const password = data.get("password") as string;
-    login({ username, password }).catch(() =>
-      notify("Invalid username or password", { type: "error" })
-    );
+    try {
+      await login({ username, password });
+    } catch (error) {
+      notify("Invalid username or password", { type: "error" });
+    }
   };
 
   return (
